@@ -4,10 +4,22 @@
 
 
 /* Custom default button */
-.btn-secondary,
+.btn-primary {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+/*.btn-secondary,*/
 .btn-secondary:hover,
 .btn-secondary:focus {
-  color: #333;
+  color: #dc3545;
   text-shadow: none; /* Prevent inheritance from `body` */
 }
 
@@ -21,10 +33,31 @@ body {
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
 }
 
+.container {
+  width: auto;
+  max-width: 75em;
+  padding: 0 15px;
+}
+
 .cover-container {
   max-width: 75em;
 }
 
+.h-100 {
+  height: 100%!important;
+}
+
+mt-auto {
+  margin-top: auto!important; 
+}
+
+mb-auto {
+  margin-bottom: auto!important;
+}
+
+a:hover {
+  color: #dc3545!important;
+}
 
 /*
  * Header
@@ -40,6 +73,8 @@ body {
 
 .nav-masthead .nav-link:hover,
 .nav-masthead .nav-link:focus {
+  color: rgba(255, 255, 255, .25)!important;
+  /*border-bottom-color: #dc3545;*/
   border-bottom-color: rgba(255, 255, 255, .25);
 }
 
@@ -48,6 +83,24 @@ body {
 }
 
 .nav-masthead .active {
-  color: #fff;
-  border-bottom-color: #fff;
+  color: #dc3545;
+  border-bottom-color: #dc3545;
+}
+
+
+/*
+  * Footer
+  */
+
+.b-example-divider {
+  height: 3rem;
+  background-color: rgba(0, 0, 0, .1);
+  border: solid rgba(0, 0, 0, .15);
+  border-width: 1px 0;
+  box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+}
+
+.bi {
+  vertical-align: -.125em;
+  fill: currentColor;
 }
