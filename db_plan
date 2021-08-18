@@ -1,0 +1,80 @@
+users
+	id - PK - id of the user
+	userDescription - admin/normal
+	firstname?
+	lastname?
+	email Varchar(50) - used for login
+	passwordhash varchar(32)
+	registered_at datetime
+	lastLogin datetime
+
+posts
+	id - PK - id of the posts
+	authorId - - id of corrisponding author of post
+	title
+	metaTitle - the meta title to be used for browser title and SEO
+	summary - the summary of the post to mention the key highlights
+	status - if the post is posted or not
+	dateCreated - datetime
+	content - text
+
+comments
+	id - PK - id of the comment
+	postId - id of the post that the comment is on
+	parentId - the parent id to identify the parent comment
+	title 
+	status - if comment is reviewed and posted or not
+	dateCreated - datetime
+	content - text
+
+tags
+	id - id of each tag for posts
+	title
+	content
+
+post_tag
+	postId
+	tagId
+
+categories
+	id - id of each category
+	title - title of the category
+	content - 
+	icon - the image for the category
+
+project_category
+	projectId
+	categoryId
+
+projects
+	id - PK - id of the project
+	authorId - id of corresponding author of projects
+	title - title of the project
+	metaTitle - the meta title to be used for browser title and SEO
+	summary - the summary of the project to talk about the thing that were learned
+	status - if the project is posted or not
+	dateCreated - datetime
+	thumbnailImagePath - path for the image to show something of the project
+
+
+from flask import Flask, render_template, request, redirect
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
+app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+db = SQLAlchemy(app)
+
+# ----------------------- Projects Database Model --------------------------
+# class ProjectPost(db.Model):
+# 	id = db.Column(db.Integer, primary_key=True)
+# 	title = db.Column(db.String(100), nullable=False)
+# 	content = db.Column(db.Text, nullable=False)
+
+# @app.route("/403")
+# def error_403():
+# 	return '', 403
+
+if __name__ == "__main__":
+	app.run(debug=True)

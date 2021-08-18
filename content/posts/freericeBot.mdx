@@ -1,0 +1,56 @@
+---
+title: Python Quiz Bot - Part 01
+published_at: 2021-06-18
+show_word_count: true
+---
+
+<Image wide file="collins-square.jpg" alt="Collins Square" />
+
+## Introduction:
+Back in 2020, I found an educational trivia website, made by the [World Food Programme (WFP)](https://www.wfp.org/), called [Freerice](https://freerice.com/). It helps you get smarter while making a difference for people around the world. Every correct answer you make on the website, donates the equivalent of 10 grains of rice.
+
+>In the game, these payments are represented by grains of rice so by 
+>playing Freerice, you are generating the money that pays for this rice. 
+>This money goes into the pot of "greatest needs" to support WFP's ongoing 
+>emergencies. 100% of all funds generated on Freerice go to the World Food 
+>Programme. Freerice does not earn or keep any money it raises.<br />
+>~ *[Freerice about page](https://freerice.com/about)*
+
+## Birth of the Idea
+After knowing about this website and having experience programming with python, I wanted to know how I could use python to answer trivia questions on *Freerice*, instead of me playing it manually; in theory, infinite rice donations!<br />
+Back then, with a few Google searches, I learned about selenium and webscraping and decided on using that as the way to automate playing the trivia games.
+
+I only ended up developing it to be able to play the multiplication tables category, as numbers are easier to work with and I was just a beginner at the time. I had ideas and plans to make it work with a few other categories like English Vocabulary, Basic Math Pre-Algebra and other language categories. I will have to try to implement them and describe my process in a part 2.
+
+## Initial Design
+
+#### Start-up
+I started my selenium project by initializing the Chrome Driver and opening the desired category webpage; in this case, back then it was only [multiplication tables](https://beta.freerice.com/categories/multiplication-table). 
+
+The page would then load, so I made the program wait until all the elements were loaded onto the page, that way I don't run into errors because the program is trying to find certain elements that haven't been loaded yet. To be honest, it was some pretty messy code, with lots of forced waiting on the driver. 
+
+#### Cookies Button
+I had to make a small function to handle the cookies button when it pops up on entry to the website. The small pop up would get in the way of handling the rest of the webpage, so I made the function click on the 'OK' button for cookies. 
+
+#### Question Handling
+Once the page was open and ready to play, I made a function to scrape the question and all four answers using the elements class names in the html.
+The multiplication problems were in the form of ***num1 x num2 = ***, so I got the solution into a variable using
+
+    solution = eval(question.text.rstrip('=').replace('x', '*'))
+
+I then implement a check of my solution among the four answer options, and if it is found among them, I run a driver script execution to click on the relevant answer. The question handling is run for as many times as requested at the beginning.
+
+## Design Flaws
+1. Organization: The overall layout was messy and not super organized, it was one of my best and cleanest projects yet back then, but there was a little too much repeated code. 
+2. Feature Obsoletion: I made a feature that was only relevant to the beta version of freerice. They didn't have accounts back then, so I started keeping track of the total rice earnings in a seperate file. Just counting the rice as it is earned and then add it to the total amount of rice. 
+3. Timing Out: I couldn't get the program to run for very many more times than 100 times. It would start to time out after running for too long. I never found out why.
+4. Big Goals, Small Skills: I had big goals to implement the other categories, but I didn't have the skills to build them yet.
+5. Outdated Code: The code used back then has basically become obsolete, and I can't make it run now. (It's okay, I need to start from the beginning to make it better this time)
+
+## Future Goals
++ Search for better methods of scraping and web automation, alternatives to selenium.
++ Account Creation or Account information request to setup a config file to keep track of the user so it can log in automatically everytime after the initial setup.
++ Actually finish the other category options.
++ Figure out how to register if the question was answered right or wrong.
++ Make it able to run indefinitely.
++ Organize modules better.

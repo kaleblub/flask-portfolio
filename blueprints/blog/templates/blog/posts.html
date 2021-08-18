@@ -9,7 +9,7 @@
 
 <hr>
 <h2>Create New Blog Post:</h2>
-<form action='/posts' method='POST'>
+<form action='/blog' method='POST'>
 	Title: <input type='text' name='title' id='title'>
 	<br>
 	Author: <input type='text' name='author' id='author'>
@@ -32,13 +32,9 @@
 		
 		<p>{{ post.content }}</p>
 
-		<a href='/posts/delete/{{ post.id }}'>Delete</a>
-		<a href='/posts/edit/{{ post.id }}'>Edit</a>
+		<a href='/blog/delete/{{ post.id }}'>Delete</a>
+		<a href='/blog/edit/{{ post.id }}'>Edit</a>
 		<hr>
 
 	{% endfor %}
-
-
-<a href='/'>Home</a>
-<a href='/about'>About</a>
 {% endblock %}

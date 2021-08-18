@@ -12,46 +12,35 @@ This is a portfolio website made with Flask and Bootstrap.
 
 ## Task List
 
-### 1. Main Page > Blog Sections
-- Fix Text Color
-- Fix Background Color
-- Change images to be elated to the blog topic
+### 1. Home Page 
+- Plan my summary message at the home page
+- Decide if I want the about page to be right at the start.
+- Fix the button style that is on the home page
 
-###	2. Add Dynamic Blog Page
-- Research Good Blog Examples
-- Try to keep the same style as the homepage
-- Add a blog home page
-- Make an organized format of the blog topics and stuff
+### 2. About
+- Build out an about page
 
-### 3. My Work Section
-- Fix the display of the projects
-- Make project topic organization, ie.  ALL | PYTHON | REACT | C++
-- Make links to the individual projects
-- Maybe a hover effect on each project
-- Change Coloring 
-- Think of summary of section
+### 3. Blog
+- Design the layout of my blog main page and each individual blog post
 
-###	4. Add Dynamic Project Page
-- Download links
-- Screenshots or Video Demonstration
-- Github link
-- Description
+### 4. Projects
+- Get pictures for each of the project thumbnails
+- Make the card background color for each project a lighter gray than the second bg color
+- Figure out a database query filter system to get each project ordered by language.
+- Type out a project summary for each project
+- Type out the Project page summary
 
-### 5. Contact Section
-- Change colors, of button, background, forms backgrounds, text
-- Test Sample email to myself
+### 5. Authorization
+- Build html file for login
+- Build html file for signup
+- Build html file for forgotten password
 
-### 6. Color Picker
-- Reduce how many options there are
-- Make drop down menu style for hiding the color options until wanted 
-- Create the backgrounds for each color option
-- Create all the color palette changes through each page with the options
-- Add hover effects
-- Add after click style
+### 6. Database
+- Figure out how to handle likes on my posts
+- Figure out how to handle comments on my posts
+- Figure out how to get MDX files to work with flask, being served from my database.
 
-### 7. Add About Me Page or Read More Switch/Flip Effect
-- Update summary/greeting
-
-### 8. ETC
-- Change Tab Logo/Icon
-- Remove Extra/Useless Files
+### 6. Overall Design
+- Fix issue with the Footer not sticking to the bottom of the page
+- Fix/Design the logo that I want on the navbar
+- Make a complete black background with a lighter background for each part of the body. eg Navbar/Header, Main, Footer
