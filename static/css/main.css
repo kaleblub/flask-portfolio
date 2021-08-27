@@ -1,3 +1,108 @@
+html {
+	position: relative;
+	min-height: 100%;
+}
+
 body {
-	font-family: Helvetica;
+	font-family: "Inter UI", -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", Helvetica, Arial, sans-serif;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	font-feature-settings: "liga", "tnum", "case", "calt", "zero", "ss01", "locl";
+	color: #a9a9b3!important;
+}
+
+main {
+	margin: auto;
+}
+
+h1 {
+	font-size: 2.625rem;
+}
+
+h2 {
+    font-size: 1.625rem;
+}
+
+a {
+	color: inherit;
+}
+
+/* Dark Theme */
+.dark-theme {
+	background-color: #292a2d;
+	color: #a9a9b3;
+}
+
+.dark-theme .header {
+	background: #252627;
+}
+
+.container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+/* Header */
+.header {
+	background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px;
+}
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 760px;
+    max-width: 100%;
+}
+
+/*Navbar Logo*/
+.logo {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	font-weight: bold;
+	font-display: auto;
+	font-family: monospace, monospace;
+}
+.logo__mark {
+	margin-right: 5px;
+}
+.logo__text {
+	font-size: 1.4rem;
+}
+.logo__cursor {
+	display: inline-block;
+	width: 10px;
+	height: 1rem;
+	background: #fe5186;
+	margin-left: 5px;
+	border-radius: 1px;
+	-webkit-animation: cursor 1s infinite;
+	animation: cursor 1s infinite;
+}
+
+
+/* Footer  */
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 }

@@ -36,9 +36,11 @@ This is a portfolio website made with Flask and Bootstrap.
 - Build html file for forgotten password
 
 ### 6. Database
-- Figure out how to handle likes on my posts
+- Figure out how to handle likes on posts and on comments of posts
 - Figure out how to handle comments on my posts
 - Figure out how to get MDX files to work with flask, being served from my database.
+- When like is clicked, add the like to the database with the according post or comment
+- Create the table model for handling likes with user, comment or post it is related to
 
 ### 6. Overall Design
 - Fix issue with the Footer not sticking to the bottom of the page

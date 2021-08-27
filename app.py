@@ -1,8 +1,9 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from sqlalchemy.orm import scoped_session
 
-# from extensions import database, commands
+import postModel
+from database import SessionLocal, engine
 
 # Import Blueprints
 from blueprints.main.routes import main_bp
@@ -12,17 +13,15 @@ from blueprints.contact.routes import contact_bp
 from blueprints.projects.routes import projects_bp
 
 def create_app():
+	postModel.Base.metadata.create_all(bind=engine)
 
 	app = Flask(__name__)
-	db = SQLAlchemy()
-	app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-	app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 	CORS(app)
-	db.init_app(app)
+
+	app.session = scoped_session(SessionLocal)#, scopefunc=_app_ctx_stack.__ident_func__)
 
 	#setup all our dependencies
-	# database.init_app(app)
-	# commands.init_app(app)
+
 
 	# Register Blueprints
 	app.register_blueprint(main_bp)

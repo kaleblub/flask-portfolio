@@ -10,12 +10,11 @@
 <!--   <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/cover/">
   <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/">
   <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/footers/">
- -->  
-  <!-- Bootstrap core CSS -->
+ -->
+ <!------------ BOOTSTRAP CORE CSS ------------>  
   <link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
-	
-  <!-- Favicons -->
+<!------------ FAVICONS ------------>
   <link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
   <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
   <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
@@ -42,91 +41,53 @@
 
     {% block head %} {% endblock %}
 
-    <!-- Custom styles for this template -->
+<!------------ CUSTOM STYLES FOR THIS TEMPLATE ------------>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cover.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/projects.css') }}">
 </head>
 
-<!------------- START OF BODY ------------>
-<body class="d-flex h-100 text-center text-white bg-dark">
-  <div class="cover-container d-flex container w-100 h-100 p-3 mx-auto flex-column">
-    <header class="mb-auto">
-      <div>
-        <h3 class="float-md-start mb-0">Kaleb Humpal</h3>
+<!------------- START OF THE BODY & HEADER/NAVBAR ------------>
+<body class="dark-theme d-flex text-center text-white bg-dark">
+  <div class="cover-container d-flex container w-100 h-100 p-3 mx-auto flex-column min-vh-100">
+    <header class="header">
+      <span class="header__inner">
+        <a href="/">
+          <div class="logo float-md-start mb-0">
+            <span class="logo__mark">&gt;</span>
+            <span class="logo__text">  /KalebHumpal/ $</span><span id="cd__text"></span>
+            <span class="logo__cursor"></span>
+          </div>
+        </a>
         <nav class="nav nav-masthead justify-content-center float-md-end">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
           <a class="nav-link" href="/about">About</a>
-          <a class="nav-link" href="/blog">Blog</a>
+          <a class="nav-link disabled" style="color: #6c757d"  href="/blog">Blog</a>
+          <a class="nav-link disabled" style="color: #6c757d" href="/contact">Contact</a>
           <a class="nav-link" href="/projects">Projects</a>
         </nav>
-      </div>
+      </span>
     </header>	
-    <main class="px-3 flex-shrink-0">
+    
+<!------------ MAIN BLOCK OF THE BODY ------------>
+    <main class="content flex-fill">
       {% block body %} {% endblock %}
     </main>
 
-
-
-   <!-- <nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">> /KalebHumpal/ $</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExample03">
-        <ul class="navbar-nav me-auto mb-2 mb-sm-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/posts">Blog</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/projects">My Works</a>
-             Disable link with class="disabled" tabindex="-1" aria-disabled="true"
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-            <ul class="dropdown-menu" aria-labelledby="dropdown03">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form>
-          <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-        </form>
-      </div>
-    </div>
-  </nav>
-	<div class="container">
-		<br>
-		
-
-	</div>-->
-
-  <div class="b-example-divider"></div>
-
-
-    <footer class="mt-auto py-3 bg-dark">
+<!------------ START OF THE FOOTER ------------>
+    <footer class="footer py-3 bg-dark">
       <ul class="nav justify-content-center border-bottom pb-3 mb-3">
         <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
         <li class="nav-item"><a href="/about" class="nav-link px-2 text-muted">About</a></li>
-        <li class="nav-item"><a href="/blog" class="nav-link px-2 text-muted">Blog</a></li>
+        <li class="nav-item"><a href="/blog" class="nav-link px-2 text-muted disabled">Blog</a></li>
+        <li class="nav-item"><a href="/contact" class="nav-link px-2 text-muted disabled">Contact</a></li>
         <li class="nav-item"><a href="/projects" class="nav-link px-2 text-muted">Projects</a></li>
       </ul>
       <p class="text-center text-muted">&copy; 2021 Made by <a href="https://github.com/kaleblub/kaleblub.github.io" class="text-muted">Kaleb Humpal</a> - Powered by <a href="#" class="text-muted">Flask</a></p>
     </footer>
   </div>
 
-
-
-
+<!------------ JAVASCRIPT ------------>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
 </html>
