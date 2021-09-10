@@ -10,6 +10,7 @@
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
+    transition: all .6s;
 }
 
 .bd-placeholder-img {
@@ -21,12 +22,15 @@
     background-size: contain;
 }
 
+.btn-outline-secondary {
+    color: #6c757d;
+    border-color: #6c757d;
+    transition: all .6s;
+}
 
 .btn-outline-secondary:hover {
     color: #fff;
     background-color: $main-pink;
     border-color: $main-pink;
-    box-shadow: 0 .125rem .25rem $main-light-pink!important;
+    box-shadow: 0rem 0rem 3rem $main-pink !important;
 }
-
-/*========== End Projects =============*/

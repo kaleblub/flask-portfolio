@@ -1,16 +1,38 @@
 {% extends 'base.html' %}
+{% set active_page = 'blog' %}
 
 {% block head %}
 <title>Blog</title>
+<link rel="stylesheet" href="../../static/css/main.css?v=1.1.25">
 {% endblock %}
 
 {% block body %}
-
-<hr>
-<h2>BLOG IS UNDER CONSTRUCTION! </h2>
-
-<hr>
-<h3>Come back later!</h3>
+<main class="posts">
+	<h1>Blog</h1>
+	<div class="posts-group">
+		<div class="post-year">2021</div>
+		<ul class="posts-list">
+			<li class="post-item">
+				<a href="/blog/HelloWorld" class="hvr-grow">
+					<span class="post-title">'Hello World!'</span>
+					<span class="post-day">19 June</span>
+				</a>
+			</li>
+			<li class="post-item">
+				<a href="/blog/freericeBot" class="hvr-grow">
+					<span class="post-title">Python Quiz Bot - Part 01</span>
+					<span class="post-day">18 June</span>
+				</a>
+			</li>
+			<li class="post-item">
+				<a href="/blog/post-with-code-snippets" class="hvr-grow">
+					<span class="post-title">Post with code snippets</span>
+					<span class="post-day">4 March</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</main>
 
 
 {% endblock %}

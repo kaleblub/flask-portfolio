@@ -36,95 +36,112 @@
 .home-row {
 	max-width: 80em;
 	display: flex;
-    justify-content: space-evenly;
+  justify-content: space-evenly;
 
 	.home-card {
-	    margin-top: 8em;
-	    margin-bottom: 2em;
-	    margin-right: 1.5em;
-	    margin-left: 1.5em;
-	    width: 33.33%;
+    margin-top: 8em;
+    margin-bottom: 2em;
+    margin-right: 1em;
+    margin-left: 1em;
+    width: 33.33%;
+    padding-right: 1.5em;
+    padding-left: 1.5em;
+    position: relative; // For the svg images to be able to grow
 
-	    .home-card-h2 {
+    .bd-placeholder-img {
+	    position: absolute;
+	    margin-top: -4rem;
+ 	  	margin-left: -4rem;
+	    transition: all 1s;
+    }
+
+    .home-card-text {
+    	margin: inherit;
+    }
+
+    .home-card-h2 {
 			margin-top: 1em;
-			color: white;
+			color: ghostwhite;
 		}
 
-		.container-home-prompt-btn {
-		    width: 100%;
-		    display: -webkit-box;
-		    display: -webkit-flex;
-		    display: -moz-box;
-		    display: -ms-flexbox;
-		    display: flex;
-		    flex-wrap: wrap;
-		    margin-top: -25px;
-		    justify-content: center;
+		&:hover {
+			.bd-placeholder-img {
+				width: 160px;
+				height: 160px;
+				margin-left: -4.75rem;			}
 		}
-
-		.home-prompt-btn {
-		    display: -webkit-box;
-		    display: -webkit-flex;
-		    display: -moz-box;
-		    display: -ms-flexbox;
-		    display: flex;
-		    justify-content: center;
-		    align-items: center;
-		    padding: 0 20px;
-		    min-width: 160px;
-		    height: 50px;
-		    background-color: #ff4b5a;
-		    border-radius: 25px;
-		    font-family: Poppins-Medium;
-		    font-size: 16px;
-		    color: #fff;
-		    line-height: 1.2;
-		    -webkit-transition: all .4s;
-		    -o-transition: all .4s;
-		    -moz-transition: all .4s;
-		    transition: all .4s;
-		    box-shadow: 0 10px 30px 0 rgb(255,75,90/50%);
-		    -moz-box-shadow: 0 10px 30px 0 rgba(255,75,90,.5);
-		    -webkit-box-shadow: 0 10px 30px 0 rgb(255,75,90/50%);
-		    -o-box-shadow: 0 10px 30px 0 rgba(255,75,90,.5);
-		    -ms-box-shadow: 0 10px 30px 0 rgba(255,75,90,.5);
-
-		    i {
-			    -webkit-transition: all .4s;
-			    -o-transition: all .4s;
-			    -moz-transition: all .4s;
-			    transition: all .4s;
-			}
-		}
-
-		.contact100-form-btn:hover {
-		    background-color: #333;
-		    box-shadow: 0 10px 30px 0 rgb(51,51,51/50%);
-		    -moz-box-shadow: 0 10px 30px 0 rgba(51,51,51,.5);
-		    -webkit-box-shadow: 0 10px 30px 0 rgb(51,51,51/50%);
-		    -o-box-shadow: 0 10px 30px 0 rgba(51,51,51,.5);
-		    -ms-box-shadow: 0 10px 30px 0 rgba(51,51,51,.5);
-		
-			i {
-			    -webkit-transform: translateX(10px);
-			    -moz-transform: translateX(10px);
-			    -ms-transform: translateX(10px);
-			    -o-transform: translateX(10px);
-			    transform: translateX(10px);
-			}
-
-		}
-	}	
-
-	/* Responsive layout - makes the three columns stack 
-	on top of each other instead of next to each other */
-	@media screen and (max-width: 600px) {
-	  .home-card {
-	    width: 100%;
-	  }
-	  .home-row {
-	  	flex-wrap: wrap;
-	  }
 	}
 }
-/*========== End Home =============*/
+
+.container-home-prompt-btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: inherit;
+
+	.home-prompt-btn {
+    color: $main-bg-dark-gray;
+    border-color: #6c757d;
+    background: ghostwhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    min-width: 160px;
+    height: 50px;
+	  font-weight: 400;
+		line-height: 1.5;
+		text-align: center;
+	  text-decoration: none;
+	  vertical-align: middle;
+		user-select: none;
+		border: 1px solid transparent;
+		font-size: 1rem;
+		border-radius: .25rem;
+		-webkit-transition: all .6s;
+    -o-transition: all .6s;
+    -moz-transition: all .6s;
+    transition: all .6s;
+
+    i {
+	    -webkit-transition: all .4s;
+	    -o-transition: all .4s;
+	    -moz-transition: all .4s;
+	    transition: all .4s;
+		}
+		&:hover {
+	    color: ghostwhite;
+	    background-color: #E8175D;
+	    border-color: #E8175D;
+	    box-shadow: 0rem 0rem 2rem $main-pink;
+	    -moz-box-shadow: 0rem 0rem 2rem $main-pink;
+	    -webkit-box-shadow: 0rem 0rem 2rem $main-pink;
+	    -o-box-shadow: 0rem 0rem 2rem $main-pink;
+	    -ms-box-shadow: 0rem 0rem 2rem $main-pink;
+
+			i {
+		    -webkit-transform: translateX(10px);
+		    -moz-transform: translateX(10px);
+		    -ms-transform: translateX(10px);
+		    -o-transform: translateX(10px);
+		    transform: translateX(10px);
+			}
+		}
+	}
+}
+
+/* Responsive layout - makes the three columns stack 
+on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .home-card {
+    width: 100%;
+  }
+  .home-row {
+  	flex-wrap: wrap;
+  }
+}
