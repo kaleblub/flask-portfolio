@@ -1,12 +1,13 @@
 // Import other sass files
 @import "custom-variables";
-@import "home";
 @import "navbar";
+@import "home";
 @import "projects";
-@import "footer";
+@import "about";
 @import "blog";
 @import "contact";
 @import "bootstrapOverwrite";
+@import "footer";
 
 html {
 	position: block;
