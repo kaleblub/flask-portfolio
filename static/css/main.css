@@ -192,9 +192,9 @@ on top of each other instead of next to each other */
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #212529;
+  background-color: #00000020;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  border: 1px solid #00000020;
   border-radius: .25rem;
   transition: all .6s; }
 
