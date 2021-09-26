@@ -1,0 +1,3 @@
+# 5 - PAGES
+
+## Contains the styles for every individual page. Almost every page needs to have specific styles that are to be used only for that particular page

@@ -3,11 +3,11 @@ from flask import Flask
 from flask_cors import CORS
 from sqlalchemy.orm import scoped_session
 import sass
-import postModel
+# import postModel
 from database import SessionLocal, engine
 
 # Map scss source files to css destination files
-sassMap = {"./static/scss/main.scss": "./static/css/main.css"}
+sassMap = {"./static/scss/app.scss": "./static/css/main.css"}
 
 def compile_sass_to_css(sass_map):
     for source, dest in sass_map.items():
@@ -17,7 +17,7 @@ def compile_sass_to_css(sass_map):
 
 def create_app():
 	"""Create Flask App"""
-	postModel.Base.metadata.create_all(bind=engine)
+	# postModel.Base.metadata.create_all(bind=engine)
 
 	app = Flask(__name__)
 	CORS(app)

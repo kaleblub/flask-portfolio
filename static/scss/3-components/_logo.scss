@@ -1,0 +1,56 @@
+/*
+ *============= LOGO ===============*
+ */
+ 
+.logo-link {
+ // Logo 'a'-tag over the whole logo in top left corner
+ color: $silver-spun-pearl;
+ 
+ .logo {
+  // 
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: bold;
+  font-display: auto;
+  font-family: "Roboto Mono", monospace;
+  
+  &__mark {
+   // The '>' at start of logo
+   margin-right: 5px;
+  }
+  
+  &__name {
+   // Text section of the logo
+   font-size: 1.4rem;
+  }
+
+  &__text {
+
+  }
+  
+  &__cursor {
+   // Blinking cursor of the logo
+   display: inline-block;
+   width: 10px;
+   height: 1rem;
+   background: $ruby-amaranth;
+   margin-left: 5px;
+   border-radius: 1px;
+   -webkit-animation: cursor 1s infinite;
+   animation: cursor 1s infinite;
+  }
+ }
+}
+
+// Logo Keyframes
+
+@keyframes cursor {
+ 0% {
+  opacity: 0; }
+ 50% {
+  opacity: 1; }
+ 100% {
+  opacity: 0; 
+ } 
+}

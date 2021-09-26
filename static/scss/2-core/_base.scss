@@ -1,0 +1,111 @@
+/*
+ * ============= Base structure =============*
+ */
+	
+	* {
+
+	}
+	
+	html {
+		position: block;
+		min-height: 100%;
+	}
+
+	body {
+		background-image: url("../../static/img/plainbackdrop.jpg");
+		background-size: cover;
+		background-blend-mode: darken;
+		text-shadow: 0 0.05rem .01rem rgba(0, 0, 0, 0.5);
+		box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
+		text-align: center!important;
+		display: flex;
+		font-family: 'Roboto Mono', monospace, "Inter UI", -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", Helvetica, Arial, sans-serif;
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		font-feature-settings: "liga", "tnum", "case", "calt", "zero", "ss01", "locl";
+	  color: $silver-spun-pearl;/*#a9a9b3!important;*/
+	  // background-color: $dark-gunmetal-shark;
+	}
+
+	main {
+		margin: auto;
+	}
+
+	h1 {
+		font-size: 2.625rem;
+		color: white;
+	}
+
+	h2 {
+	  font-size: 1.625rem;
+	}
+
+	.br-40 {
+	  // Turn into standard-border class or mixin? with other border styles
+	  border-radius: 0.8em;
+	}
+
+	.fw-light {
+		font-weight: 300!important;
+	}
+
+	.h-100 {
+	  height: 100%!important;
+	}
+
+	.mw-full {
+		min-width: -webkit-fill-available;
+	}
+
+	.mt-auto {
+	  margin-top: auto!important; 
+	}
+
+	.mb-auto {
+	  margin-bottom: auto!important;
+	}
+
+	.pt-5 {
+	  padding-top: 3rem!important;
+	}
+
+	.pb-5 {
+		padding-bottom: 3rem!important;
+	}
+
+	/*========= Dark Theme ==========*/
+	.dark-theme {
+		background-color: $dark-gunmetal-shark;
+		color: $pale-sky;
+		// $--bs-bg-opacity: 1;
+
+	  .header {
+	  	background: #252627;
+	  }
+	}
+
+	.container {
+	  max-width: 75em;
+	  flex: 1 1 auto;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  text-align: center;
+	}
+
+	.content {
+	  display: flex;
+	  flex-direction: column;
+	  flex: 1 1 auto;
+	  align-items: center;
+	  justify-content: center;
+	  margin: 0;
+	}
+
+	.accent-color-shadow-hover {
+		transition: all 1.2s;
+
+		&:hover {
+			box-shadow: 0 0 1em $pale-lavender-fog;
+		}
+	}
