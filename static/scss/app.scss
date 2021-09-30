@@ -1,19 +1,42 @@
 // @charset "utf-8"
 
 // 1 - HELPERS / ABSTRACTS
-@import "1-helpers/all";
+// @import "1-helpers/all";
+@import "1-helpers/functions";
+@import "1-helpers/mixins";
+@import "1-helpers/variables";
 
 // 2 - CORE
-@import '2-core/all';
+// @import '2-core/all';
+@import "2-core/base";
+@import "2-core/tags";
+@import "2-core/fonts";
+@import "2-core/icons";
 
 // 3 - COMPONENTS
-@import "3-components/all";
+// @import "3-components/all";
+@import "3-components/links";
+@import "3-components/btn-container";
+@import "3-components/buttons";
+@import "3-components/logo";
+@import "3-components/contact-modal";
+@import "3-components/cards";
+@import "3-components/yearline";
+@import "3-components/tabs";
 
 // 4 - LAYOUT
-@import "4-layout/all";
+// @import "4-layout/all";
+@import "4-layout/navbar";
+@import "4-layout/footer";
+@import "4-layout/sections";
 
 // 5 - PAGES
-@import "5-pages/all";
+// @import "5-pages/all";
+@import "5-pages/home";
+@import "5-pages/projects";
+@import "5-pages/contact";
+@import "5-pages/blog";
+@import "5-pages/about";
 
 // 6 - SECTIONS 
 @import "6-sections/all";

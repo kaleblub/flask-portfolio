@@ -21,13 +21,14 @@
 		}
 	}
 </style>
+
 <!------------ Add Icon Library ------------>
 <link href="../../static/fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet">
 
 {% block head %} {% endblock %}
 
 <!------------ CUSTOM STYLES FOR THIS TEMPLATE ------------>
-<link rel="stylesheet" href="../../static/css/main.css?v=1.2.1">
+<link rel="stylesheet" href="../../static/css/main.css?v=1.2.15">
 </head>
 
 
@@ -51,11 +52,25 @@
 
 			<div class="collapse navbar-collapse" id="navbarOptions">
 				<nav class="nav nav-masthead">
-					<a class="nav-link {{ 'nav-link--active' if active_page == 'home' else 'text-muted' }}" href="/">Home</a>
-					<a class="nav-link {{ 'nav-link--active' if active_page == 'about' else 'text-muted' }}" href="/about">About</a>
-					<a class="nav-link {{ 'nav-link--active' if active_page == 'blog' else 'text-muted' }}" href="/blog">Blog</a>
-					<a onclick="document.getElementById('modalContact').style.display='flex'" type="button" class="nav-link text-muted" data-toggle="modal" data-target="#modalContact">Contact</a>
-					<a class="nav-link {{ 'nav-link--active' if active_page == 'projects' else 'text-muted' }}" href="/projects">Projects</a>
+					<a 
+					class="nav-link {{ 'nav-link--active' if active_page == 'home' else 'text-muted' }}" 
+					href="/">Home</a>
+					<a 
+					class="nav-link {{ 'nav-link--active' if active_page == 'about' else 'text-muted' }}" 
+					href="/about">About</a>
+					<a 
+					class="nav-link {{ 'nav-link--active' if active_page == 'blog' else 'text-muted' }}" 
+					href="/blog">Blog</a>
+					<a 
+					type="button"
+					class="nav-link text-muted" 
+					data-toggle="modal" 
+					data-target="#modalContact"
+					onclick="document.getElementById('modalContact').style.display='flex'"
+					>Contact</a>
+					<a 
+					class="nav-link {{ 'nav-link--active' if active_page == 'projects' else 'text-muted' }}"  
+					href="/projects">Projects</a>
 				</nav>
 			</div>
 		</div>
@@ -76,113 +91,112 @@
 						<div class="col-md-6 d-flex align-items-stretch">
 							<div class="contact-wrap w-100 p-md-5 p-4 py-5">
 								<h3 class="mb-4"></h3>
-							<!-- <div id="form-message-warning" class="mb-4"></div>
+								<!-- <div id="form-message-warning" class="mb-4"></div>
 								<div id="form-message-success" class="mb-4">Your message was sent, thank you!</div> -->
 								<form method="POST" id="contact-form" name="contact-form" class="contact-form">
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<input type="text" class="form-control" name="name" id="name" placeholder="Name">
-											</div>
+									<div class="form-group col-md-12">
+										<input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                    <label for="" class="input__label">
+                      <span class=""></span>
+                    </label>
+									</div>
+									<div class="form-group col-md-12">
+										<input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                    <label for="" class="input__label">
+                      <span class=""></span>
+                    </label>
+									</div>
+									<div class="form-group col-md-12">
+										<input type="text" class="form-control" name="subject" id="subject" placeholder="Subject">
+                    <label for="" class="input__label">
+                      <span class=""></span>
+                    </label>
+									</div>
+									<div class="form-group col-md-12">
+										<textarea name="message" class="form-control" id="message" cols="30" rows="6" placeholder="Message"></textarea>
+                    <label for="" class="input__label">
+                      <span class=""></span>
+                    </label>
+									</div>
+									<div class="form-group col-md-12">
+										<div class="btn-container btn-container--contact">
+											<button class="prompt-btn prompt-btn--contact" onclick="submit" type="submit">
+												<span>
+													Send Message
+													<!-- <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i> -->
+												</span>
+											</button>
 										</div>
-										<div class="col-md-12">
-											<div class="form-group">
-												<input type="email" class="form-control" name="email" id="email" placeholder="Email">
-											</div>
-										</div>
-										<div class="col-md-12">
-											<div class="form-group">
-												<input type="text" class="form-control" name="subject" id="subject" placeholder="Subject">
-											</div>
-										</div>
-										<div class="col-md-12">
-											<div class="form-group">
-												<textarea name="message" class="form-control" id="message" cols="30" rows="6" placeholder="Message"></textarea>
-											</div>
-										</div>
-										<div class="col-md-12">
-											<div class="form-group">
-												<div class="btn-container btn-container--contact">
-													<button class="prompt-btn prompt-btn--contact" onclick="submit" type="submit">
-														<span>
-															Send Message
-															<!-- <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i> -->
-														</span>
-													</button>
-												</div>
-												<!-- <input type="submit" value="Send Message" class="btn btn-primary">
-													<div class="submitting"></div> -->
-												</div>
-											</div>
-										</div>
-									</form>
+										<!-- <div class="submitting"></div> -->
+									</div>
+								</form>
+									</div>
 								</div>
-							</div>
-							<div class="col-md-6 d-flex align-items-stretch">
-								<div class="info-wrap w-100 p-md-5 p-4 py-5">
-									<h3>Contact information</h3>
-									<p class="mb-4">I'm open for any suggestion or any project you may want to collaborate on.</p>
-									<div class="dbox w-100 d-flex align-items-start">
-										<div class="icon d-flex align-items-center justify-content-center">
-											<span class="fa fa-map-marker"></span>
+								<div class="col-md-6 d-flex align-items-stretch">
+									<div class="info-wrap w-100 p-md-5 p-4 py-5">
+										<h3>Contact information</h3>
+										<p class="mb-4">I'm open for any suggestion or any project you may want to collaborate on.</p>
+										<div class="dbox w-100 d-flex align-items-start">
+											<div class="icon d-flex align-items-center justify-content-center">
+												<span class="fa fa-map-marker"></span>
+											</div>
+											<div class="text pl-3">
+												<p><span>Current Location:</span> Beirut, Lebanon</p>
+											</div>
 										</div>
-										<div class="text pl-3">
-											<p><span>Current Location:</span> Beirut, Lebanon</p>
+										<div class="dbox w-100 d-flex align-items-center">
+											<div class="icon d-flex align-items-center justify-content-center">
+												<span class="fa fa-phone"></span>
+											</div>
+											<div class="text pl-3">
+												<p><span>Phone/Whatsapp:</span> <a href="tel://1234567920">+1 909 454 6121</a></p>
+											</div>
 										</div>
-									</div>
-									<div class="dbox w-100 d-flex align-items-center">
-										<div class="icon d-flex align-items-center justify-content-center">
-											<span class="fa fa-phone"></span>
+										<div class="dbox w-100 d-flex align-items-center">
+											<div class="icon d-flex align-items-center justify-content-center">
+												<span class="fa fa-paper-plane"></span>
+											</div>
+											<div class="text pl-3">
+												<p><span>Email:</span> <a href="/cdn-cgi/l/email-protection#a8c1c6cec7e8d1c7dddadbc1dccd86cbc7c5"><span class="__cf_email__" data-cfemail="d9b0b7bfb699a0b6acabaab0adbcf7bab6b4">[email&nbsp;protected]</span></a></p>
+											</div>
 										</div>
-										<div class="text pl-3">
-											<p><span>Phone/Whatsapp:</span> <a href="tel://1234567920">+1 909 454 6121</a></p>
-										</div>
-									</div>
-									<div class="dbox w-100 d-flex align-items-center">
-										<div class="icon d-flex align-items-center justify-content-center">
-											<span class="fa fa-paper-plane"></span>
-										</div>
-										<div class="text pl-3">
-											<p><span>Email:</span> <a href="/cdn-cgi/l/email-protection#a8c1c6cec7e8d1c7dddadbc1dccd86cbc7c5"><span class="__cf_email__" data-cfemail="d9b0b7bfb699a0b6acabaab0adbcf7bab6b4">[email&nbsp;protected]</span></a></p>
-										</div>
-									</div>
-									<div class="dbox w-100 d-flex align-items-center">
-										<div class="icon d-flex align-items-center justify-content-center">
-											<span class="fa fa-globe"></span>
-										</div>
-										<div class="text pl-3">
-											<p><span>Website</span> <a href="/">kaleblub.pythonanywhere.com</a></p>
+										<div class="dbox w-100 d-flex align-items-center">
+											<div class="icon d-flex align-items-center justify-content-center">
+												<span class="fa fa-globe"></span>
+											</div>
+											<div class="text pl-3">
+												<p><span>Website</span> <a href="/">kaleblub.pythonanywhere.com</a></p>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>   
+					</div>   
+				</div>
 			</div>
-		</div>
 
 
-		<!------------ MAIN BLOCK OF THE BODY ------------>
-		<main class="content flex-fill">
-			{% block body %}
-			{% endblock %}
-		</main>
+			<!------------ MAIN BLOCK OF THE BODY ------------>
+			<main class="content flex-fill">
+				{% block body %}
+				{% endblock %}
+			</main>
 
 
-		<!------------ START OF THE FOOTER ------------>
-		<footer class="footer py-3">
-			<ul class="nav justify-content-center border-bottom pb-3 mb-3">
-				<li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
-				<li class="nav-item"><a href="/about" class="nav-link px-2 text-muted">About</a></li>
-				<li class="nav-item"><a href="/blog" class="nav-link px-2 text-muted">Blog</a></li>
-				<li class="nav-item"><a onclick="document.getElementById('modalContact').style.display='flex'" type="button" class="nav-link px-2 text-muted" data-toggle="modal" data-target="#modalContact">Contact</a></li>
-				<li class="nav-item"><a href="/projects" class="nav-link px-2 text-muted">Projects</a></li>
-			</ul>
-			<p class="text-center text-muted">&copy; 2021 Made by <a href="https://github.com/kaleblub/kaleblub.github.io" class="text-muted">Kaleb Humpal</a> - Powered by <a href="#" class="text-muted">Flask</a></p>
-		</footer>
+			<!------------ START OF THE FOOTER ------------>
+			<footer class="footer py-3">
+				<ul class="nav justify-content-center border-bottom pb-3 mb-3">
+					<li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
+					<li class="nav-item"><a href="/about" class="nav-link px-2 text-muted">About</a></li>
+					<li class="nav-item"><a href="/blog" class="nav-link px-2 text-muted">Blog</a></li>
+					<li class="nav-item"><a onclick="document.getElementById('modalContact').style.display='flex'" type="button" class="nav-link px-2 text-muted" data-toggle="modal" data-target="#modalContact">Contact</a></li>
+					<li class="nav-item"><a href="/projects" class="nav-link px-2 text-muted">Projects</a></li>
+				</ul>
+				<p class="text-center text-muted">&copy; 2021 Made by <a href="https://github.com/kaleblub/kaleblub.github.io" class="text-muted">Kaleb Humpal</a> - Powered by <a href="#" class="text-muted">Flask</a></p>
+			</footer>
 
-		<!------------ JAVASCRIPT ------------>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-	</body>
-	</html>
+			<!------------ JAVASCRIPT ------------>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+		</body>
+		</html>

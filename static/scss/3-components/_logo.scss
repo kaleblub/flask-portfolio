@@ -14,6 +14,7 @@
   font-weight: bold;
   font-display: auto;
   font-family: "Roboto Mono", monospace;
+  font-family: 'Source Code Pro', monospace;
   
   &__mark {
    // The '>' at start of logo
@@ -26,7 +27,7 @@
   }
 
   &__text {
-
+    color: #fff;  
   }
   
   &__cursor {
@@ -43,7 +44,7 @@
  }
 }
 
-// Logo Keyframes
+// Logo Keyframe Animation
 
 @keyframes cursor {
  0% {

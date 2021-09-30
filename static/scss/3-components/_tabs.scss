@@ -1,0 +1,43 @@
+/*
+ *============= My Skills Section =============*
+	*/
+.tab-content {
+	// Content that is switched with toggle buttons
+	min-height: 400px;
+	
+	.tab-pane {
+		// 
+		
+		.progress-box {
+			// Each individual skill with it's own title and progress bar
+			
+			.progress-title {
+				// Title of each skill
+				display: flex;
+			}
+			.progress {
+				// Full bar with the white as the nonprogress			
+				
+				.progress-bar {
+					// Showing the amount of progress in $ruby-amaranth 
+				  display: flex;
+				  flex-direction: column;
+				  justify-content: center;
+				  overflow: hidden;
+				  color: #fff;
+				  text-align: center;
+				  white-space: nowrap;
+				  background-color: $ruby-amaranth;
+				  transition: width 0.6s ease;
+
+				  .progress-value {
+				  	position: absolute;
+		       top: -30px;
+		       right: -15px;
+		       font-size: 13px;
+					}
+				}
+			}
+		}
+	}
+}

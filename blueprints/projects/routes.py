@@ -4,4 +4,4 @@ projects_bp = Blueprint('projects_bp', __name__, template_folder="templates/proj
 
 @projects_bp.route("/")
 def projects():
-	return render_template("/projects.html") #, projects=allProjects)
+	return render_template("/projectsHome.html") #, projects=allProjects)

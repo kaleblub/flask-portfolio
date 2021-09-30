@@ -8,11 +8,17 @@
   justify-content: center;
   margin-bottom: inherit;
 	
+  &--home {
+    width: 100%;
+  }
+
+  &--about {
+    justify-content: left;
+  }
+
   &--contact {
 
   }
 
-	&--home {
-	  width: 100%;
-	} 
+	 
 }
