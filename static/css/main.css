@@ -8,8 +8,9 @@ html {
   min-height: 100%; }
 
 body {
+  overflow-x: hidden;
   background-image: url("../../static/img/plainbackdrop.jpg");
-  background-size: contain;
+  background-size: cover;
   background-attachment: fixed;
   background-blend-mode: darken;
   text-shadow: 0 0.05rem 0.01rem rgba(0, 0, 0, 0.5);
@@ -20,7 +21,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "liga", "tnum", "case", "calt", "zero", "ss01", "locl";
-  color: #acabb1;
+  color: white;
   /*#a9a9b3!important;*/ }
 
 main {
@@ -88,11 +89,7 @@ h2 {
 .social-icons {
   margin: 0;
   padding: 0;
-  display: flex;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); }
+  display: flex; }
   .social-icons .icon {
     position: relative;
     display: block;
@@ -104,8 +101,9 @@ h2 {
     background: #333;
     border-radius: 50%;
     font-size: 30px;
-    color: #666;
-    transition: .5s; }
+    color: #9f9d9d;
+    transition: 0.5s;
+    margin: 1rem; }
     .social-icons .icon::before {
       content: '';
       position: absolute;
@@ -211,6 +209,8 @@ a {
  */
 .logo-link {
   color: #acabb1; }
+  .logo-link:hover {
+    text-shadow: 0.1rem 0 0 #e8175db0; }
   .logo-link .logo {
     display: flex;
     align-items: center;
@@ -339,7 +339,8 @@ a {
     min-width: 0;
     word-wrap: break-word;
     background-clip: border-box;
-    transition: all 0.6s; }
+    transition: all 0.6s;
+    padding: 0.5rem; }
     .card--projects__image {
       background-repeat: no-repeat;
       background-position: center;
@@ -354,18 +355,23 @@ a {
   .card__header {
     margin-top: 1em;
     color: ghostwhite; }
+  .card__text {
+    margin: 0.5rem 0.5rem; }
+  .card__btns {
+    padding: 0 0.25rem 0 0.25rem; }
 
 .yearline {
   width: 100%;
   list-style: none;
   text-align: justify;
-  margin-top: 20px; }
+  margin-top: 1.5rem;
+  padding-left: 10%; }
   .yearline:before {
     display: inline-block;
     content: attr(title);
     font-size: 15px;
     position: absolute;
-    transform: translateX(-35px); }
+    transform: translateX(-3.5rem) translateY(1.75rem); }
   .yearline:after {
     display: inline-block;
     content: "";
@@ -385,7 +391,7 @@ a {
       bottom: -2.25rem; }
 
 .year-half {
-  transform: translateX(-1300%) translateY(-3px);
+  transform: translateY(-3px);
   height: 3px !important; }
 
 /*
@@ -410,6 +416,89 @@ a {
       top: -30px;
       right: -15px;
       font-size: 13px; }
+
+/*
+ *============= Experience Timeline Section =============*
+ */
+.timeline {
+  padding: 50px 0;
+  position: relative; }
+  .timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -1px;
+    width: 2px;
+    height: 100%;
+    background: #CCD1D9;
+    z-index: 1; }
+  .timeline__job {
+    width: -webkit-calc(50% + 8px);
+    width: -moz-calc(50% + 8px);
+    width: calc(50% + 8px);
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-box-pack: justify;
+    justify-content: space-between;
+    clear: both; }
+    .timeline__job--left {
+      float: left;
+      direction: rtl; }
+    .timeline__job--right {
+      float: right;
+      margin-left: auto; }
+    .timeline__job__marker {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 5px solid #000;
+      background: #eee;
+      margin-top: 10px;
+      z-index: 999;
+      transition: all 1.2s; }
+    .timeline__job__content {
+      width: 95%;
+      padding: 0 15px;
+      border: 1px solid ghostwhite;
+      border-radius: 20px;
+      transition: all 1.2s; }
+      .timeline__job__content__title {
+        margin-top: 5px;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        font-size: 1.2rem;
+        font-weight: 500;
+        text-transform: uppercase; }
+      .timeline__job__content__date {
+        font-size: 15px; }
+      .timeline__job__content__description {
+        font-size: 14px;
+        line-height: 1.5;
+        word-spacing: 1px;
+        margin-top: 0;
+        margin-bottom: 1rem; }
+    .timeline__job:hover .timeline__job__marker {
+      background: #d01d57;
+      border: 5px solid #000;
+      box-shadow: 0 0 1rem #d01d57; }
+    .timeline__job:hover .timeline__job__content {
+      box-shadow: 0 0 2rem #d01d57;
+      border: solid 1px #d01d57 !important; }
+
+@media screen and (max-width: 768px) {
+  .timeline__job {
+    width: 100%;
+    margin-bottom: 30px; }
+  .timeline__job--left {
+    float: none;
+    direction: ltr; }
+  .timeline__job--right {
+    float: none; } }
 
 /*
  *============ Navbar =============*
@@ -458,18 +547,57 @@ a {
 
 .section {
   padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
   width: 100%; }
   .section--even {
     background-color: #00000040; }
+  .section__header {
+    text-align: left; }
+    .section__header__title {
+      text-transform: uppercase;
+      font-size: 3rem;
+      font-weight: 700;
+      padding-bottom: 1rem;
+      text-shadow: 0.2rem 0.2rem 0rem #e8175db0; }
+    .section__header__description {
+      line-height: 2;
+      letter-spacing: .15px; }
+  .section .container-xl::before {
+    content: attr(data-watermark);
+    position: absolute;
+    letter-spacing: 2px;
+    font-size: 500px;
+    opacity: 0.1;
+    color: #f8f8ff;
+    font-weight: bolder;
+    font-family: 'Roboto Mono';
+    text-transform: uppercase;
+    left: -10rem;
+    transform: translateY(-14rem);
+    z-index: -1;
+    text-shadow: 1rem 1rem black;
+    transition: all 0.6s; }
+  .section:hover .container-xl::before {
+    opacity: 0.15;
+    font-size: 550px; }
 
 /*
  *========== Home ==========*
  */
-.home-header {
-  margin-bottom: 1rem; }
+#home__header {
+  justify-content: space-evenly; }
+  #home__header__title {
+    margin-bottom: 2rem; }
+  #home__header__subtitle {
+    margin-bottom: 1.5rem; }
+  #home__header__description {
+    margin-bottom: 1rem; }
 
-.home-header-secondary {
-  margin-bottom: 2rem; }
+#home__cards {
+  display: flex;
+  justify-content: space-evenly; }
 
 .home-prompts {
   display: flex; }
@@ -494,17 +622,12 @@ a {
   background-image: url("../../static/img/message-mail.svg");
   background-size: contain; }
 
-.home-row {
-  max-width: 80em;
-  display: flex;
-  justify-content: space-evenly; }
-
 /* Responsive layout - makes the three columns stack 
 on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
-  .home-card {
+  .card--home {
     width: 100%; }
-  .home-row {
+  #home__cards {
     flex-wrap: wrap; } }
 
 /*
@@ -573,18 +696,59 @@ on top of each other instead of next to each other */
     margin: 5px 0; }
   .posts .post-day {
     flex-shrink: 0;
-    margin-left: 1em;
-    opacity: 0.6; }
+    margin-left: 1em; }
 
 /*
- *============= About Header Section =============*
+ *============= About Page Specific Styles =============*
  */
-.about-header-content {
+#about__skills__container {
+  max-height: 460px;
+  min-height: 460px; }
+
+#about__skills .tab-content {
+  max-height: 300px;
+  overflow-y: visible; }
+
+#about__welcome {
   margin: 5% 10%; }
-  .about-header-content .about-text-left {
+  #about__welcome .about-text-left {
     padding-left: 25px;
     padding-right: 0;
     text-align: left; }
+
+.portfolio-photo {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding-bottom: calc(100% - 36px);
+  background-color: #00000040;
+  border: 18px solid #00000040;
+  -webkit-box-shadow: 0 0 25px 0 black;
+  -moz-box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 25px 0 black;
+  transition: all ease-in-out 0.6s; }
+  .portfolio-photo:hover {
+    box-shadow: 0 0 20px 4px #E8175D;
+    border: 18px solid #00000070; }
+  .portfolio-photo__inner {
+    background-image: url("../../static/img/anonymousPortfolioPicture.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 85%;
+    height: auto;
+    display: block;
+    position: absolute;
+    top: -18px;
+    bottom: -18px;
+    width: auto;
+    left: -18px;
+    right: -18px;
+    opacity: 0.65;
+    box-shadow: inset 0 0 200px -1px black;
+    transition: all ease-in-out 0.6s; }
+    .portfolio-photo__inner:hover {
+      box-shadow: inset 0rem 0rem 200px -1px #00000040;
+      opacity: 0.80; }
 
 /*
  *=========== What I Do ============*
@@ -615,101 +779,6 @@ on top of each other instead of next to each other */
     display: table-cell;
     font-size: 33px;
     color: #E8175D; }
-
-/*
-	*============= Experience Timeline Section =============*
-	*/
-#experience .section-header div h2 {
-  padding-bottom: 1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 2rem; }
-
-#experience .container {
-  padding: 50px 0;
-  position: relative; }
-  #experience .container:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    margin-left: -1px;
-    width: 2px;
-    height: 100%;
-    background: #CCD1D9;
-    z-index: 1; }
-  #experience .container .timeline-block {
-    width: -webkit-calc(50% + 8px);
-    width: -moz-calc(50% + 8px);
-    width: calc(50% + 8px);
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: flex;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -moz-box-pack: justify;
-    justify-content: space-between;
-    clear: both; }
-    #experience .container .timeline-block .marker {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      border: 5px solid #000;
-      background: #eee;
-      margin-top: 10px;
-      z-index: 999;
-      transition: all 1.2s; }
-    #experience .container .timeline-block:hover .marker {
-      background: #d01d57;
-      border: 5px solid #000;
-      box-shadow: 0 0 1rem #d01d57; }
-    #experience .container .timeline-block:hover .timeline-content {
-      box-shadow: 0 0 2rem #d01d57;
-      border: solid 1px #d01d57 !important; }
-    #experience .container .timeline-block .timeline-content {
-      width: 95%;
-      padding: 0 15px;
-      color: #666;
-      border: 1px solid ghostwhite;
-      border-radius: 20px;
-      transition: all 1.2s; }
-      #experience .container .timeline-block .timeline-content h3 {
-        margin-top: 5px;
-        margin-bottom: 0;
-        padding-bottom: 0;
-        font-size: 1.2rem;
-        font-weight: 500;
-        text-transform: uppercase; }
-      #experience .container .timeline-block .timeline-content span {
-        font-size: 15px;
-        color: #a4a4a4; }
-      #experience .container .timeline-block .timeline-content p {
-        font-size: 14px;
-        line-height: 1.5;
-        word-spacing: 1px;
-        color: #888;
-        margin-top: 0;
-        margin-bottom: 1rem; }
-  #experience .container .timeline-block-right {
-    float: right;
-    margin-left: auto; }
-  #experience .container .timeline-block-left {
-    float: left;
-    direction: rtl; }
-
-@media screen and (max-width: 768px) {
-  #experience .container:before {
-    left: 8px;
-    width: 2px; }
-  #experience .container .timeline-block {
-    width: 100%;
-    margin-bottom: 30px; }
-  #experience .container .timeline-block-left {
-    float: none;
-    direction: ltr; }
-  #experience .container .timeline-block-right {
-    float: none; } }
 
 @media (min-width: 576px) {
   .modal-dialog {

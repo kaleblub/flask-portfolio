@@ -5,6 +5,10 @@
 .logo-link {
  // Logo 'a'-tag over the whole logo in top left corner
  color: $silver-spun-pearl;
+
+ &:hover {
+  text-shadow: 0.1rem 0 0 #e8175db0;
+ }
  
  .logo {
   // 

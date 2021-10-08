@@ -1,0 +1,41 @@
+<header class="navbar navbar-expand-lg">
+	<div class="container-xl">
+		<a class="logo-link" href="/">
+			<div class="logo float-md-start mb-0 navbar-brand text-muted">
+				<span class="logo__mark">
+					<i class="fas fa-angle-right"></i>
+				</span>
+				<span class="logo__name">  /KalebHumpal/{% block logoText %}{% endblock %} $</span>
+				<span class="logo__text"></span>
+				<span class="logo__cursor"></span>
+			</div>
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarOptions" aria-controls="navbarOptions" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarOptions">
+			<nav class="nav nav-masthead">
+				<a 
+				class="nav-link {{ 'nav-link--active' if active_page == 'home' else 'text-muted' }}" 
+				href="/">Home</a>
+				<a 
+				class="nav-link {{ 'nav-link--active' if active_page == 'about' else 'text-muted' }}" 
+				href="/about">About</a>
+				<a 
+				class="nav-link {{ 'nav-link--active' if active_page == 'blog' else 'text-muted' }}" 
+				href="/blog">Blog</a>
+				<a 
+				type="button"
+				class="nav-link text-muted" 
+				data-toggle="modal" 
+				data-target="#modalContact"
+				onclick="document.getElementById('modalContact').style.display='flex'"
+				>Contact</a>
+				<a 
+				class="nav-link {{ 'nav-link--active' if active_page == 'projects' else 'text-muted' }}"  
+				href="/projects">Projects</a>
+			</nav>
+		</div>
+	</div>
+</header>

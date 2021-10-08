@@ -1,13 +1,30 @@
 /*
  *========== Home ==========*
  */
+ #home {
+  &__header {
+    // max-width: 80em;
+    // display: flex;
+    justify-content: space-evenly;
 
- .home-header {
- 	margin-bottom: 1rem;
- }
+    &__title {
+      margin-bottom: 2rem;
+    }
 
- .home-header-secondary {
- 	margin-bottom: 2rem;
+    &__subtitle {
+      margin-bottom: 1.5rem;
+    }
+
+    &__description {
+      margin-bottom: 1rem;
+    }
+
+  }
+
+  &__cards {
+    display: flex;
+    justify-content: space-evenly;
+  }
  }
 
  .home-prompts {
@@ -38,19 +55,14 @@
  	background-size: contain;
  }
 
- .home-row {
- 	max-width: 80em;
- 	display: flex;
- 	justify-content: space-evenly;
-}
-
 /* Responsive layout - makes the three columns stack 
 on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
-	.home-card {
+	.card--home {
 		width: 100%;
 	}
-	.home-row {
+
+	#home__cards {
 		flex-wrap: wrap;
 	}
 }

@@ -1,0 +1,115 @@
+/*
+ *============= Experience Timeline Section =============*
+ */
+
+ .timeline {
+   padding: 50px 0;
+   position: relative;
+   // overflow: hidden;
+
+   &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      margin-left: -1px;
+      width: 2px;
+      height: 100%;
+      background: #CCD1D9;
+      z-index: 1;
+   }
+
+
+   &__job {
+   width: -webkit-calc(50% + 8px);
+   width: -moz-calc(50% + 8px);
+   width: calc(50% + 8px);
+   display: -webkit-box;
+   display: -webkit-flex;
+   display: -moz-box;
+   display: flex;
+   -webkit-box-pack: justify;
+   -webkit-justify-content: space-between;
+   -moz-box-pack: justify;
+   justify-content: space-between;
+   clear: both;
+
+      &--left {
+         float: left;
+         direction: rtl;
+      }
+
+      &--right {
+         float: right;
+         margin-left: auto;
+      }
+
+      &__marker {
+         width: 16px;
+         height: 16px;
+         border-radius: 50%;
+         border: 5px solid #000;
+         background: #eee;
+         margin-top: 10px;
+         z-index: 999;
+         transition: all 1.2s;
+      }
+
+      &__content {
+         width: 95%;
+         padding: 0 15px;
+         border: 1px solid ghostwhite;
+         border-radius: 20px;
+         transition: all 1.2s;
+
+         &__title {
+            margin-top: 5px;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+
+            text-transform: uppercase;
+         }
+         &__date {
+            font-size: 15px;
+         }
+         &__description {
+            font-size: 14px;
+            line-height: 1.5;
+            word-spacing: 1px;
+
+            margin-top: 0;
+            margin-bottom: 1rem;
+         }
+      }
+
+      &:hover {
+         .timeline__job__marker {
+           background: $dark-ruby-amaranth;
+           border: 5px solid #000;
+           box-shadow: 0 0 1rem $dark-ruby-amaranth;
+        }
+        .timeline__job__content {
+           box-shadow: 0 0 2rem $dark-ruby-amaranth;
+           border: solid 1px $dark-ruby-amaranth!important;
+        }
+      }
+   }
+}
+
+
+@media screen and (max-width: 768px) {	
+
+   .timeline__job {
+      width: 100%;
+      margin-bottom: 30px;
+   }
+   .timeline__job--left {
+      float: none;
+      direction: ltr;
+   }
+   .timeline__job--right {
+      float: none;
+   }
+}

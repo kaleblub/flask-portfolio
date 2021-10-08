@@ -1,13 +1,14 @@
+from datetime import datetime
 from sqlalchemy import Table, Column, Integer, String, Text, Boolean, DateTime, ForeignKey
 from sqlalchemy.types import Date
 from sqlalchemy.orm import relationship, backref
-from datetime import datetime
 
 # Import The Declarative Base 
 from database import Base
 
 class BlogPost(Base):
 	__tablename__ = "posts"
+	
 	id = Column(Integer, primary_key=True)
 	title = Column(String(50), nullable=False, unique=True)
 	summary = Column(String(200), nullable=False)

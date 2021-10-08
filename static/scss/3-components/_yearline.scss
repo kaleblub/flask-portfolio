@@ -2,14 +2,15 @@
 	width: 100%;
 	list-style: none;
 	text-align: justify;
-	margin-top: 20px;
+	margin-top: 1.5rem;
+	padding-left: 10%;
 
 	&:before {
 		display: inline-block;
 		content: attr(title);
 		font-size: 15px;
 		position: absolute;
-		transform: translateX(-35px);
+		transform: translateX(-3.5rem) translateY(1.75rem);
 	}
 
 	&:after {
@@ -37,6 +38,6 @@
 }
 
 .year-half {
-	transform: translateX(-1300%) translateY(-3px);
+	transform: translateY(-3px);
 	height: 3px!important;
 }

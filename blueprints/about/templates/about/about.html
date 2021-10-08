@@ -3,42 +3,56 @@
 
 {% block head %}
 <title>About – Kaleb Humpal</title>
-<link rel="stylesheet" href="../../static/css/main.css?v=1.2.15">
+<link rel="stylesheet" href="../../static/css/main.css?v=1.2.26">
 {% endblock %}
 
+{% block logoText %}about/{% endblock %}
 
 {% block body %}
-<section class="section section--odd about-header-content">
-	<div class="row flex-v-align">
-		<div class="col-sm-12 col-md-5 col-lg-5">
-			<div class="portfolio-photo">
-				<div class="hp-inner" style="background-position: calc(50% + -5.13342px) calc(50% + 7.3584px);"></div>
-			</div>
-		</div>
-		<div class="col-sm-12 col-md-7 col-lg-7">
-			<div class="about-text-left">
-				<h1>Kaleb Humpal</h1>
-				<p>I am a passionate learner in the world of computer science. I find interests in almost evierythng about it, from generative art, to web development, to cyber security and penetration testing. I am addicted to coding, I look forward to writing and adding to whatever my current project is, I go to sleep thinking about it, I sometimes even dream about it and wake up thinking about it.</p>
-				<div class="social-icons">
-					<a href="#0" class="icon">
-						<i class="fab fa-github"></i>
-					</a>
-					<a href="#0" class="icon">
-						<i class="fab fa-linkedin"></i>
-					</a>
-					<a href="#0" class="icon">
-						<i class="fab fa-stack-overflow"></i>
-					</a>
-					<a href="#0" class="icon">
-						<i class="fab fa-chrome"></i>
-					</a>
-					<a href="#0" class="icon">
-						<i class="fab fa-firefox"></i>
-					</a>
+<section id="about__welcome" class="section section--odd">
+	<div class="container-xl">
+		<div class="row">
+			<div class="col-sm-12 col-md-5 col-lg-4">
+				<div class="portfolio-photo">
+					<div class="portfolio-photo__inner" style="background-position: calc(50% + -5.13342px) calc(50% + 7.3584px);">
+						<title>Icons made by Freepik from www.flaticon.com</title>
+<!-- 						<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
+					</div>
 				</div>
-				<div class="btn-container">
-					<a href="https://themeforest.net/item/leven-vcard-wordpress-theme/25289671" target="_blank" id="cv-btn" class="prompt-btn">Download CV</a>
-					<a href="https://lmpixels.com/wp/leven-wp/contact/" target="_self" id="about-contact-btn" class="prompt-btn">Contact</a>
+			</div>
+			<div class="col-sm-12 col-md-7 col-lg-7">
+				<div class="section__header about-text-left">
+					<h1 class="section__header__title">Kaleb Humpal</h1>
+					<p class="section__header__description">I am a passionate learner in the world of computer science. I find interests in almost evierythng about it, from generative art, to web development, to cyber security and penetration testing. I am addicted to coding, I look forward to writing and adding to whatever my current project is, I go to sleep thinking about it, I sometimes even dream about it and wake up thinking about it.</p>
+					<div class="btn-container btn-container--about">
+						<a type="button" target="_blank" id="cv-btn" class="prompt-btn">Download CV</a>
+						<a 
+						type="button" 
+						data-toggle="modal" 
+						data-target="#modalContact" 
+						id="about-contact-btn" 
+						class="prompt-btn"
+						onclick="document.getElementById('modalContact').style.display='flex'">
+							Contact
+						</a>
+					</div>
+					<div class="social-icons">
+						<a href="https://github.com/kaleblub" class="icon">
+							<i class="fab fa-github"></i>
+						</a>
+						<a href="https://www.linkedin.com/in/kaleb-humpal-52a481200/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BMFqRQLlTQJe4k6APSVjyww%3D%3D" class="icon">
+							<i class="fab fa-linkedin"></i>
+						</a>
+						<a href="https://stackoverflow.com/users/14511836/kaleblub?tab=profile" class="icon">
+							<i class="fab fa-stack-overflow"></i>
+						</a>
+						<a href="#0" class="icon">
+							<i class="fab fa-chrome"></i>
+						</a>
+						<a href="#0" class="icon">
+							<i class="fab fa-firefox"></i>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -46,188 +60,192 @@
 </section>
 
 <!-- My Skills Progression Section -->
-<section id="section__skills" class="section section--even row">
-	<div class="col-lg-4 padding-less img" style="background-image:url('../../static/img/skills.jpg')" data-jarallax="{&quot;speed&quot;: 0.5}"></div><!-- end col -->
-	<div class="col-lg-8 offset-lg-4" style="text-align: left;">
-		<div class="section__header">
-			<!-- CONDENSE THESE CLASSES DOWN INTO THE SECION -->
-			<h4 class="section__header__title title title-line text-uppercase mb-4 pb-4">My Skills</h4>
-			<span></span>
-			<p class="mx-auto para-desc mb-0">My skills include a little bit of both front end and backend aspects. But my favorite by far is Python, as you can tell <a href="/projects">here</a>.</p>
-		</div>
-		<div class="row">
-			<div class="col-lg-3 col-md-4 col-12">
-				<ul class="nav nav-pills flex-column px-0" id="pills-tab" role="tablist">
-					<li class="nav-item mt-4 pt-2">
-						<a type="button" class="prompt-btn active" id="pills-front-end-tab" data-bs-toggle="pill" href="#pills-front-end" role="tab" aria-controls="pills-front-end" aria-selected="true">
-							Front End
-						</a><!--end nav link-->
-					</li><!--end nav item-->
+<section id="about__skills" class="section section--even">
+	<div id="about__skills__container" class="container-xl" data-watermark="skills">
+		<div class="col-lg-4 padding-less img" style="background-image:url('../../static/img/skills.jpg')" data-jarallax="{&quot;speed&quot;: 0.5}"></div><!-- end col -->
+		<div class="col-lg-8 offset-lg-4">
+			<div class="section__header">
+				<!-- CONDENSE THESE CLASSES DOWN INTO THE SECTION -->
+				<h4 class="section__header__title mb-4 pb-4">My Skills</h4>
+				<span></span>
+				<p class="section__header__description mx-auto para-desc mb-0">My skills include a little bit of both front end and backend aspects. But my favorite by far is Python, as you can tell <a href="/projects">here</a>.</p>
+			</div>
+			<div class="row">
+				<div class="col-lg-3 col-md-4 col-12">
+					<ul class="nav nav-pills flex-column px-0" id="pills-tab" role="tablist">
+						<li class="nav-item mt-4 pt-2">
+							<a type="button" class="prompt-btn active" id="pills-front-end-tab" data-bs-toggle="pill" href="#pills-front-end" role="tab" aria-controls="pills-front-end" aria-selected="true">
+								Front End
+							</a><!--end nav link-->
+						</li><!--end nav item-->
 
-					<li class="nav-item mt-4 pt-2">
-						<a class="prompt-btn" id="pills-back-end-tab" data-bs-toggle="pill" href="#pills-back-end" role="tab" aria-controls="pills-back-end" aria-selected="false">
-							Back End
-						</a><!--end nav link-->
-					</li><!--end nav item-->
+						<li class="nav-item mt-4 pt-2">
+							<a class="prompt-btn" id="pills-back-end-tab" data-bs-toggle="pill" href="#pills-back-end" role="tab" aria-controls="pills-back-end" aria-selected="false">
+								Back End
+							</a><!--end nav link-->
+						</li><!--end nav item-->
 
-					<li class="nav-item mt-4 pt-2">
-						<a class="prompt-btn" id="pills-etc-tab" data-bs-toggle="pill" href="#pills-etc" role="tab" aria-controls="pills-etc" aria-selected="false">
-							Msc.
-						</a><!--end nav link-->
-					</li><!--end nav item-->
-				</ul><!--end nav pills-->
-			</div><!--end col-->
+						<li class="nav-item mt-4 pt-2">
+							<a class="prompt-btn" id="pills-etc-tab" data-bs-toggle="pill" href="#pills-etc" role="tab" aria-controls="pills-etc" aria-selected="false">
+								Msc.
+							</a><!--end nav link-->
+						</li><!--end nav item-->
+					</ul><!--end nav pills-->
+				</div><!--end col-->
 
-			<div class="col-lg-9 col-md-8 col-12">
-				<div class="tab-content ps-lg-4" id="pills-tabContent">
-					<div class="tab-pane fade active show" id="pills-front-end" role="tabpanel" aria-labelledby="pills-front-end-tab">
-						<div class="progress-box mt-4 pt-2">
-							<h6 class="progress-title">HTML</h6>
-							<div class="progress">
-								<div class="progress-bar position-relative" style="width:84%;">
-									<div class="progress-value d-block text-dark h6">84%</div>
+				<div class="col-lg-9 col-md-8 col-12">
+					<div class="tab-content ps-lg-4" id="pills-tabContent">
+						<div class="tab-pane fade active show" id="pills-front-end" role="tabpanel" aria-labelledby="pills-front-end-tab">
+							<div class="progress-box mt-4 pt-2">
+								<h6 class="progress-title">HTML</h6>
+								<div class="progress">
+									<div class="progress-bar position-relative" style="width:60%;">
+										<div class="progress-value d-block text-dark h6">60%</div>
+									</div>
 								</div>
-							</div>
-						</div><!--end process box-->
-						<div class="progress-box mt-4 pt-2">
-							<h6 class="progress-title">CSS</h6>
-							<div class="progress">
-								<div class="progress-bar position-relative" style="width:75%;">
-									<div class="progress-value d-block text-dark h6">75%</div>
+							</div><!--end process box-->
+							<div class="progress-box mt-4 pt-2">
+								<h6 class="progress-title">CSS</h6>
+								<div class="progress">
+									<div class="progress-bar position-relative" style="width:60%;">
+										<div class="progress-value d-block text-dark h6">60%</div>
+									</div>
 								</div>
-							</div>
-						</div><!--end process box-->
-						<div class="progress-box mt-4 pt-2">
-							<h6 class="progress-title">Javascript</h6>
-							<div class="progress">
-								<div class="progress-bar position-relative" style="width:79%;">
-									<div class="progress-value d-block text-dark h6">79%</div>
+							</div><!--end process box-->
+							<div class="progress-box mt-4 pt-2">
+								<h6 class="progress-title">Javascript</h6>
+								<div class="progress">
+									<div class="progress-bar position-relative" style="width:10%;">
+										<div class="progress-value d-block text-dark h6">10%</div>
+									</div>
 								</div>
-							</div>
-						</div><!--end process box-->
-					</div><!--end teb pane-->
+							</div><!--end process box-->
+						</div><!--end teb pane-->
 
-					<div class="tab-pane fade" id="pills-back-end" role="tabpanel" aria-labelledby="pills-back-end-tab">
-						<div class="progress-box mt-4 pt-2">
-							<h6 class="progress-title">Python</h6>
-							<div class="progress">
-								<div class="progress-bar position-relative" style="width:84%;">
-									<div class="progress-value d-block text-dark h6">84%</div>
+						<div class="tab-pane fade" id="pills-back-end" role="tabpanel" aria-labelledby="pills-back-end-tab">
+							<div class="progress-box mt-4 pt-2">
+								<h6 class="progress-title">Python</h6>
+								<div class="progress">
+									<div class="progress-bar position-relative" style="width:60%;">
+										<div class="progress-value d-block text-dark h6">60%</div>
+									</div>
 								</div>
-							</div>
-						</div><!--end process box-->
-						<div class="progress-box mt-4 pt-2">
-							<h6 class="progress-title">Flask</h6>
-							<div class="progress">
-								<div class="progress-bar position-relative" style="width:75%;">
-									<div class="progress-value d-block text-dark h6">75%</div>
+							</div><!--end process box-->
+							<div class="progress-box mt-4 pt-2">
+								<h6 class="progress-title">Flask</h6>
+								<div class="progress">
+									<div class="progress-bar position-relative" style="width:10%;">
+										<div class="progress-value d-block text-dark h6">10%</div>
+									</div>
 								</div>
-							</div>
-						</div><!--end process box-->
-						<div class="progress-box mt-4 pt-2">
-							<h6 class="progress-title">C++</h6>
-							<div class="progress">
-								<div class="progress-bar position-relative" style="width:79%;">
-									<div class="progress-value d-block text-dark h6">79%</div>
+							</div><!--end process box-->
+							<div class="progress-box mt-4 pt-2">
+								<h6 class="progress-title">C++</h6>
+								<div class="progress">
+									<div class="progress-bar position-relative" style="width:20%;">
+										<div class="progress-value d-block text-dark h6">20%</div>
+									</div>
 								</div>
-							</div>
-						</div><!--end process box-->
-						<div class="progress-box mt-4 pt-2">
-							<h6 class="progress-title">SQL</h6>
-							<div class="progress">
-								<div class="progress-bar position-relative" style="width:79%;">
-									<div class="progress-value d-block text-dark h6">79%</div>
+							</div><!--end process box-->
+							<div class="progress-box mt-4 pt-2">
+								<h6 class="progress-title">SQL</h6>
+								<div class="progress">
+									<div class="progress-bar position-relative" style="width:10%;">
+										<div class="progress-value d-block text-dark h6">10%</div>
+									</div>
 								</div>
-							</div>
-						</div><!--end process box-->
-					</div><!--end teb pane-->
+							</div><!--end process box-->
+						</div><!--end teb pane-->
 
-					<div class="tab-pane fade" id="pills-etc" role="tabpanel" aria-labelledby="pills-etc-tab">
-						<div class="progress-box mt-4 pt-2">
-							<h6 class="progress-title">Linux CLI</h6>
-							<div class="progress">
-								<div class="progress-bar position-relative" style="width:84%;">
-									<div class="progress-value d-block text-dark h6">84%</div>
+						<div class="tab-pane fade" id="pills-etc" role="tabpanel" aria-labelledby="pills-etc-tab">
+							<div class="progress-box mt-4 pt-2">
+								<h6 class="progress-title">Linux CLI</h6>
+								<div class="progress">
+									<div class="progress-bar position-relative" style="width:70%;">
+										<div class="progress-value d-block text-dark h6">70%</div>
+									</div>
+								</div>
+							</div><!--end process box-->
+							<div class="progress-box mt-4 pt-2">
+								<h6 class="progress-title">Bash</h6>
+								<div class="progress">
+									<div class="progress-bar position-relative" style="width:20%;">
+										<div class="progress-value d-block text-dark h6">20%</div>
+									</div>
 								</div>
 							</div>
-						</div><!--end process box-->
-						<div class="progress-box mt-4 pt-2">
-							<h6 class="progress-title">Bash</h6>
-							<div class="progress">
-								<div class="progress-bar position-relative" style="width:75%;">
-									<div class="progress-value d-block text-dark h6">75%</div>
-								</div>
-							</div>
-						</div>
-					</div><!--end teb pane-->
-					<ul class="yearline" title="Yrs">
-						<li class="year-half"></li>
-						<li data-years="1"></li>
-						<li class="year-half"></li>
-						<li data-years="2"></li>
-						<li class="year-half"></li>
-						<li data-years="3"></li>
-						<li class="year-half"></li>
-						<li data-years="4"></li>
-						<li class="year-half"></li>
-						<li data-years="5"></li>
-					</ul>
-				</div><!--end tab content-->
-			</div><!--end col-->
-		</div> <!-- end row --> 
-	</div> <!-- end col -->        
+						</div><!--end teb pane-->
+						<ul class="yearline" title="Yrs">
+							<li class="year-half"></li>
+							<li data-years="1"></li>
+							<li class="year-half"></li>
+							<li data-years="2"></li>
+							<li class="year-half"></li>
+							<li data-years="3"></li>
+							<li class="year-half"></li>
+							<li data-years="4"></li>
+							<li class="year-half"></li>
+							<li data-years="5"></li>
+						</ul>
+					</div><!--end tab content-->
+				</div><!--end col-->
+			</div> <!-- end row --> 
+		</div> <!-- end col --> 
+	</div>       
 </section>
 
 
 <!-- What I Do Section -->
-<section class="section section--odd">
-	<div class="section__header">
-		<h2 class="section__header__title title title-line text-uppercase mb-4 pb-4">What I Do</h2>
-	</div>
-	<div class="row">
-		<div class=" col-xs-12 col-sm-6 ">
-			<div id="col_inner_3fa94961ec32117c71b91b80d4565769" class="fw-col-inner">
-				<div id="info-list-6138736695070" class="info-list-w-icon">
-					<div class="info-block-w-icon">
-						<div class="ci-icon">
-							<i class="linecons linecons-pen"></i>
+<section id="about__what-i-do" class="section section--odd" >
+	<div class="container-xl" data-watermark="development">
+		<div class="section__header">
+			<h2 class="section__header__title  mb-4 pb-4">What I Do</h2>
+		</div>
+		<div class="row">
+			<div class=" col-xs-12 col-sm-6 ">
+				<div class="fw-col-inner">
+					<div class="info-list-w-icon">
+						<div class="info-block-w-icon">
+							<div class="ci-icon">
+								<i class="linecons linecons-pen"></i>
+							</div>
+							<div class="ci-text">
+								<h4>Develop Software</h4>
+								<p>I let my mind take me all over the place with new ideas, getting inspiration and motivation to create all kinds of things. Like web scrapers, bots, games, etc. I love bringing my ideas into the world and seeing them functioning how I imagined.</p>
+							</div>
 						</div>
-						<div class="ci-text">
-							<h4>Develop Software</h4>
-							<p>I let my mind take me all over the place with new ideas, getting inspiration and motivation to create all kinds of things. Like web scrapers, bots, games, etc. I love bringing my ideas into the world and seeing them functioning how I imagined.</p>
-						</div>
-					</div>
-					<div class="info-block-w-icon">
-						<div class="ci-icon">
-							<i class="linecons linecons-display"></i>
-						</div>
-						<div class="ci-text">
-							<h4>Web Development</h4>
-							<p>Since seeing results of what I make is so satisfying to me, developing websites is a perfect outlet for that. I am not a designer, though I believe I have decent taste in designs and can recognise website quality. I have made my own website in the past for fun, I've made a draft of a website for my mother's business. Recently, with the creation of this portfolio, I have improved my CSS and HTML knowledge by a lot.</p>
+						<div class="info-block-w-icon">
+							<div class="ci-icon">
+								<i class="linecons linecons-display"></i>
+							</div>
+							<div class="ci-text">
+								<h4>Web Development</h4>
+								<p>Since seeing results of what I make is so satisfying to me, developing websites is a perfect outlet for that. I am not a designer, though I believe I have decent taste in designs and can recognise website quality. I have made my own website in the past for fun, I've made a draft of a website for my mother's business. Recently, with the creation of this portfolio, I have improved my CSS and HTML knowledge by a lot.</p>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class=" col-xs-12 col-sm-6 ">
-			<div id="col_inner_931ccceee4bc772acc2735fc06fc1c62" class="fw-col-inner">
-				<div id="info-list-613873669528d" class="info-list-w-icon">
-					<div class="info-block-w-icon">
-						<div class="ci-icon">
-							<i class="linecons linecons-shop"></i>
+			<div class=" col-xs-12 col-sm-6 ">
+				<div class="fw-col-inner">
+					<div class="info-list-w-icon">
+						<div class="info-block-w-icon">
+							<div class="ci-icon">
+								<i class="linecons linecons-shop"></i>
+							</div>
+							<div class="ci-text">
+								<h4>Scripting</h4>
+								<p>My mind is always on the look out for how to improve my development processes and how to automate certain tasks that I do a lot. I've written my personal Linux config script to get started on a clean installation faster, an automated system backup script. I like creating my own keyboard shortcuts to do certain commands I don't want to type out, like resetting my Network Manager, or to reset my mousepad driver.</p>
+							</div>
 						</div>
-						<div class="ci-text">
-							<h4>Scripting</h4>
-							<p>My mind is always on the look out for how to improve my development processes and how to automate certain tasks that I do a lot. I've written my personal Linux config script to get started on a clean installation faster, an automated system backup script. I like creating my own keyboard shortcuts to do certain commands I don't want to type out, like resetting my Network Manager, or to reset my mousepad driver.</p>
-						</div>
-					</div>
-					<div class="info-block-w-icon">
-						<div class="ci-icon">
-							<i class="linecons linecons-megaphone"></i>
-						</div>
-						<div class="ci-text">
-							<h4>I'm Not Sure Yet</h4>
-							<p>Mauris neque libero, aliquet vel mollis nec, euismod sed tellus. Mauris convallis dictum elit id volutpat. Vivamus blandit, dolor vitae lacinia maximus, risus velit vehicula odio, a tincidunt turpis turpis tempus ex.</p>
+						<div class="info-block-w-icon">
+							<div class="ci-icon">
+								<i class="linecons linecons-megaphone"></i>
+							</div>
+							<div class="ci-text">
+								<h4>I'm Not Sure Yet</h4>
+								<p>Mauris neque libero, aliquet vel mollis nec, euismod sed tellus. Mauris convallis dictum elit id volutpat. Vivamus blandit, dolor vitae lacinia maximus, risus velit vehicula odio, a tincidunt turpis turpis tempus ex.</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -237,225 +255,223 @@
 </section>
 
 <!-- Work Timeline -->
-<section id="experience" class="section section--even">
-	<div class="section-header">
-		<div>
-			<h2>My Experience</h2>
+<section id="about__experience" class="section section--even">
+	<div class="container-xl" data-watermark="experience">
+		<div class="section__header">
+			<h2 class="section__header__title">My Experience</h2>
 		</div>
-	</div>
-	<div class="container">
-		<div class="timeline-block timeline-block-left">
-			<div class="marker"></div>
-			<div class="timeline-content">
-				<h3>Web Designer</h3>
-				<span>2015 - 2018</span>
+		<div class="timeline">
+			<div class="timeline__job timeline__job--left">
+				<div class="timeline__job__marker"></div>
+				<div class="timeline__job__content">
+					<h3 class="timeline__job__content__title">Web Designer</h3>
+					<span class="timeline__job__content__date">2015 - 2018</span>
 
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+					<p class="timeline__job__content__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
 					labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
 					laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-				voluptate.</p>
+					voluptate.</p>
+				</div>
 			</div>
-		</div>
-		<div class="timeline-block timeline-block-right">
-			<div class="marker"></div>
-			<div class="timeline-content">
-				<h3>Adobe InDesign Editor</h3>
-				<span>June 2020 - September 2020</span>
+			<div class="timeline__job timeline__job--right">
+				<div class="timeline__job__marker"></div>
+				<div class="timeline__job__content">
+					<h3 class="timeline__job__content__title">Adobe InDesign Editor</h3>
+					<span class="timeline__job__content__date">June 2020 - September 2020</span>
 
-				<p>I was responsible for the careful following and implementation of layout designs in Adobe InDesign. Worked with Farsee, Arabic, Turkish, and English study guides, coloring books, bible lessons, etc.</p>
+					<p class="timeline__job__content__description">I was responsible for the careful following and implementation of layout designs in Adobe InDesign. Worked with Farsee, Arabic, Turkish, and English study guides, coloring books, bible lessons, etc.</p>
+				</div>
 			</div>
-		</div>
-		<div class="timeline-block timeline-block-left">
-			<div class="marker"></div>
-			<div class="timeline-content">
-				<h3>Computer Science Student</h3>
-				<span>August 2019 - November 2020</span>
+			<div class="timeline__job timeline__job--left">
+				<div class="timeline__job__marker"></div>
+				<div class="timeline__job__content">
+					<h3 class="timeline__job__content__title">Computer Science Student</h3>
+					<span class="timeline__job__content__date">August 2019 - November 2020</span>
 
-				<p>I studied computer science and had my passion for coding and learning all about computers reignited as I went to university to grow my romantic relationship and get engaged and then married.</p>
+					<p class="timeline__job__content__description">I studied computer science and had my passion for coding and learning all about computers reignited as I went to university to grow my romantic relationship and get engaged and then married.</p>
+				</div>
 			</div>
-		</div>
-		<div class="timeline-block timeline-block-right">
-			<div class="marker"></div>
-			<div class="timeline-content">
-				<h3>Kitchen Manager</h3>
-				<span>June 2017 - August 2019</span>
+			<div class="timeline__job timeline__job--right">
+				<div class="timeline__job__marker"></div>
+				<div class="timeline__job__content">
+					<h3 class="timeline__job__content__title">Kitchen Manager</h3>
+					<span class="timeline__job__content__date">June 2017 - August 2019</span>
 
-				<p>I was responsible for ordering supplies, food, and ingredients. Preparation of food, supervising/training new staff in specific stations, and cross-training if necessary, maintaining inventory levels and conducting full weekly inventory assessments, Assisting with menu changes and adjustments, scheduling, and responding personally to guest questions and complaints.</p>
+					<p class="timeline__job__content__description">I was responsible for ordering supplies, food, and ingredients. Preparation of food, supervising/training new staff in specific stations, and cross-training if necessary, maintaining inventory levels and conducting full weekly inventory assessments, Assisting with menu changes and adjustments, scheduling, and responding personally to guest questions and complaints.</p>
+				</div>
 			</div>
-		</div>
+		</div>	
 	</div>
 </section>
 
 <!-- Hobbies and Interests -->
-<section class="section section--odd">
-	<div class="row justify-content-center">
-		<div class="col-12 text-center">
-			<div class="section-title">
-				<div class="titles">
-					<h4 class="title title-line text-uppercase mb-4 pb-4">Hobbies &amp; Interests</h4>
-					<span></span>
-				</div>
-				<p class="mx-auto para-desc mb-0">Other than my professional information, here are a few things for you to get a sense of what kind of person I am.</p>
-			</div>
-		</div><!--end col-->
-	</div><!--end row-->
+<section id="about__interests" class="section section--odd">
+	<div class="container-xl" data-watermark="hobbies&interests">
+		<div class="row">
+			<div class="section__header col-12">
+				<h4 class="section__header__title mb-4 pb-4">Hobbies &amp; Interests</h4>
+				<span></span>
+				<p class="section__header__description">Other than my professional information, here are a few things for you to get a sense of what kind of person I am.</p>
+			</div><!--end col-->
+		</div><!--end row-->
 
-	<div class="row">
-		<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-			<div class="interests-desc bg-light position-relative px-2 py-3 rounded">
-				<div class="hobbies d-flex align-items-center">
-					<div class="text-center rounded-pill me-4">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-monitor icon fea icon-md-sm"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-					</div>
-					<div class="content">
-						<h6 class="title mb-0">Programming</h6>
+		<div class="row">
+			<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
+				<div class="prompt-btn px-2 py-3">
+					<div class="hobbies d-flex align-items-center">
+						<div class="text-center rounded-pill me-4">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-monitor icon fea icon-md-sm"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+						</div>
+						<div class="content">
+							<h6 class="title mb-0">Programming</h6>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div><!--end col-->
+			</div><!--end col-->
 
-		<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-			<div class="interests-desc bg-light position-relative px-2 py-3 rounded">
-				<div class="hobbies d-flex align-items-center">
-					<div class="text-center rounded-pill me-4">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-stop-circle icon fea icon-md-sm"><circle cx="12" cy="12" r="10"></circle><rect x="9" y="9" width="6" height="6"></rect></svg>
-					</div>
-					<div class="content">
-						<h6 class="title mb-0">Linux</h6>
+			<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
+				<div class="prompt-btn px-2 py-3">
+					<div class="hobbies d-flex align-items-center">
+						<div class="text-center rounded-pill me-4">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-stop-circle icon fea icon-md-sm"><circle cx="12" cy="12" r="10"></circle><rect x="9" y="9" width="6" height="6"></rect></svg>
+						</div>
+						<div class="content">
+							<h6 class="title mb-0">Linux</h6>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div><!--end col-->
+			</div><!--end col-->
 
-		<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-			<div class="interests-desc bg-light position-relative px-2 py-3 rounded">
-				<div class="hobbies d-flex align-items-center">
-					<div class="text-center rounded-pill me-4">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-video icon fea icon-md-sm"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
-					</div>
-					<div class="content">
-						<h6 class="title mb-0">Movies</h6>
+			<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
+				<div class="prompt-btn px-2 py-3">
+					<div class="hobbies d-flex align-items-center">
+						<div class="text-center rounded-pill me-4">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-video icon fea icon-md-sm"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+						</div>
+						<div class="content">
+							<h6 class="title mb-0">Movies</h6>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div><!--end col-->
+			</div><!--end col-->
 
-		<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-			<div class="interests-desc bg-light position-relative px-2 py-3 rounded">
-				<div class="hobbies d-flex align-items-center">
-					<div class="text-center rounded-pill me-4">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-coffee icon fea icon-md-sm"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
-					</div>
-					<div class="content">
-						<h6 class="title mb-0">Tea & Coffee</h6>
+			<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
+				<div class="prompt-btn px-2 py-3">
+					<div class="hobbies d-flex align-items-center">
+						<div class="text-center rounded-pill me-4">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-coffee icon fea icon-md-sm"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+						</div>
+						<div class="content">
+							<h6 class="title mb-0">Tea & Coffee</h6>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div><!--end col-->
+			</div><!--end col-->
 
-		<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-			<div class="interests-desc bg-light position-relative px-2 py-3 rounded">
-				<div class="hobbies d-flex align-items-center">
-					<div class="text-center rounded-pill me-4">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-music icon fea icon-md-sm"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-					</div>
-					<div class="content">
-						<h6 class="title mb-0">Music</h6>
+			<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
+				<div class="prompt-btn px-2 py-3">
+					<div class="hobbies d-flex align-items-center">
+						<div class="text-center rounded-pill me-4">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-music icon fea icon-md-sm"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+						</div>
+						<div class="content">
+							<h6 class="title mb-0">Music</h6>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div><!--end col-->
+			</div><!--end col-->
 
-		<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-			<div class="interests-desc bg-light position-relative px-2 py-3 rounded">
-				<div class="hobbies d-flex align-items-center">
-					<div class="text-center rounded-pill me-4">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-watch icon fea icon-md-sm"><circle cx="12" cy="12" r="7"></circle><polyline points="12 9 12 12 13.5 13.5"></polyline><path d="M16.51 17.35l-.35 3.83a2 2 0 0 1-2 1.82H9.83a2 2 0 0 1-2-1.82l-.35-3.83m.01-10.7l.35-3.83A2 2 0 0 1 9.83 1h4.35a2 2 0 0 1 2 1.82l.35 3.83"></path></svg>
-					</div>
-					<div class="content">
-						<h6 class="title mb-0">Gaming</h6>
+			<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
+				<div class="prompt-btn px-2 py-3">
+					<div class="hobbies d-flex align-items-center">
+						<div class="text-center rounded-pill me-4">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-watch icon fea icon-md-sm"><circle cx="12" cy="12" r="7"></circle><polyline points="12 9 12 12 13.5 13.5"></polyline><path d="M16.51 17.35l-.35 3.83a2 2 0 0 1-2 1.82H9.83a2 2 0 0 1-2-1.82l-.35-3.83m.01-10.7l.35-3.83A2 2 0 0 1 9.83 1h4.35a2 2 0 0 1 2 1.82l.35 3.83"></path></svg>
+						</div>
+						<div class="content">
+							<h6 class="title mb-0">Gaming</h6>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div><!--end col-->
+			</div><!--end col-->
 
-		<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-			<div class="interests-desc bg-light position-relative px-2 py-3 rounded">
-				<div class="hobbies d-flex align-items-center">
-					<div class="text-center rounded-pill me-4">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box icon fea icon-md-sm"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-					</div>
-					<div class="content">
-						<h6 class="title mb-0">Puzzles</h6>
+			<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
+				<div class="prompt-btn px-2 py-3">
+					<div class="hobbies d-flex align-items-center">
+						<div class="text-center rounded-pill me-4">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box icon fea icon-md-sm"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+						</div>
+						<div class="content">
+							<h6 class="title mb-0">Puzzles</h6>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div><!--end col-->
+			</div><!--end col-->
 
-		<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-			<div class="interests-desc bg-light position-relative px-2 py-3 rounded">
-				<div class="hobbies d-flex align-items-center">
-					<div class="text-center rounded-pill me-4">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book icon fea icon-md-sm"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-					</div>
-					<div class="content">
-						<h6 class="title mb-0">Reading</h6>
+			<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
+				<div class="prompt-btn px-2 py-3">
+					<div class="hobbies d-flex align-items-center">
+						<div class="text-center rounded-pill me-4">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book icon fea icon-md-sm"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+						</div>
+						<div class="content">
+							<h6 class="title mb-0">Reading</h6>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div><!--end col-->
+			</div><!--end col-->
 
-		<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-			<div class="interests-desc bg-light position-relative px-2 py-3 rounded">
-				<div class="hobbies d-flex align-items-center">
-					<div class="text-center rounded-pill me-4">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smartphone icon fea icon-md-sm"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-					</div>
-					<div class="content">
-						<h6 class="title mb-0">Android</h6>
+			<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
+				<div class="prompt-btn px-2 py-3">
+					<div class="hobbies d-flex align-items-center">
+						<div class="text-center rounded-pill me-4">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smartphone icon fea icon-md-sm"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+						</div>
+						<div class="content">
+							<h6 class="title mb-0">Android</h6>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div><!--end col-->
+			</div><!--end col-->
 
-		<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-			<div class="interests-desc bg-light position-relative px-2 py-3 rounded">
-				<div class="hobbies d-flex align-items-center">
-					<div class="text-center rounded-pill me-4">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity icon fea icon-md-sm"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-					</div>
-					<div class="content">
-						<h6 class="title mb-0">Drones</h6>
+			<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
+				<div class="prompt-btn px-2 py-3">
+					<div class="hobbies d-flex align-items-center">
+						<div class="text-center rounded-pill me-4">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity icon fea icon-md-sm"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+						</div>
+						<div class="content">
+							<h6 class="title mb-0">Drones</h6>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div><!--end col-->
+			</div><!--end col-->
 
-		<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-			<div class="interests-desc bg-light position-relative px-2 py-3 rounded">
-				<div class="hobbies d-flex align-items-center">
-					<div class="text-center rounded-pill me-4">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity icon fea icon-md-sm"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-					</div>
-					<div class="content">
-						<h6 class="title mb-0">Philosophy</h6>
+			<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
+				<div class="prompt-btn px-2 py-3">
+					<div class="hobbies d-flex align-items-center">
+						<div class="text-center rounded-pill me-4">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity icon fea icon-md-sm"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+						</div>
+						<div class="content">
+							<h6 class="title mb-0">Philosophy</h6>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div><!--end col-->
+			</div><!--end col-->
 
-		<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
-			<div class="interests-desc bg-light position-relative px-2 py-3 rounded">
-				<div class="hobbies d-flex align-items-center">
-					<div class="text-center rounded-pill me-4">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity icon fea icon-md-sm"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-					</div>
-					<div class="content">
-						<h6 class="title mb-0">Animals</h6>
+			<div class="col-lg-3 col-md-4 col-12 mt-4 pt-2">
+				<div class="prompt-btn px-2 py-3">
+					<div class="hobbies d-flex align-items-center">
+						<div class="text-center rounded-pill me-4">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity icon fea icon-md-sm"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+						</div>
+						<div class="content">
+							<h6 class="title mb-0">Animals</h6>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div><!--end col-->
+			</div><!--end col-->
+		</div>
 	</div>
 </section>
 

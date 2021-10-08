@@ -12,8 +12,9 @@
 	}
 
 	body {
+		overflow-x: hidden;
 		background-image: url("../../static/img/plainbackdrop.jpg");
-		background-size: contain;
+		background-size: cover;
 		background-attachment: fixed;
 		background-blend-mode: darken;
 		text-shadow: 0 0.05rem .01rem rgba(0, 0, 0, 0.5);
@@ -24,7 +25,7 @@
 		text-rendering: optimizeLegibility;
 		-webkit-font-smoothing: antialiased;
 		font-feature-settings: "liga", "tnum", "case", "calt", "zero", "ss01", "locl";
-	  color: $silver-spun-pearl;/*#a9a9b3!important;*/
+	  color: white;/*#a9a9b3!important;*/
 	  // background-color: $dark-gunmetal-shark;
 	}
 

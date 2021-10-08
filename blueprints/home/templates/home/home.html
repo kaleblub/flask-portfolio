@@ -7,10 +7,10 @@
 
 
 {% block body %}
-<div class="col-md-5 p-lg-5 mx-auto my-5">
-	<h1 class="display-4 fw-normal">Kaleb Humpal</h1>
-	<h2>Software Developer</h2>
-	<p class="lead fw-normal">I am a self taught programmer, with a few University/Online courses under my belt. </br>I prefer to learn by doing things myself. I am always eager to grow my knowledge of anything related to computer science.</p>
+<section id="home__header" class="section my-5">
+	<h1 id="home__header__title" class="display-4 fw-normal">Kaleb Humpal</h1>
+	<h2 id="home__header__subtitle">Software Developer</h2>
+	<p id="home__header__description" class="lead fw-normal">I am a self taught programmer, with a few University/Online courses under my belt. </br>I prefer to learn by doing things myself. I am always eager to grow my knowledge of anything related to computer science.</p>
 	<div class="btn-container btn-container--home">
 		<button class="prompt-btn prompt-btn--home" onclick="window.location.href='/about'">
 			<span>
@@ -19,11 +19,11 @@
 			</span>
 		</button>
 	</div>
-</div>
+</section>
 
 <!-- Three columns of text below the carousel -->
-<div class="home-row  row--home">
-	<div class="card card--home col-lg-4 br-40 accent-color-shadow-hover">
+<section id="home__cards" class="section home-row">
+	<div class="card card--home col-lg-4 accent-color-shadow-hover">
 		<svg id="portfolio-thumbnail" 
 			class="bd-placeholder-img card--home__image"
 			width="140" 
@@ -50,7 +50,7 @@
 		</div>
 	</div><!-- /.col-lg-4 -->
 
-	<div class="card card--home col-lg-4 br-40 accent-color-shadow-hover">
+	<div class="card card--home col-lg-4 accent-color-shadow-hover">
 		<svg id="blog-thumbnail" 
 		class="bd-placeholder-img card--home__image" 
 		width="140" 
@@ -78,7 +78,7 @@
 		</div>
 	</div><!-- /.col-lg-4 -->
 
-	<div class="card card--home col-lg-4 br-40 home-card accent-color-shadow-hover">
+	<div class="card card--home col-lg-4 home-card accent-color-shadow-hover">
 		<svg id="contact-thumbnail" 
 		class="bd-placeholder-img card--home__image" 
 		width="140" 
@@ -105,5 +105,5 @@
 			</div>
 		</div><!-- /.col-lg-4 -->
 	</div>
-</div><!-- /.row -->
+</section><!-- /.row -->
 {% endblock %}
