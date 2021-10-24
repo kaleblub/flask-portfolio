@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Blog – {{ post['title'] }}</title>
+{% endblock %}
+
+{% block body %}
+<h1>{{ post['title'] }}</h1>
+<h3>{{ post['author'] }}</h3>
+<span>{{ post['date_created'] }}</span>
+<p>{{ post['content'] }}</p>
+{% endblock %}
