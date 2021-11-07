@@ -1,11 +1,54 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, session
+from ..models import Post
+from database import SessionLocal
+from static.scripts import getPostFiles, returnSeperatedData
+import os
+import markdown
+import hashlib
+
 
 blog_bp = Blueprint('blog_bp', __name__, template_folder="templates/blog")
+session = SessionLocal()
+
+# --- This Should Be Temporary Unless Superior, Using The Static Content Files --- 	
+staticPosts = []
+for file in getPostFiles():
+	staticPosts.append(returnSeperatedData(file))
+
 
 # ----------------------- Render Blog Page --------------------------
-@blog_bp.route("/")
+@blog_bp.route("/", methods=['GET'])
 def blog():
-	return render_template("blog.html")
+	allPosts = session.query(Post).all()
+	
+	# Sort the posts by date
+	sortedPosts = []
+	for post in staticPosts:
+		
+		print(sorted(post['date_created']))
+	return render_template("blog.html", posts=allPosts, staticPosts=staticPosts)
+
+
+# ----------------------- Render Individual Posts --------------------------
+# @blog_bp.route("/<int:id>")
+# def postPage(id):
+# 	post = session.query(Post).filter(Post.id == id).first()
+# 	print(post)
+# 	return render_template("posts.html", post=post)
+
+# ---------------- Render Static Post Content -----------------
+@blog_bp.route("/<string:id>")
+def staticPostPage(id):
+	post = staticPosts[int(id)]
+	post['content'] = markdown.markdown(''.join(post['content']), extensions=['fenced_code', 'codehilite'])
+	
+	path = "/home/gaz/dev/py/web/flaskBlog/static/css/"
+	shortPath = "../../static/css/"
+	files = os.listdir(path)
+	for file in files:
+		files[files.index(file)] = shortPath + file
+
+	return render_template("staticPosts.html", post=post, cssFiles=files)
 
 # @blog_bp.route("/", methods=['GET', 'POST'])
 # def posts():

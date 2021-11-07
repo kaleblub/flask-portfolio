@@ -13,6 +13,7 @@
   $common-opaque: #00000040;
 
   // Grays
+  $paragraph-grey: #e4e4e4;
   $dark-gunmetal-shark: #212529; // Gray for the background of the body
   $gunmetal-shark: #2c3033; // Gray for the background of the sections
   $pale-lavender-fog: #d7d5ff; // White/purple shade for the hover box shadow on sections
@@ -34,3 +35,12 @@
   $tablet: 960px;
   $desktop: 1200px;
   $desktop-large: 1400px;
+
+
+  // For phone, add width: min-content to the body
+  // .section {
+    /* padding-top: 0*/
+    /* padding-bottom: 0*/
+    /* padding-left: 0*/
+    /* padding-right: 0 */
+    // width: 100%;

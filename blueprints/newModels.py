@@ -3,7 +3,7 @@ from sqlalchemy.types import Date
 from sqlalchemy.orm import relationship, backref
 from datetime import datetime
 
-# Import The Declarative Base 
+# Import The Declarative Base and the Database Engine
 from database import Base, engine
 
 
@@ -12,27 +12,20 @@ class User(Base):
 	id = Column(Integer, primary_key=True, index=True)
 	name = Column(String(50), nullable=False)
 	email = Column(String(50), nullable=False, unique=True)
-	dateRegistered = Column(DateTime, default=datetime.utcnow())
-	lastLogin = Column(DateTime)
-	userStatus = Column(Boolean, nullable=False) # True or False if the user is Admin
+	date_registered = Column(DateTime, default=datetime.utcnow())
+	last_login = Column(DateTime)
+	status = Column(Boolean, nullable=False) # True or False if the user is Admin
+	
+	# --- Relationships ---
 	posts = relationship("Posts") # One to many reference to Posts table
 	comments = relationship("Comments") # One to many reference to Comments table
 	commentLikes = relationship("LikesOnComments")
 	postLikes = relationship("LikesOnPosts")
 
 	def __repr__(self):
-		return "<User()>" % ()
+		return "<User(id='%s', name='%s', email='%s', date_registered='%s', last_login='%s', status='%s')>" \
+			% (self.id, self.name, self.email, self.date_registered, self.last_login, self.status)
 
-	# @property
-	# def serialize(self):
-	# 	return {
-	# 		'id': self.id,
-	# 		'name': self.name,
-	# 		'email': self.email,
-	# 		'dateRegistered': self.dateRegistered,
-	# 		'lastLogin': self.lastLogin,
-	# 		'userStatus': self.userStatus,
-	# 	}
 
 class LikesOnComment(Base):
 	__tablename__ = 'LikesOnComments'
@@ -68,33 +61,34 @@ class Post(Base):
 	__tablename__ = "posts"
 	id = Column(Integer, primary_key=True)
 	title = Column(String(50), nullable=False, unique=True)
+	author = Column(String(50), nullable=False, default="Kaleb Humpal")
 	summary = Column(String(200), nullable=False)
-	status = Column(Boolean, nullable=False) # True or False if the post is posted
-	dateCreated = Column(DateTime, default=datetime.utcnow())
+	# status = Column(Boolean, nullable=False) # True or False if the post is posted
+	date_created = Column(DateTime, default=datetime.utcnow())
 	content = Column(Text, nullable=False)
-	authorId = Column(Integer, ForeignKey('users.id'))
-	comments = relationship("Comments", backref=backref("posts", uselist=True))
-	tags = relationship("Tag", secondary=PostTagAssociation)
-	likes = relationship("LikesOnPosts")
-	word_count = getWordCount()
+	word_count = Column(Integer)
 
-	def getWordCount(self):
-		contentWordList = self.content.split(" ")
-	    wordCount = 0
-	    for word in content:
-	        wordCount += 1
-	    return wordCount
+	# --- Relationships ---
+	# authorId = Column(Integer, ForeignKey('users.id'))
+	# comments = relationship("Comments", backref=backref("posts", uselist=True))
+	tags = relationship("Tag", secondary=PostTagAssociation)
+	# likes = relationship("LikesOnPosts")
+
+	def __repr__(self):
+		return "<Post(id='%s', title='%s', author='%s', summary='%s', date_created='%s', word_count='%s')>" \
+			% (self.id, self.title, self.author, self.summary, self.date_created, self.word_count)
 
 	@property
 	def serialize(self):
 		return {
 			'id': self.id,
 			'title': self.title,
+			'author': self.author,
+			'tags': self.tags,
 			'summary': self.summary,
-			'status': self.status,
-			'dateCreated': self.dateCreated,
+			'date_created': self.dateCreated,
 			'content': self.content,
-			'authorId': self.authorId,
+			'word_count': getWordCount(self.content)
 		}
 
 class Comment(Base):
@@ -104,6 +98,8 @@ class Comment(Base):
 	status = Column(Boolean, nullable=False) # True or False if the comment is allowed or not
 	dateCreated = Column(DateTime, default=datetime.utcnow) # Date the Comment was posted
 	content = Column(Text, nullable=False) # The text of the comment
+	
+	# --- Relationships ---
 	postId = Column(Integer, ForeignKey('posts.id'), nullable=False) # ID of the Parent Post of the Comment
 	authorId = Column(Integer, ForeignKey('users.id'), nullable=False) # ID of the User who posted the comment
 	parentCommentId = Column(Integer, ForeignKey('comments.id'), nullable=True )
@@ -127,14 +123,12 @@ class Tag(Base):
 	__tablename__ = "tags"
 	id = Column(Integer, primary_key=True)
 	title = Column(String(20), nullable=False)
-	content = Column(String(20), nullable=False)
 
 	@property
 	def serialize(self):
 		return {
 			'id': self.id,
 			'title': self.title,
-			'content': self.content,
 		}
 
 # class PostTagAssociation(Base):
@@ -148,11 +142,10 @@ PostTagAssociation = Table('PostTagAssociations', Base.metadata,
 	Column('tagId', ForeignKey('tags.id'))
 )
 
-class Categories(Base):
+class Category(Base):
 	__tablename__ = "categories"
 	id = Column(Integer, primary_key=True)
 	title = Column(String(50), nullable=False)
-	content = Column(String(50), nullable=False)
 	icon = Column(String(50), nullable=False) # Icon of the Language/Tool used in the project
 
 	@property
@@ -160,7 +153,6 @@ class Categories(Base):
 		return {
 			'id': self.id,
 			'title': self.title,
-			'content': self.content,
 			'icon': self.icon,
 		}
 
@@ -169,16 +161,22 @@ ProjectCategoryAssociation = Table('projectCategory', Base.metadata,
 	Column('categoryId', Integer, ForeignKey('categories.id'))
 )
 
-class Projects(Base):
+class Project(Base):
 	__tablename__ = "projects"
 	id = Column(Integer, primary_key=True)
 	title = Column(String(50), nullable=False)
 	summary = Column(String(200), nullable=False)
 	status = Column(Integer)
-	dateCreated = Column(DateTime, default=datetime.utcnow)
+	date_created = Column(DateTime, default=datetime.utcnow)
 	thumbnailImage = Column(String(250))
+	
+	# --- Relationships ---
 	authorId = Column(Integer, ForeignKey('users.id'), nullable=False)
 	categories = relationship("Categories", secondary=ProjectCategoryAssociation)
+
+	def __repr__(self):
+		return "<Project(id='%s', title='%s', summary='%s', status='%s', date_created='%s', thumbnailImage='%s')>" \
+			% (self.id, self.title, self.summary, self.status, self.date_created, self.thumbnailImage)
 
 if __name__ == "__main__":
 	Base.metadata.create_all(engine)

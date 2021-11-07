@@ -2,11 +2,20 @@
 
 {% block head %}
 <title>Blog – {{ post['title'] }}</title>
+<link id="theme" type="text/css" rel="stylesheet" href="../../static/css/dracula.css">
 {% endblock %}
 
+{% block logoText %}/blog/'{{ post['title'] }}'{% endblock %}
+
 {% block body %}
-<h1>{{ post['title'] }}</h1>
-<h3>{{ post['author'] }}</h3>
-<span>{{ post['date_created'] }}</span>
-<p>{{ post['content'] }}</p>
+<section id="blogPost" class="section section--odd">
+	<div class="container-xl">
+		<h1 class="section__header__title">{{ post['title'].rstrip("\"") }}</h1>
+		<span id="post__author" class="">
+			<a href="/about">{{ post['author'] }}</a>
+		</span>
+		<span> – {{ post['date_created'][1] }}{{ post['date_created'][0] }}, {{ post['date_created'][2] }}</span>
+		<p class="section__header__description">{{ post['content'] |safe }}</p>
+	</div>
+</section>
 {% endblock %}

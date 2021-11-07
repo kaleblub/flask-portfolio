@@ -1,15 +1,13 @@
 ---
-title: "Python Quiz Bot – Part 01"
-author: "Kaleb Humpal"
-date_created: "2021-6-18"
-summary: "Part 01 of my web scraping bot that automatically answers questions on a website called 'freerice.com', a website made by the World Food Programme (WFP) that donates rice with every correct answer."
-tags: ["bot", "automation", "web-scraper", "web-scraping", "python"]
+title: Python Quiz Bot – Part 01
+author: Kaleb Humpal
+date_created: 2021-6-18
+summary: Part 01 of my web scraping bot that automatically answers questions on a website called 'freerice.com', a website made by the World Food Programme (WFP) that donates rice with every correct answer.
+tags: [bot, automation, web-scraper, web-scraping, python]
 ---
 
-<Image wide file="collins-square.jpg" alt="Collins Square" />
-
 ## Introduction:
-Back in 2020, I found an educational trivia website, made by the [World Food Programme (WFP)](https://www.wfp.org/), called [Freerice](https://freerice.com/). It helps you get smarter while making a difference for people around the world. Every correct answer you make on the website, donates the equivalent of 10 grains of rice.
+Back in 2020, I found an educational trivia website, made by the [World Food Programme (WFP)](https://www.wfp.org/), called [Freerice](https://freerice.com/). It helps you get smarter while making a difference for people around the world. Every correct answer you make on the website, donates the equivalent of 10 grains of rice.<br /><br />
 
 >In the game, these payments are represented by grains of rice so by 
 >playing Freerice, you are generating the money that pays for this rice. 
@@ -26,28 +24,30 @@ I only ended up developing it to be able to play the multiplication tables categ
 
 ## Initial Design
 
-#### Start-up
+### Start-up
 I started my selenium project by initializing the Chrome Driver and opening the desired category webpage; in this case, back then it was only [multiplication tables](https://beta.freerice.com/categories/multiplication-table). 
 
 The page would then load, so I made the program wait until all the elements were loaded onto the page, that way I don't run into errors because the program is trying to find certain elements that haven't been loaded yet. To be honest, it was some pretty messy code, with lots of forced waiting on the driver. 
 
-#### Cookies Button
+### Cookies Button
 I had to make a small function to handle the cookies button when it pops up on entry to the website. The small pop up would get in the way of handling the rest of the webpage, so I made the function click on the 'OK' button for cookies. 
 
-#### Question Handling
+### Question Handling
 Once the page was open and ready to play, I made a function to scrape the question and all four answers using the elements class names in the html.
 The multiplication problems were in the form of ***num1 x num2 = ***, so I got the solution into a variable using
 
-    solution = eval(question.text.rstrip('=').replace('x', '*'))
+~~~~python
+solution = eval(question.text.rstrip('=').replace('x', '*'))
+~~~~
 
 I then implement a check of my solution among the four answer options, and if it is found among them, I run a driver script execution to click on the relevant answer. The question handling is run for as many times as requested at the beginning.
 
 ## Design Flaws
-1. Organization: The overall layout was messy and not super organized, it was one of my best and cleanest projects yet back then, but there was a little too much repeated code. 
-2. Feature Obsoletion: I made a feature that was only relevant to the beta version of freerice. They didn't have accounts back then, so I started keeping track of the total rice earnings in a seperate file. Just counting the rice as it is earned and then add it to the total amount of rice. 
-3. Timing Out: I couldn't get the program to run for very many more times than 100 times. It would start to time out after running for too long. I never found out why.
-4. Big Goals, Small Skills: I had big goals to implement the other categories, but I didn't have the skills to build them yet.
-5. Outdated Code: The code used back then has basically become obsolete, and I can't make it run now. (It's okay, I need to start from the beginning to make it better this time)
+1. **Organization**: The overall layout was messy and not super organized, it was one of my best and cleanest projects yet back then, but there was a little too much repeated code. 
+2. **Feature Obsoletion**: I made a feature that was only relevant to the beta version of freerice. They didn't have accounts back then, so I started keeping track of the total rice earnings in a seperate file. Just counting the rice as it is earned and then add it to the total amount of rice. 
+3. **Timing Out**: I couldn't get the program to run for very many more times than 100 times. It would start to time out after running for too long. I never found out why.
+4. **Big Goals, Small Skills**: I had big goals to implement the other categories, but I didn't have the skills to build them yet.
+5. **Outdated Code**: The code used back then has basically become obsolete, and I can't make it run now. (It's okay, I need to start from the beginning to make it better this time)
 
 ## Future Goals
 + Search for better methods of scraping and web automation, alternatives to selenium.

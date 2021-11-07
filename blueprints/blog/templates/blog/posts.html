@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Posts</title>
+<title>Blog – {{ post.title }}</title>
 {% endblock %}
 
 {% block body %}
-<h1>All Posts</h1>
+<h1>{{ post.title }}</h1>
+<h3>{{ post.author}}</h3>
+<span>{{ post.date_created }}</span>
+<p>{{ post.content }}</p>
+<!-- <h1>All Posts</h1>
 
 <hr>
 <h2>Create New Blog Post:</h2>
@@ -19,8 +23,8 @@
 	<input type='submit' value='Post'>
 </form>
 
-<hr>
-
+<hr> -->
+<!-- 
 	{% for post in posts %}
 		<h2>{{ post.title }}</h2>
 
@@ -35,6 +39,5 @@
 		<a href='/blog/delete/{{ post.id }}'>Delete</a>
 		<a href='/blog/edit/{{ post.id }}'>Edit</a>
 		<hr>
-
-	{% endfor %}
+	{% endfor %} -->
 {% endblock %}

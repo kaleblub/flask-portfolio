@@ -1,17 +1,13 @@
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base
 
-# Tell Where To Save The Database
-# SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
+SQLALCHEMY_DATABASE_URI = "sqlite:///db.sqlite3"
 
 # Create An Engine
-def startEngine(uri):
-	return create_engine(uri, connect_args={"check_same_thread": False})
+engine = create_engine(SQLALCHEMY_DATABASE_URI, connect_args={"check_same_thread": False}, echo=True, future=True)
 
-# Create A Configured "Local Session" Class
-def startLocalSession(engine):
-	return sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# Create A Configured "Local Session" sessionmaker Class
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Create A Declarative Base Class
 Base = declarative_base()

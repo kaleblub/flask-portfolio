@@ -3,7 +3,10 @@
   bottom: 0;
   width: 100%;
   margin-top: 20px;
-  background-color: #00000040;
+  // background-color: #00000040;
+  background: #485563;
+  background: -webkit-linear-gradient(to top, #29323c, #48556300);
+  background: linear-gradient(to top, #29323c, #48556300);
 
   a:hover {
     color: $ruby-amaranth!important;

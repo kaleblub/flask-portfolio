@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% include 'asciiArt.html' %}
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,14 +26,111 @@
 {% block head %} {% endblock %}
 
 <!------------ Add Icon Library ------------>
+<link rel="icon" href="../../static/icons/wolf.png"></link>
+
+<!------------ Add Icon Library ------------>
 <link href="../../static/fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet">
 
 <!------------ CUSTOM STYLES FOR THIS TEMPLATE ------------>
-<link rel="stylesheet" href="../../static/css/main.css?v=1.2.26">
+<link rel="stylesheet" href="../../static/css/main.css?v=1.2.35">
+
+<!-- <script>
+	var body = document.body;
+	var headCounter = 0;
+	var bodyCounter = 0;
+	const fonts = [
+		'Aldrich',
+		'Audiowide',
+		'Bungee Hairline',
+		'Caesar Dressing',
+		'Electrolize',
+		'garet-book',
+		'Iceberg',
+		'Iceland',
+		'ki-light',
+		'ki-light-italic',
+		'Lato Regular',
+		'Libre Barcode 39 Extended Text',
+		'Libre Barcode 39 Text',
+		'Major Mono Display',
+		'Megrim',
+		'Modernhead',
+		'Monoton',
+		'Montserrat-Regular',
+		'Nova Flat',
+		'Nunito-Regular',
+		'Odibee Sans',
+		'Share Tech Mono',
+		'Syncopate',
+		'Text Me One',
+		'Unica One',
+		'Zen Kurenaido',
+		'Zen Tokyo Zoo',	
+	];
+	var bodyFontSize = 15;
+
+
+
+	document.body.style.fontSize = bodyFontSize + 'px';
+	document.body.style.fontFamily = fonts[counter];
+
+	function displayFonts() {
+		document.getElementById("headerFont").innerHTML = fonts[headCounter];
+		document.getElementById("textFont").innerHTML = fonts[bodyCounter];
+		document.getElementById("fontSize").innerHTML = bodyFontSize + "px";
+		console.log(fonts[headCounter]);
+		console.log(fonts[bodyCounter]);
+		console.log(bodyFontSize + 'px');
+	}
+
+	function headUp() {
+		headCounter++;
+		for(var i = 0; i < document.querySelectorAll("h1, h2, h3, h4, h5, h6").length; i++) {
+    		document.querySelectorAll("h1, h2, h3, h4, h5, h6")[i].style.fontFamily = fonts[headCounter];
+		};
+		displayFonts();
+	}
+
+	function headDown() {
+		headCounter--;
+		for(var i = 0; i < document.querySelectorAll("h1, h2, h3, h4, h5, h6").length; i++) {
+			document.querySelectorAll("h1, h2, h3, h4, h5, h6")[i].style.fontFamily = fonts[headCounter];
+		};
+		displayFonts();
+	}
+
+	function bodyUp() {
+		bodyCounter++;
+		document.body.style.fontFamily = fonts[bodyCounter];
+		displayFonts();
+	}
+
+	function bodyDown() {
+		bodyCounter--;
+		document.body.style.fontFamily = fonts[bodyCounter];
+		displayFonts();
+	}
+
+	function bodySizeDown() {
+		bodyFontSize--;
+		document.body.style.fontSize = bodyFontSize + 'px';
+		displayFonts();
+	}
+
+	function bodySizeUp() {
+		bodyFontSize++;
+		document.body.style.fontSize = bodyFontSize + 'px';
+		displayFonts();
+	}
+
+</script> -->
+
+
 </head>
 
 <body class="flex-column min-vh-100">
 	<!------------- HEADER/NAVBAR ------------>
+	<!-- with logoText  -->
 	<!-- {% include 'navigationbar.html' %} -->
 	<!-- Will use static way of changing the logo text until
 		dynamic way is discovered. Q: Can I Put The Header Snippet In Its Own File And Still Change The Text Of The Logo? -->
@@ -43,7 +141,7 @@
 				<span class="logo__mark">
 					<i class="fas fa-angle-right"></i>
 				</span>
-				<span class="logo__name">  /KalebHumpal/{% block logoText %}{% endblock %} $</span>
+				<span class="logo__name"> [ KalebHumpal ~{% block logoText %}{% endblock %}] $</span>
 				<span class="logo__text"></span>
 				<span class="logo__cursor"></span>
 			</div>
@@ -77,6 +175,31 @@
 		</div>
 	</div>
 </header>
+<!-- <div id="first">
+      <div class="grid-container">
+        <div class="grid-item">
+          <button type="button" id="b1" class="small_btn" onclick="headUp()">Next Header Font</button>
+        </div>
+        <div class="grid-item">
+          <button type="button" id="b2" class="small_btn" onclick='headDown()'>Previous Header Font</button>
+          <p>Header Font: <span id='headerFont'></span></p>
+        </div>
+        <div class="grid-item">
+          <button type="button" id="b3" class="small_btn" onclick='bodyUp()'>Next Text Font</button>
+        </div>
+        <div class="grid-item">
+          <button type="button" id="b4" class="small_btn" onclick='bodyDown()'>Previous Text Font</button>
+          <p>Text Font: <span id='textFont'></span></p>
+        </div>
+        <div class="grid-item">
+          <button type="button" id="b5" class="big_btn" onclick='bodySizeUp()'>Text Font Size Up</button>
+        </div>
+        <div class="grid-item">
+          <button type="button" id="b5" class="big_btn" onclick='bodySizeDown()'>Text Font Size Down</button>
+       	  <p>Font Size: <span id='fontSize'></span></p>
+        </div>
+      </div>
+    </div> -->
 
 	<!------------- CONTACT MODAL ------------>
 	{% include 'contactModal.html' %}

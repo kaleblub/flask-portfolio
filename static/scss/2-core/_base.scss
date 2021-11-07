@@ -13,33 +13,43 @@
 
 	body {
 		overflow-x: hidden;
-		background-image: url("../../static/img/plainbackdrop.jpg");
+		background: #485563;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to top, #29323c, #485563);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to top, #29323c, #485563); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 		background-size: cover;
 		background-attachment: fixed;
-		background-blend-mode: darken;
+		background-blend-mode: color;
 		text-shadow: 0 0.05rem .01rem rgba(0, 0, 0, 0.5);
 		box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
 		text-align: center!important;
 		display: flex;
-		font-family: 'Roboto Mono', monospace, "Inter UI", -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", Helvetica, Arial, sans-serif;
+		font-family: 'garet-book', 'Roboto Mono', monospace, "Inter UI", -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", Helvetica, Arial, sans-serif;
 		text-rendering: optimizeLegibility;
 		-webkit-font-smoothing: antialiased;
 		font-feature-settings: "liga", "tnum", "case", "calt", "zero", "ss01", "locl";
-	  color: white;/*#a9a9b3!important;*/
-	  // background-color: $dark-gunmetal-shark;
+	  color: $paragraph-grey;
 	}
 
 	main {
 		margin: auto;
 	}
 
-	h1 {
-		font-size: 2.625rem;
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Modernhead';
 		color: white;
 	}
 
-	h2 {
-	  font-size: 1.625rem;
+	// h1 {
+	// 	font-size: 2.625rem;
+	// 	color: white;
+	// }
+
+	// h2 {
+	//   font-size: 1.625rem;
+	// }
+
+	p {
+		// font-family: 'garet-book';
 	}
 
 	.br-40 {
@@ -77,9 +87,7 @@
 
 	/*========= Dark Theme ==========*/
 	.dark-theme {
-		background-color: $dark-gunmetal-shark;
-		color: $pale-sky;
-		// $--bs-bg-opacity: 1;
+		
 
 	  .header {
 	  	background: #252627;

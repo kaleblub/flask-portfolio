@@ -8,9 +8,9 @@
 
 // 2 - CORE
 // @import '2-core/all';
+@import "2-core/fonts";
 @import "2-core/base";
 @import "2-core/tags";
-@import "2-core/fonts";
 @import "2-core/icons";
 
 // 3 - COMPONENTS
@@ -30,6 +30,7 @@
 @import "4-layout/navbar";
 @import "4-layout/footer";
 @import "4-layout/sections";
+// @import "4-layout/blogPost";
 
 // 5 - PAGES
 // @import "5-pages/all";
@@ -38,6 +39,7 @@
 @import "5-pages/contact";
 @import "5-pages/blog";
 @import "5-pages/about";
+@import "5-pages/blogPost";
 
 // 6 - SECTIONS 
 // @import "6-sections/all";
