@@ -1,0 +1,418 @@
+---
+title: TryHackMe – Advent of Cyber 3 – [Days 16-18] 
+author: Kaleb Humpal
+date_created: 2021-12-18
+summary: Writeup for Days 16-18 of Try Hack Me's 3rd Advent of Cyber event, covering the topics of OSINT and Cloud.
+tags: [cyber security, hacking, tryhackme, offensive security, pentest, penetration testing, pentesting, christmas, event, christmas event, OSINT, open-source intelligence, cloud, cload tech, cloud technology, AWS, docker]
+---
+
+## [Day 16] `OSINT` Ransomware Madness
+Grinch Enterprises has decided to use the best festival company to try their new ransomware service. While they think that this is a great proving ground, McSkidy is adamant to determine their goals and share them with the wider security community - can you use your open source intelligence methods to find out more information about their ransomware gang!
+
+
+After reading through the information about `OSINT(Open Source Intelligence)`, `#`, and `#`, and possibly watching [`Alh4zr3d`'s Video](https://youtu.be/FLIDaavQ9aM)
+
+## Questions 
+You are the responding intelligence officer on the hunt for more information about the infamous "Grinch Enterprises" ransomware gang. 
+As a response to the recent ransomware activity from Grinch Enterprises, your team has managed to collect a sample ransomware note. 
+
+!!! ВАЖНЫЙ !!!
+
+Ваши файлы были зашифрованы Гринчем. Мы используем самые современные технологии шифрования.
+
+Чтобы получить доступ к своим файлам, обратитесь к оператору Grinch Enterprises.
+
+Ваш личный идентификационный идентификатор: «b288b97e-665d-4105-a3b2-666da90db14b».
+
+С оператором, назначенным для вашего дела, можно связаться как "GrinchWho31" на всех платформах.
+
+!!! ВАЖНЫЙ !!!
+### 1. 
+My go to instinct when seeing this and knowing it is an `OSINT` challenge is to translate the message, let's go to Google Translate and translate it so that we can use it for the rest of the questions. 
+
+So here is the message in English:
+
+!!! IMPORTANT !!!
+
+Your files were encrypted by the Grinch. We use the most advanced encryption technologies.
+
+Contact your Grinch Enterprises operator to access your files.
+
+Your personal ID is “b288b97e-665d-4105-a3b2-666da90db14b”.
+
+The operator assigned to your case can be contacted as "GrinchWho31" on all platforms.
+
+!!! IMPORTANT !!!
+
+#### Flag
+`No answer needed`
+
+### 2. What is the operator's username?
+
+#### Flag
+`GrinchWho31`
+
+### 3. What social media platform is the username associated with?
+For this one, let's just search that username on google to see what social media platform the username is possibly on.
+We get the following as the first result:
+<Image wide src="../../static/img/AoC3/Day16-Q3-GrinchWho31_social_media_platform.png" />
+
+I realized that `reddit` is not a social media platform, so I kept looking, another search result was [`Keybase.io`](https://keybase.io/grinchwho31/sigs/1GW8QR7CWW3cpvVPGMCF5tZz4j96ncEgrVaR), and it shows that `grinchwho31` is a twitter account.
+#### Flag
+`twitter`
+
+### 4. What is the cryptographic identifier associated with the operator?
+Let's go to that twitter account and see what we can find. [@GrinchWho31](https://twitter.com/GrinchWho31) has a tweet saying "Verifying myself: I am grinchwho31 on http://Keybase.io. 1GW8QR7CWW3cpvVPGMCF5tZz4j96ncEgrVaR / https://keybase.io/grinchwho31/sigs/1GW8QR7CWW3cpvVPGMCF5tZz4j96ncEgrVaR
+"
+#### Flag
+So the cryptographic identifier is `1GW8QR7CWW3cpvVPGMCF5tZz4j96ncEgrVaR`
+
+### 5. What platform is the cryptographic identifier associated with?
+#### Flag
+We know within the same tweet that it is with `keybase.io`
+
+### 6. What is the bitcoin address of the operator?
+If we click on the keybase link in the tweet, we can see:
+<Image wide src="Day16-Q3-proof_GrinchWho31_is_on_twitter.png" />
+#### Flag
+So the bitcoin address is `bc1q5q2w2x6yka5gchr89988p2c8w8nquem6tndw2f`
+
+### 7. What platform does the operator leak the bitcoin address on? 
+This one tricked me, because I see a picture on reddit showing the bitcoin address, but that was something else, so the other account on the `keybase.io` shows a github account, and if we head there and look inside the repo for [`Christmas-Stealer` and inside the `ransom.cpp` file](https://github.com/ChristmasHater31/Christmas-Stealer/blob/main/ransom.cpp), we can see the bitcoin address being leaked.
+#### Flag
+So it was leaked on `github`
+
+### 8. What is the operator's personal email?
+While we are on the `ChristmasHater31`'s github, we can look inside the other repository that he has called [`ChristBASHTree`](https://github.com/ChristmasHater31/ChristBASHTree), we can then see that it has 4 commits, let's see what they are. We can see from the top, there is an update to an already created `tree.sh`, under that we see `tree.sh` being created, and beneath those two are `Create Dockerfile` and `Initial commit`. So let's look at the difference between the original and up-to-date `tree.sh`. In the commit called [`Update tree.sh`](https://github.com/ChristmasHater31/ChristBASHTree/commit/e7c8970160c38e8a7a598a7fefcb617544c117b6), we can see 2 deletions. one being `echo "Created by Donte Heath"` and the other being `echo "Contact: DonteHeath21@gmail.com"`.
+
+#### Flag
+From the above deletions, we can see that the operator's email is `DonteHeath21@gmail.com`
+
+### 9. What is the operator's real name?
+#### Flag
+Also from the github deletions above, we can see that the operator's real name is `Donte Heath`.
+
+---
+
+## [Day 17] `Cloud` Elf Leaks
+In a move to taunt the Best Festival Company, Grinch Enterprises sends out an email to the entire company with everyone's name and date of birth. McSkidy looks quite stressed with the breach and thinks about the potential legal consequences. She talks to McInfra to try to determine the origin of the breach.
+
+After reading through the stuff about understanding `#`, `#`, and `#`, and possibly watching [`Neal Bridge`'s Video](https://www.youtube.com/watch?v=RAgvdpvKJa0) 
+
+## Questions 
+Somehow, the Grinch has managed to get hold of all the Elves' names and email addresses. How could this have happened? Given the scope of the breach, McSkidy believes someone in HR must be involved. You know that HR recently launched a new portal site using WordPress. You also know that HR didn't request any infrastructure from IT to deploy this portal site. Where is that portal hosted?
+
+Here is the image HR sent out announcing the new site:
+
+<Image wide src="https://s3.amazonaws.com/images.bestfestivalcompany.com/flyer.png" />
+Based on that, can you figure out how the Grinch got access to the employee database?
+
+### 1. What is the name of the S3 Bucket used to host the HR Website announcement?
+
+#### Flag
+
+### 2. What is the message left in the flag.txt object from that bucket?
+
+#### Flag
+
+### 3. What other file in that bucket looks interesting to you?
+We can then remove the `flag.txt` part from the url and we will get the contents of the bucket
+```xml
+<ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+<Name>images.bestfestivalcompany.com</Name>
+<Prefix/>
+<Marker/>
+<MaxKeys>1000</MaxKeys>
+<IsTruncated>false</IsTruncated>
+<Contents>
+<Key>.DS_Store</Key>
+<LastModified>2021-11-13T15:06:51.000Z</LastModified>
+<ETag>"194577a7e20bdcc7afbb718f502c134c"</ETag>
+<Size>6148</Size>
+<StorageClass>STANDARD</StorageClass>
+</Contents>
+<Contents>
+<Key>0vF39p3.png</Key>
+<LastModified>2021-11-13T12:43:03.000Z</LastModified>
+<ETag>"22477987d59a33e85e56652fc0bcdac1"</ETag>
+<Size>108420</Size>
+<StorageClass>STANDARD</StorageClass>
+</Contents>
+<Contents>
+<Key>AWSConsole.png</Key>
+<LastModified>2021-11-27T11:55:21.000Z</LastModified>
+<ETag>"b9f5bded112a6fae6d4efe8a93ae9c8d"</ETag>
+<Size>705191</Size>
+<StorageClass>STANDARD</StorageClass>
+</Contents>
+<Contents>
+<Key>aws-logo.png</Key>
+<LastModified>2021-11-13T12:43:03.000Z</LastModified>
+<ETag>"a1b4c9c670fe9d7ddde63317d3a9eb80"</ETag>
+<Size>5652</Size>
+<StorageClass>STANDARD</StorageClass>
+</Contents>
+<Contents>
+<Key>flag.txt</Key>
+<LastModified>2021-11-13T15:06:51.000Z</LastModified>
+<ETag>"6f612c089ef7289bade62611b99ecbdf"</ETag>
+<Size>68</Size>
+<StorageClass>STANDARD</StorageClass>
+</Contents>
+<Contents>
+<Key>flyer.png</Key>
+<LastModified>2021-11-13T15:06:51.000Z</LastModified>
+<ETag>"4328a8cc659d9bf6e6f0fe495cb8f792"</ETag>
+<Size>2349068</Size>
+<StorageClass>STANDARD</StorageClass>
+</Contents>
+<Contents>
+<Key>presents.jpg</Key>
+<LastModified>2021-11-13T12:43:03.000Z</LastModified>
+<ETag>"c694bfcd57fce1fa301c64698820383d"</ETag>
+<Size>92531</Size>
+<StorageClass>STANDARD</StorageClass>
+</Contents>
+<Contents>
+<Key>tree.png</Key>
+<LastModified>2021-11-13T12:43:03.000Z</LastModified>
+<ETag>"6a8702234bcfd26592e7768c58a62919"</ETag>
+<Size>4680</Size>
+<StorageClass>STANDARD</StorageClass>
+</Contents>
+<Contents>
+<Key>wp-backup.zip</Key>
+<LastModified>2021-11-23T23:52:22.000Z</LastModified>
+<ETag>"a32214e8c30f676fa1ab96a2d15b9956-2"</ETag>
+<Size>16556739</Size>
+<StorageClass>STANDARD</StorageClass>
+</Contents>
+</ListBucketResult>
+```
+#### Flag
+At the very bottom we can find the WordPress Backup file: `wp-backup.zip`
+
+### 4. What is the AWS Access Key ID in that file?
+*Access Key IDs always begin with the letters AKIA and are 20 characters long. These act as a user name for the AWS API.  The Secret Access Key is 40 characters long. AWS generates both strings; however, AWS doesn't make the Secret Access Key available to download after the initial generation.*
+
+#### Flag
+If we run '```cat * | grep AKIA```' because we know what we are sorta looking for, we can see the 'S3_UPLOADS_KEY' is `AKIAQI52OJVCPZXFYAOI`.
+
+### 5. What is the AWS Account ID that access-key works for?
+If we run ```cat wp-config.php```, near the bottom we can find some custom values set in the bucket, shown by the keyword `define`:
+```console
+define('S3_UPLOADS_BUCKET', 'images.bestfestivalcompany.com');
+define('S3_UPLOADS_KEY', 'AKIAQI52OJVCPZXFYAOI');
+define('S3_UPLOADS_SECRET', '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');
+define('S3_UPLOADS_REGION', 'us-east-1');
+```
+
+We can use these values and add them to an `AWS Profile`, for that they told us we can use the command `aws configure --profile PROFILENAME`
+```console
+root@ip-10-10-85-108:~# aws configure --profile aoc
+AWS Access Key ID [None]: AKIAQI52OJVCPZXFYAOI
+AWS Secret Access Key [None]: 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
+Default region name [None]: us-east-1
+Default output format [None]:
+```
+We can check if those were actually set within the `.aws` directory in the home directory:
+```console
+root@ip-10-10-85-108:~# cd .aws
+root@ip-10-10-85-108:~/.aws# ls
+config  credentials
+root@ip-10-10-85-108:~/.aws# cat config
+[profile aoc]
+region = us-east-1
+root@ip-10-10-85-108:~/.aws# cat credentials 
+[aoc]
+aws_access_key_id = AKIAQI52OJVCPZXFYAOI
+aws_secret_access_key = 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
+```
+So that worked! Now we can execute any command using these credentials, they give us a command to `Find the Account ID belonging to an access key: aws sts get-access-key-info --access-key-id AKIAEXAMPLE`, let's give that a shot:
+```console
+root@ip-10-10-85-108:~/.aws# aws sts get-access-key-info --access-key-id AKIAQI52OJVCPZXFYAOI --profile aoc
+{
+    "Account": "019181489476"
+}
+```
+Woooo! There it is!
+#### Flag
+`019181489476`
+
+### 6. What is the Username for that access-key?
+For this one, they give us another command to use:
+```console
+root@ip-10-10-85-108:~/.aws# aws sts get-caller-identity --profile aoc
+{
+    "UserId": "AIDAQI52OJVCFHT3E73BO",
+    "Account": "019181489476",
+    "Arn": "arn:aws:iam::019181489476:user/ElfMcHR@bfc.com"
+}
+```
+#### Flag
+The flag from the above output is after the 'user/', so it is `ElfMcHR@bfc.com`
+
+### 7. There is an EC2 Instance in this account. Under the TAGs, what is the Name of the instance?
+They gave us a command to `List all the EC2 instances running in an account: aws ec2 describe-instances --output text --profile PROFILENAME`. Let's run that and see what we get:
+```console
+root@ip-10-10-85-108:~/.aws# aws ec2 describe-instances --output text --profile aoc
+RESERVATIONS	019181489476	043234062703	r-0e89ba65b28a7c699
+INSTANCES	0	x86_64	HR-Po-Insta-1NAKAMW2PPVMT	False	True	xen	ami-0c2b8ca1dad447f8a	i-0c56041ac61cf5a95	t3a.micro	hr-key	2021-11-13T12:36:58.000Z	ip-172-31-68-81.ec2.internal	172.31.68.81		/dev/xvda	ebs	True	User initiated (2021-11-13 12:42:39 GMT)	subnet-00b1107c0c18c0722	hvm	vpc-0235b5a9591606b73
+BLOCKDEVICEMAPPINGS	/dev/xvda
+EBS	2021-11-13T12:36:59.000Z	True	attached	vol-0ac79339aac8b249d
+CAPACITYRESERVATIONSPECIFICATION	open
+CPUOPTIONS	1	2
+HIBERNATIONOPTIONS	False
+METADATAOPTIONS	enabled	1	optional	applied
+MONITORING	disabled
+NETWORKINTERFACES		interface	16:35:78:d8:60:d1	eni-027945da0ddb79e59	019181489476	ip-172-31-68-81.ec2.internal	172.31.68.81	True	in-use	subnet-00b1107c0c18c0722	vpc-0235b5a9591606b73
+ATTACHMENT	2021-11-13T12:36:58.000Z	eni-attach-0d91e2137f6014220	True	0	attached
+GROUPS	sg-0c6e7cd87c1c8d035	default
+PRIVATEIPADDRESSES	True	ip-172-31-68-81.ec2.internal	172.31.68.81
+PLACEMENT	us-east-1f		default
+SECURITYGROUPS	sg-0c6e7cd87c1c8d035	default
+STATE	80	stopped
+STATEREASON	Client.UserInitiatedShutdown	Client.UserInitiatedShutdown: User initiated shutdown
+TAGS	aws:cloudformation:stack-id	arn:aws:cloudformation:us-east-1:019181489476:stack/HR-Portal/5ebc4e90-447e-11ec-a711-12d63f44d7b7
+TAGS	aws:cloudformation:logical-id	Instance
+TAGS	created_by	Elf McHR
+TAGS	aws:cloudformation:stack-name	HR-Portal
+TAGS	Name	HR-Portal
+```
+#### Flag
+It's kind of a mess, but we can see the last TAG has a Name    `HR-Portal`.
+
+### 8. What is the database password stored in Secrets Manager?
+Let's take a look at what the hint says for this one. *Hint: the AWS CLI commands for Secrets manager can be found by running `aws secretsmanager help` You'll first need to list all the secrets, then you can get the secret value. Remember to specify a region that looks similar to `XX-north-X`.*
+Okay, so when I check `aws secretsmanager help` there is a list of available commands, a few of the seemingly most useful are `get-random-password`, `get-secret-value`, and `list-secrets`. So let's list the secrets of our profile:
+```console
+root@ip-10-10-85-108:~/.aws# aws secretsmanager list-secrets --profile aoc
+{
+    "SecretList": [
+        {
+            "ARN": "arn:aws:secretsmanager:us-east-1:019181489476:secret:HR-Password-8AkWYF",
+            "Name": "HR-Password",
+            "Description": "Portal DB Secret",
+            "LastChangedDate": 1637717347.812,
+            "LastAccessedDate": 1640476800.0,
+            "Tags": [
+                {
+                    "Key": "aws:cloudformation:stack-name",
+                    "Value": "HR-Portal"
+                },
+                {
+                    "Key": "aws:cloudformation:logical-id",
+                    "Value": "FalseSecret"
+                },
+                {
+                    "Key": "aws:cloudformation:stack-id",
+                    "Value": "arn:aws:cloudformation:us-east-1:019181489476:stack/HR-Portal/5ebc4e90-447e-11ec-a711-12d63f44d7b7"
+                },
+                {
+                    "Key": "created_by",
+                    "Value": "Elf McHR"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "Payroll"
+                }
+            ],
+            "SecretVersionsToStages": {
+                "70630b3c-4fbe-4a24-885d-18445bd808b1": [
+                    "AWSCURRENT"
+                ],
+                "a702190e-69f7-4a8a-81fd-3d20b486657a": [
+                    "AWSPREVIOUS"
+                ]
+            }
+        }
+    ]
+}
+```
+So there is the secret named `HR-Password`, let's try to use the other two commands and see what happens, `get-random-password`:
+```console
+root@ip-10-10-85-108:~/.aws# aws secretsmanager get-random-password --profile aoc
+
+An error occurred (AccessDeniedException) when calling the GetRandomPassword operation: User: arn:aws:iam::019181489476:user/ElfMcHR@bfc.com is not authorized to perform: secretsmanager:GetRandomPassword because no identity-based policy allows the secretsmanager:GetRandomPassword action
+```
+It doesn't look like this one is going to work, maybe we can try the other one `get-secret-value`:
+```console
+root@ip-10-10-85-108:~/.aws# aws secretsmanager get-secret-value --profile aoc
+usage: aws [options] <command> <subcommand> [<subcommand> ...] [parameters]
+To see help text, you can run:
+
+  aws help
+  aws <command> help
+  aws <command> <subcommand> help
+aws: error: the following arguments are required: --secret-id
+```
+With that last line of output, we can see that we need to add another argument, `--secret-id` which is probably `HR-Password`:
+```console
+root@ip-10-10-85-108:~/.aws# aws secretsmanager get-secret-value --secret-id HR-Password --profile aoc
+{
+    "ARN": "arn:aws:secretsmanager:us-east-1:019181489476:secret:HR-Password-8AkWYF",
+    "Name": "HR-Password",
+    "VersionId": "70630b3c-4fbe-4a24-885d-18445bd808b1",
+    "SecretString": "The Secret you're looking for is not in this **REGION**. Santa wants to have low latency to his databases. Look closer to where he lives.",
+    "VersionStages": [
+        "AWSCURRENT"
+    ],
+    "CreatedDate": 1637717347.718
+}
+```
+Hmm... Got the wrong `REGION`, we need to try closer to where Santa lives. I'm not sure where that is, maybe I can find somewhere that matches with the hint saying `XX-north-X`. While searching for the [available regions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html) for AWS, I found the following information:
+
+| Region Name | Region |
+| ----------- | ------ |
+| `US East (Ohio)` | us-east-2 |
+| `US East (N. Virginia)` | us-east-1 |
+| `US West (N. California)` | us-west-1	|
+| ........... | ...... |
+| `Europe (Paris)` | eu-west-3 |
+| `Europe (Stockholm)` | eu-north-1 |
+
+That `Stockholm` one has got to be it, let's try:
+```console
+root@ip-10-10-85-108:~/.aws# aws secretsmanager get-secret-value --secret-id HR-Password --profile aoc --region eu-north-1
+{
+    "ARN": "arn:aws:secretsmanager:eu-north-1:019181489476:secret:HR-Password-KIJEvK",
+    "Name": "HR-Password",
+    "VersionId": "f806c3cd-ea20-4a1a-948f-80927f3ad366",
+    "SecretString": "Winter2021!",
+    "VersionStages": [
+        "AWSCURRENT"
+    ],
+    "CreatedDate": 1636809979.996
+}
+```
+#### Flag
+That did the trick, there's the "SecretString": "`Winter2021!`".
+
+---
+
+## [Day 18] `Cloud` Playing With Containers
+Grinch Enterprises has been gloating about their attack on an underground forum. We know they were specifically targeting organizations in a campaign they've themed "Advent of Cyber" (AOC) - what a frustrating coincidence. Tracing the user back over time - we also encountered a reference to using AWS Elastic Container Registry (ECR) to store container images they use as infrastructure in their attacks. Let's see if we can find out more about the attack tooling Grinch Enterprises is using.
+
+After reading through the stuff about understanding `#`, `#`, and `#`, and possibly watching [`John Hammond`'s Video](https://www.youtube.com/watch?v=jpRTzb1eZQ4) 
+
+## Questions
+
+### 1. What command will list container images stored in your local container registry?
+#### Flag
+`docker images`
+
+### 2. What command will allow you to save a docker image as a tar archive?
+#### Flag
+`docker save`
+
+### 3. What is the name of the file (including file extension) for the configuration, repository tags, and layer hash values stored in a container image?
+#### Flag
+`manifest.json`
+
+### 4. What is the token value you found for the bonus challenge?
+I am new to docker, so getting it set up without the attack box took a little bit of trouble-shooting, I was getting errors of `Permission Denied`, and when I could fix that, I was getting errors talking about `Cannot Connect to the Docker Daemon`, but when I fixed that, I got an error saying `Job for docker.service failed because the control process exited with error code`. After a few minutes, I finally found [this stackoverflow question](https://stackoverflow.com/questions/55906503/docker-how-to-fix-job-for-docker-service-failed-because-the-control-process-ex). And the best answer worked for me, he said "*I really dont know what was happening, but I run `sudo dockerd --debug` like Zeitounator orients me, reboot my pc and docker works perfectly.*" Sure enough, it worked! </br>
+
+So now, from there, let's continue with the `Bonus Challenge` instructions, I saved the container image as instructed with `docker save -o aoc.tar public.ecr.aws/h0w1j9u3/grinch-aoc:latest`, then I can unpack that `aoc.tar` file with `tar -xf aoc.tar`.
+
+
+#### Flag

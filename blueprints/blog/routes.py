@@ -9,6 +9,7 @@ import hashlib
 
 blog_bp = Blueprint('blog_bp', __name__, template_folder="templates/blog")
 session = SessionLocal()
+app_root_directory = os.getcwd()
 
 # --- This Should Be Temporary Unless Superior, Using The Static Content Files --- 	
 staticPosts = []
@@ -21,11 +22,11 @@ for file in getPostFiles():
 def blog():
 	allPosts = session.query(Post).all()
 	
-	# Sort the posts by date
-	sortedPosts = []
-	for post in staticPosts:
+	# # Sort the posts by date
+	# sortedPosts = []
+	# for post in staticPosts:
 		
-		print(sorted(post['date_created']))
+	# 	print(sorted(post['date_created']))
 	return render_template("blog.html", posts=allPosts, staticPosts=staticPosts)
 
 
@@ -42,9 +43,8 @@ def staticPostPage(id):
 	post = staticPosts[int(id)]
 	post['content'] = markdown.markdown(''.join(post['content']), extensions=['fenced_code', 'codehilite'])
 	
-	path = "/home/gaz/dev/py/web/flaskBlog/static/css/"
-	shortPath = "../../static/css/"
-	files = os.listdir(path)
+	shortPath = app_root_directory + "/static/css/"
+	files = os.listdir(shortPath)
 	for file in files:
 		files[files.index(file)] = shortPath + file
 

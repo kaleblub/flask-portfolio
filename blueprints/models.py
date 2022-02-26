@@ -14,9 +14,10 @@ PostTagAssociation = Table('PostTagAssociations', Base.metadata,
 
 class Post(Base):
 	__tablename__ = "posts"
+
 	id = Column(Integer, primary_key=True)
 	title = Column(String(50), nullable=False, unique=True)
-	author = Column(String(50), nullable=False, default="Kaleb Humpal")
+	author = Column(String(20), nullable=False, default="Kaleb Humpal")
 	summary = Column(String(200), nullable=False)
 	# status = Column(Boolean, nullable=False) # True or False if the post is posted
 	date_created = Column(DateTime, default=datetime.utcnow())
@@ -46,6 +47,7 @@ class Post(Base):
 
 class Tag(Base):
 	__tablename__ = "tags"
+
 	id = Column(Integer, primary_key=True)
 	title = Column(String(20), nullable=False)
 	content = Column(String(20), nullable=False)
@@ -58,8 +60,9 @@ class Tag(Base):
 		'content': self.content,
 		}
 
-
+############################################
 # Run This File Alone To Create 
 # The Database With The Table Models Above
+############################################
 if __name__ == "__main__":
 	Base.metadata.create_all(engine)

