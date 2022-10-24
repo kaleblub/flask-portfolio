@@ -15,7 +15,7 @@ Markdown==3.3.4
 MarkupSafe==2.0.1
 Pygments==2.10.0
 six==1.16.0
-SQLAlchemy==1.4.23
+SQLAlchemy==1.4.27
 Werkzeug==2.0.1
 WTForms==2.3.3
 wtforms-validators==1.0.0

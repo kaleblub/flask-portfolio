@@ -1,0 +1,81 @@
+@media screen and (min-width: $desktop) {
+  
+}
+
+@media screen and 
+(min-width: $tablet) and 
+(max-width: $desktop - 1) {
+    
+}
+
+@media screen and 
+(max-width: $tablet - 1) {
+  .section {
+    padding-top: 1.5rem!important;
+    padding-bottom: 1.5rem!important;
+    padding-left: 1.5rem!important;
+    padding-right: 1.5rem!important;
+  }
+
+  #about__skills {
+    /* Increase the height for the skills progress section */
+    height: 52rem;
+  }
+
+  .timeline {
+    &:before {
+      /* Move the backbone of the timeline to the left of the screen
+      and shorten it's height */
+      left: 2.5%!important;
+      height: 100%!important;
+    }
+  }
+}
+
+
+@media (min-width: 576px) {
+  .modal-dialog {
+      max-width: none;
+      margin: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .p-md-5 {
+    padding: 3rem!important;
+  }
+  .m-md-3 {
+    margin: 4rem!important;
+  }
+}
+
+// @media (max-width: $tablet) {
+//   .section {
+//     padding-top: 2rem;
+//     padding-bottom: 2rem;
+//     padding-left: 2rem;
+//     padding-right: 2rem;
+//     width: 100%;
+//   }
+// }
+
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+.text-muted {
+
+	a {
+		&:hover {
+			color: $ruby-amaranth!important;
+    	text-shadow: 0 0 1rem #e8175d;
+		}
+	}
+}
+
+// On Header
+.bg-dark {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))!important;
+}

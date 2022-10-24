@@ -26,8 +26,10 @@
   }
   
   &__name {
-   // Text section of the logo
+   // Text section of the logo,
+   // ending with the '$'
    font-size: 1.4rem;
+   margin-right: inherit;
   }
 
   &__text {

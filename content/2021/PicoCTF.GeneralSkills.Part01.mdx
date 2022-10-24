@@ -1,0 +1,363 @@
+---
+title: PicoCTF – General Skills – Part 01
+author: Kaleb Humpal
+date_created: 2021-11-14
+summary: Part 01 of the Pico CTF Gym, General Skills Section
+tags: [ctf, capture-the-flag, shell-session, python, linux, hacking, penetration testing, pentest, scripting, ]
+---
+
+I have always been interested in(and enjoyed) the challenge that coding challenges bring, such as [codewars](https://www.codewars.com/dashboard) and [](). I have also been increasingly interested in penetration testing and that area of computer science, so I have slowly been hearing more and more about CTFs(`C`apture `T`he `F`lags). I have worked on the `Bandit` series of wargames from [OverTheWire](https://overthewire.org/wargames/).
+I have recently been exposed to a new one for me, [picoCTF](https://picoctf.org/) from a few of [John Hammond](https://www.youtube.com/channel/UCVeW9qkBjo3zosnqUbG7CFw)'s youtube videos.
+For this article, I am going through the [first page of the challenges under the `General Skills` tag.](https://play.picoctf.org/practice?category=5&page=1) 
+
+
+## Obedient Cat
+*AUTHOR: SYREAL*
+### Description:
+This file has a flag in plain sight (aka `"in-the-clear"`).[***Download flag***](https://mercury.picoctf.net/static/217686fc11d733b80be62dcfcfca6c75/flag).
+
+### Writeup:
+Download the file and `cat` the file:
+```shell-session
+$ cat flag
+picoCTF{s4n1ty_v3r1f13d_b5aeb3dd}
+```
+
+### Flag:
+`picoCTF{s4n1ty_v3r1f13d_b5aeb3dd}`
+
+
+## Python Wrangling
+*AUTHOR: SYREAL*
+### Description:
+Python scripts are invoked kind of like programs in the Terminal... Can you run [this Python script](https://mercury.picoctf.net/static/8e33ede04d02f3765b8c6a6e24d72733/ende.py) using [this password](https://mercury.picoctf.net/static/8e33ede04d02f3765b8c6a6e24d72733/pw.txt) to get [the flag](https://mercury.picoctf.net/static/8e33ede04d02f3765b8c6a6e24d72733/flag.txt.en)?
+
+### Writeup:
+In this one, we start out provided with three files
+```shell-session
+$ ls
+ende.py  flag.txt.en  pw.txt
+```
+**`pw.txt`** = Text file with the password in it. -> `aa821c16aa821c16aa821c16aa821c16`</br>
+**`flag.txt.en`** = Text file that holds the encrypted flag. -> `gAAAAABgUAIWjVP_Ne1VPrHlLZKpvfaifN7qlLoN7NEzOpAl55av7sPuV8wQZj9V-6oI_x4L10O8R-b9c19INaTFrlGbT6YxQeLXd2S3FQA8HmFxU9NILpJGEtVPsGpzPAmLSsRwezRX` </br>
+**`ende.py`** = Python script that we are told to use with the password to decrypt the flag.
+
+We can copy the password for later, and try running `ende.py`:
+```shell-session
+$ python3 ende.py
+Usage: ende.py (-e/-d) [file]
+```
+Looks like we just need to add either `-e or -d`, (we will add `-d` because we are `decrypting`), we also need to substitute our `flag.txt.en` in as `[file]`.
+```shell-session
+$ python3 ende.py -d flag.txt.en
+Please enter the password:aa821c16aa821c16aa821c16aa821c16
+picoCTF{4p0110_1n_7h3_h0us3_aa821c16}
+```
+
+### Flag:
+`picoCTF{4p0110_1n_7h3_h0us3_aa821c16}`
+
+
+## Wave a flag
+*AUTHOR: SYREAL*
+### Description:
+Can you invoke help flags for a tool or binary? [**This program**](https://mercury.picoctf.net/static/a14be2648c73e3cda5fc8490a2f476af/warm) has extraordinarily helpful information...
+
+### Writeup:
+To start, we have to make the `warm` file `executable`.
+```shell-session
+$ chmod +x warm
+```
+Let's try to run it now?
+```shell-session
+$ ./warm
+Hello user! Pass me a -h to learn what I can do!
+```
+All right then, let's pass the `-h` flag to it to get the help message.
+```shell-session
+$ ./warm -h
+Oh, help? I actually don't do much, but I do have this flag here: picoCTF{b1scu1ts_4nd_gr4vy_755f3544}
+```
+There it is!
+
+### Flag:
+`picoCTF{b1scu1ts_4nd_gr4vy_755f3544}`
+
+
+## Nice netcat...
+*AUTHOR: SYREAL*
+### Description:
+There is a nice program that you can talk to by using this command in a shell: `$ nc mercury.picoctf.net 43239`, but it doesn't speak English...
+
+### Writeup:
+When we enter 
+```shell-session
+$ nc mercury.picoctf.net 43239
+```
+We get weird output as numbers printed out on many lines.
+```shell-session
+112 
+105 
+99 
+111 
+67 
+84 
+70 
+123 
+103 
+48 
+48 
+100 
+95 
+107 
+49 
+116 
+116 
+121 
+33 
+95 
+110 
+49 
+99 
+51 
+95 
+107 
+49 
+116 
+116 
+121 
+33 
+95 
+55 
+99 
+48 
+56 
+50 
+49 
+102 
+53 
+125 
+10
+```
+We can save that into an output file with:
+```shell-session
+$ nc mercury.picoctf.net 43239 > netcat_output.txt
+```
+Now that we have saved those numbers for later, let's write a python script to translate the ASCII coded numbers into Unicode.
+```python
+ascii_to_unicode = []
+with open('netcat_output.txt', 'r') as f:
+   for line in f.readlines():
+      ascii_to_unicode.append(chr(int(line)))
+   print(''.join(ascii_to_unicode))
+```
+**`On Line 1`**, we get an empty list ready to add each translated ASCII coded number to. </br>
+**`On Line 2`**, with the output file(`netcat_output.txt`) open it for reading, refer to it as `'f'`. </br>
+**`Then On Line 3`**, we check each line in all the lines of the output file and for each of those lines.</br>
+**`Line 4`**, we make sure python recognizes it as an integer instead of a string with `int()`, then we check that integer's Unicode equivalent with `chr()`, and finally, with that value, we append it to our list at the beginning.</br>
+**`Finally, On Line 5`**, we print the whole list after we turn it into a string, which is our flag.
+
+### Flag:
+`picoCTF{g00d_k1tty!_n1c3_k1tty!_7c0821f5}`
+
+
+## Static ain't always noise
+*AUTHOR: SYREAL*
+### Description:
+Can you look at the data in this binary: [static](https://mercury.picoctf.net/static/bc72945175d643626d6ea9a689672dbd/static)? This [BASH script](https://mercury.picoctf.net/static/bc72945175d643626d6ea9a689672dbd/ltdis.sh) might help!
+
+### Writeup:
+For this one I just ran
+```shell-session
+$ strings static | grep "pico"
+```
+
+### Flag:
+`picoCTF{d15a5m_t34s3r_1e6a7731}`
+
+
+## Tab, Tab, Attack
+*AUTHOR: SYREAL*
+### Description:
+Using tabcomplete in the Terminal will add years to your life, esp. when dealing with long rambling directory structures and filenames: [Addadshashanammu.zip](https://mercury.picoctf.net/static/659efd595171e4c40378be6a2e9b7298/Addadshashanammu.zip) 
+
+### Writeup:
+With the given zip file, run: 
+```shell-session
+$ unzip Addadshashanammu.zip
+Archive:  Addadshashanammu.zip
+   creating: Addadshashanammu/
+   creating: Addadshashanammu/Almurbalarammi/
+   creating: Addadshashanammu/Almurbalarammi/Ashalmimilkala/
+   creating: Addadshashanammu/Almurbalarammi/Ashalmimilkala/Assurnabitashpi/
+   creating: Addadshashanammu/Almurbalarammi/Ashalmimilkala/Assurnabitashpi/Maelkashishi/
+   creating: Addadshashanammu/Almurbalarammi/Ashalmimilkala/Assurnabitashpi/Maelkashishi/Onnissiralis/
+   creating: Addadshashanammu/Almurbalarammi/Ashalmimilkala/Assurnabitashpi/Maelkashishi/Onnissiralis/Ularradallaku/
+  inflating: Addadshashanammu/Almurbalarammi/Ashalmimilkala/Assurnabitashpi/Maelkashishi/Onnissiralis/Ularradallaku/fang-of-haynekhtnamet  
+``` 
+That gives us the folder structure within the zip file.
+On the completion of `unzip`, it prints what folders and files were created and inflated. We get a lengthy descent of 7 folders deep and 1 file at the end. I just copy/pasted the path to the file and ran: 
+```shell-session
+$ strings Addadshashanammu/Almurbalarammi/Ashalmimilkala/Assurnabitashpi/Maelkashishi/Onnissiralis/Ularradallaku/fang-of-haynekhtnamet | grep "pico"
+```
+
+### Flag:
+`picoCTF{l3v3l_up!_t4k3_4_r35t!_524e3dc4}`
+
+
+## Magikarp Ground Mission
+*AUTHOR: SYREAL*
+### Description:
+Do you know how to move between directories and read files in the shell? Start the container, `ssh` to it, and then `ls` once connected to begin. Login via `ssh` as `ctf-player` with the password, `6d448c9c`
+
+### Writeup:
+To get started, we have to Launch Instance. Once up, we use the provided ssh command below the Description.
+For me this time it is: 
+
+```shell-session
+$ ssh ctf-player@venus.picoctf.net -p 53053
+```
+
+It asks if you're sure you want to continue, type `yes` and hit your `Enter` key.
+It will then ask you for the password, use the password they gave, `6d448c9c`.
+
+After that, let's run `ls` like they tell us to.
+
+```shell-session 
+ctf-player@pico-chall$ ls
+1of3.flag.txt  instructions-to-2of3.txt
+```
+With both of those text files, let's see what is inside of them.
+
+```shell-session
+ctf-player@pico-chall$ cat *
+picoCTF{xxsh_
+Next, go to the root of all things, more succinctly `/`
+```
+Looks like we have 1/3 of the flag, let's follow the instructions they give us.
+
+```shell-session
+ctf-player@pico-chall$ cd ..
+ctf-player@pico-chall$ ls
+2of3.flag.txt  boot  etc   instructions-to-3of3.txt  lib64  mnt  proc  run   srv  tmp  var
+bin          dev   home  lib             media  opt  root  sbin  sys  usr
+```
+There is the second piece! Let's get it and add it to our first piece, while we're at it, let's read the instructions to the final piece of the flag.
+
+```shell-session
+ctf-player@pico-chall$ cat 2of3.flag.txt instructions-to-3of3.txt
+0ut_0f_\/\/4t3r_
+Lastly, ctf-player, go home... more succinctly `~`
+```
+
+Almost there! Let's navigate to `~`:
+
+```shell-session
+ctf-player@pico-chall$ cd ~
+ctf-player@pico-chall$ ls
+3of3.flag.txt  drop-in
+```
+
+There's the final piece! Let's get it!
+
+```shell-session
+ctf-player@pico-chall$ cat 3of3.flag.txt
+5190b070}
+```
+
+### Flag:
+`picoCTF{xxsh_0ut_0f_\/\/4t3r_5190b070}`
+
+
+## Lets Warm Up
+*AUTHOR: SANJAY C/DANNY TUNITIS*
+### Description:
+If I told you a word started with 0x70 in hexadecimal, what would it start with in ASCII?
+
+### Writeup:
+Using the Python Interpreter, we can easily see the given hexadecimal number in Unicode by just inputting the number and pressing Enter: 
+```python
+>>> 0x70
+112
+``` 
+
+Next, we can use python's `chr()` method, which returns a string representing a character whose Unicode code point is an integer.
+
+```python
+>>> chr(0x70)
+'p'
+```
+
+### Flag:
+`picoCTF{p}`
+
+
+## Warmed Up
+*AUTHOR: SANJAY C/DANNY TUNITIS*
+### Description:
+What is 0x3D (base 16) in decimal (base 10)?
+
+### Writeup:
+Using the technically unnecessary first step in `*Lets Warm Up*`, we can again simply enter the hexadecimal number into the Python Interpreter:
+```python
+>>> 0x3D
+61
+```
+
+### Flag:
+`picoCTF{61}`
+
+
+## 2Warm
+*AUTHOR: SANJAY C/DANNY TUNITIS*
+### Description:
+Can you convert the number 42 (base 10) to binary (base 2)?
+
+### Writeup:
+In the Python Interpreter, we can use the `bin()` method, `which converts and returns the binary equivalent string of a given integer.`
+```python
+>>> bin(42)
+'0b101010'
+```
+
+For the flag, we should take off the `0b` part, which is just used by the computer to differentiate binary numbers from numbers in base 10 representation.
+
+### Flag:
+`picoCTF{101010}`
+
+
+## what's a net cat?
+*AUTHOR: SANJAY C/DANNY TUNITIS*
+### Description:
+Using netcat(nc) is going to be pretty important. Can you connect to `jupiter.challenges.picoctf.org` at port `64287` to get the flag?
+
+### Writeup:
+We simply follow the instructions they give us, and they do give us the flag. Let's `netcat` that `domain` on that `port`.
+```shell-session
+$ nc jupiter.challenges.picoctf.org 64287
+You're on your way to becoming the net cat master
+picoCTF{nEtCat_Mast3ry_284be8f7}
+```
+
+### Flag:
+`picoCTF{nEtCat_Mast3ry_284be8f7}`
+
+
+## strings it
+*AUTHOR: SANJAY C/DANNY TUNITIS*
+### Description:
+Can you find the flag in [file](https://jupiter.challenges.picoctf.org/static/5bd86036f013ac3b9c958499adf3e2e2/strings) without running it?
+
+### Writeup:
+After downloading the file, using the hint of the challenge's title 'strings it', run the `strings` command with a grep to filter for the pico flag
+`strings strings | grep "pico"`
+
+### Flag:
+`picoCTF{5tRIng5_1T_827aee91}`
+
+
+
+
+
+
+

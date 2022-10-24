@@ -19,8 +19,39 @@
 		// justify-content: space-between;
 
 
-	 .container-xl {
-  // Navbar container holding the logo and nav-links
+/*=====HAMBURGER ICON=====*/
+.hamb{
+    cursor: pointer;
+    float: right;
+    padding: 35px 40px;
+    position: relative;
+    z-index: 3;
+}/* Style label tag */
+
+.hamb-line {
+    background: var(--white);
+    display: block;
+    height: 2px;
+    position: fixed;
+    width: 24px;
+} /* Style span tag */
+
+.hamb-line::before,
+.hamb-line::after{
+    background: var(--white);
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+}
+.hamb-line::before{
+    top: 5px;
+}
+.hamb-line::after{
+    top: -5px;
+}
   .navbar-toggler {
 
   	#navbarOptions {
@@ -69,5 +100,4 @@
   		}
   	}
   }
-}
 }

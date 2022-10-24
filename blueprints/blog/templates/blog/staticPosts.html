@@ -3,19 +3,42 @@
 {% block head %}
 <title>Blog – {{ post['title'] }}</title>
 <link id="theme" type="text/css" rel="stylesheet" href="../../static/css/dracula.css">
+<style>
+	.section__header {
+		padding:  24px;
+	}
+</style>
+
 {% endblock %}
 
-{% block logoText %}/blog/'{{ post['title'] }}'{% endblock %}
+{% block logoText %}/Blog/Post-{{ '.'.join(post['date_created']) }}{% endblock %}
 
 {% block body %}
 <section id="blogPost" class="section section--odd">
 	<div class="container-xl">
-		<h1 class="section__header__title">{{ post['title'].rstrip("\"") }}</h1>
-		<span id="post__author" class="">
-			<a href="/about">{{ post['author'] }}</a>
-		</span>
-		<span> – {{ post['date_created'][1] }}{{ post['date_created'][0] }}, {{ post['date_created'][2] }}</span>
-		<p class="section__header__description">{{ post['content'] |safe }}</p>
+		<div class="section__header">
+			<h1 class="section__header__title">{{ post['title'].rstrip("\"") }}</h1>
+
+			<div id="post__author" class="section__header__description">
+				<img alt="" class="rounded-circle mr-2" src="https://www.gravatar.com/avatar/a8dc1f35af7e04617f9e20d1bb4ced62?s=32">
+				<a href="/about">
+					Kaleb Humpal
+				</a>
+			</div>
+			<div class="mt-2 mt-md-0">
+				<i class="fad fa-fw fa-calendar-alt ml-md-4 mr-2"></i>
+				<time datetime="2022-04-24T00:00:00+00:00">{{post['date_created'][0]}}/{{post['date_created'][1]}}/{{post['date_created'][2]}}</time>
+			</div>
+			<div class="mt-2 mt-md-0">
+				<i class="fad fa-fw fa-watch-calculator ml-md-4 mr-2"></i>2 min read
+			</div>
+
+			{% for tag in post['tags'].split(',') %}
+				<a class="" href="/categories/{{ tag }}"><i class="fa-fw fad fa-folders"></i>{{ tag }}</a>
+			{% endfor %}
+		</div>
+		<p class="section__header__description">{{ post['summary'] }}</p>
+		{{ post['content'] |safe }}
 	</div>
 </section>
 {% endblock %}

@@ -30,17 +30,6 @@
   $small-heading: 0.625rem;
 
 //*========== Screen Break-Points ==========*
-  $small-phone: 320px;
-  $large-phone: 768px;
-  $tablet: 960px;
-  $desktop: 1200px;
-  $desktop-large: 1400px;
-
-
-  // For phone, add width: min-content to the body
-  // .section {
-    /* padding-top: 0*/
-    /* padding-bottom: 0*/
-    /* padding-left: 0*/
-    /* padding-right: 0 */
-    // width: 100%;
+  $smartphone: 360px;
+  $tablet: 768px;
+  $desktop: 1024px;

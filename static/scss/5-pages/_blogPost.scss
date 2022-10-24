@@ -2,23 +2,24 @@
 	text-align: left;
 
 	h1, h2, h3, h4, h5, h6 {
-		font-weight: 600;
+		// font-weight: 600;
 	}
 }
 
-h2 {
-	margin-top: 5rem;
-  margin-bottom: 2rem;
-  font-size: 2rem;
-  border-bottom: 5px solid #E8175D;
+p img + blockquote {
+	margin: -2rem 1.5rem 1rem;
 }
 
 blockquote {
 	background: $common-opaque;
 	font-size: smaller;
-	margin: -2rem 1.5rem 1rem;
+	// margin: -2rem 1.5rem 1rem;
 	padding-left: 3rem;
 	border-left: 5px solid $ruby-amaranth;
+
+	p {
+		margin-left: none;
+	}
 }
 
 pre {
@@ -28,4 +29,9 @@ pre {
 
 img {
 	margin-bottom: 2rem;
+}
+
+code {
+	color: $ruby-amaranth;
+	font-size: 1em;
 }

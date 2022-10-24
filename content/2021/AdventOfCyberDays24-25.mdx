@@ -1,0 +1,56 @@
+---
+title: TryHackMe – Advent of Cyber 3 – [Days 24-25] 
+author: Kaleb Humpal
+date_created: 2021-12-25
+summary: Writeup for Days 24-25 of Try Hack Me's 3rd Advent of Cyber event, covering the topic of Post Exploitation.
+tags: [cyber security, hacking, tryhackme, offensive security, pentest, penetration testing, pentesting, web exploitation, christmas, event]
+---
+
+## [Day 24] `Post Exploitation` Learning From The Grinch
+McSkidy has learned a lot about how Grinch Enterprises operates and wants to prepare for any future attacks from anyone who hates Christmas. From a forensics analysis they did, she noticed that the Grinch Enterprises performed some malicious activities. She wants to perform these on the same machine they compromised to understand her adversaries a little better. Can you follow along and help her prepare for any other attacks?
+
+
+After reading through the stuff about understanding `#`, `#`, and `#`, and possibly watching [`#`' Video]() 
+
+## Questions 
+
+### 1. What is the username of the other user on the system?
+#### Flag
+While looking through the output of `privilege::debug` in `mimikatz`, we can see the first user listed is `emily`.
+
+### 2. What is the NTLM hash of this user?
+
+#### Flag
+`8af326aa4850225b75c592d4ce19ccf5`
+
+### 3. What is the password for this user?
+After running `john --format=NT -w=/usr/share/wordlists/rockyou.txt hash.txt --pot=output.txt`, john the ripper doesn't take long for the hash we got.
+#### Flag
+The password turns out to be `1234567890`.
+
+---
+
+## [Day 25] 
+
+<Image wide src="#" />
+
+After reading through the stuff about understanding `#`, `#`, and `#`, and possibly watching [`#`' Video]() 
+
+## Questions 
+
+### 1. 
+
+#### Flag
+
+### 2. 
+
+#### Flag
+
+### 3. 
+
+#### Flag
+
+
+### 4. 
+
+#### Flag

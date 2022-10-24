@@ -10,23 +10,39 @@ import hashlib
 blog_bp = Blueprint('blog_bp', __name__, template_folder="templates/blog")
 session = SessionLocal()
 
-# --- This Should Be Temporary Unless Superior, Using The Static Content Files --- 	
-staticPosts = []
-for file in getPostFiles():
-	staticPosts.append(returnSeperatedData(file))
+# --- This Should Be Temporary Unless Superior, Using The Static Content Files ---
+yearFolder = "./content/"
+year_to_files_dict = getPostFiles(yearFolder)
+
+for (year, file_list) in year_to_files_dict.items():
+	for file in enumerate(file_list):
+		year_to_files_dict[year][file[0]] = returnSeperatedData(yearFolder + year + '/' + file[1])
 
 
-# ----------------------- Render Blog Page --------------------------
+# ----------------------- Render Main Blog Page --------------------------
 @blog_bp.route("/", methods=['GET'])
 def blog():
 	allPosts = session.query(Post).all()
+
 	
 	# Sort the posts by date
-	sortedPosts = []
-	for post in staticPosts:
-		
-		print(sorted(post['date_created']))
-	return render_template("blog.html", posts=allPosts, staticPosts=staticPosts)
+	sortedPosts = {}
+
+	# For each post,
+	# for (year, post) in year_to_files_dict: # Was staticPosts
+		# If the year is not already a key in sortedPosts dict
+		# print(sortedPosts.keys() == None)
+		# if postYear not in sortedPosts.keys():
+			# i
+			# create a key of the year, and append the post
+		# 	sortedPosts[postYear] = []
+		# 	sortedPosts[postYear].append(post)
+		# else:
+
+
+
+		# print(post['date_created'])
+	return render_template("blog.html", posts=allPosts, staticPosts=year_to_files_dict)
 
 
 # ----------------------- Render Individual Posts --------------------------
@@ -37,18 +53,12 @@ def blog():
 # 	return render_template("posts.html", post=post)
 
 # ---------------- Render Static Post Content -----------------
-@blog_bp.route("/<string:id>")
-def staticPostPage(id):
-	post = staticPosts[int(id)]
+@blog_bp.route("<string:year>/<string:id>")
+def staticPostPage(year, id):
+	post = year_to_files_dict[year][int(id)]
 	post['content'] = markdown.markdown(''.join(post['content']), extensions=['fenced_code', 'codehilite'])
-	
-	path = "/home/gaz/dev/py/web/flaskBlog/static/css/"
-	shortPath = "../../static/css/"
-	files = os.listdir(path)
-	for file in files:
-		files[files.index(file)] = shortPath + file
 
-	return render_template("staticPosts.html", post=post, cssFiles=files)
+	return render_template("staticPosts.html", post=post)
 
 # @blog_bp.route("/", methods=['GET', 'POST'])
 # def posts():

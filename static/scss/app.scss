@@ -8,6 +8,8 @@
 
 // 2 - CORE
 // @import '2-core/all';
+@import "2-core/resets";
+@import "2-core/breakpoints";
 @import "2-core/fonts";
 @import "2-core/base";
 @import "2-core/tags";
@@ -43,6 +45,3 @@
 
 // 6 - SECTIONS 
 // @import "6-sections/all";
-
-// Extra Trash
-@import "bootstrapOverwrite";

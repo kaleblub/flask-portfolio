@@ -1,0 +1,42 @@
+---
+title: Instant OS Installation
+author: Kaleb Humpal
+date_created: 2022-2-20
+summary: Follow my installation of instantOS onto my laptop. My personal review, after a week of daily use, is at the end. 
+tags: [ArchLinux, archlinux, Arch Linux, arch linux, Linux, linux, install, usb, liveUSB, live usb, Etcher, operating system, OS]
+---
+
+# instantOS Installation
+
+## Introduction
+
+I have been having the urge to do a little bit of spring cleaning(*Digitally*). I have been considering doing a fresh install of Linux. I happened to come across a video that made me think about changing my GalliumOS Xfce install to something cleaner looking. I found something mentioning a new Linux Distro called [instantOS](https://instantos.io/), *"an Arch Linux based distro that works out of the box but is still aimed at power users. Everything is lightning fast, flexible and just works."* 
+</br>
+That along with the fact that it is **ULTRA LIGHTWEIGHT**, sounds pretty good to me as a mediocre Chromebook user.. I have been interested in taking the step into the world [Arch Linux](https://archlinux.org/) as well, so I might as well go for it since I have a whole weekend ahead of me!
+
+## Setup
+
+Going through the Prerequisites in the [install guide](https://instantos.io/docs/installguide/), I have my USB stick, my computer, 5GB or more of disk space, 64Bit processor, and an internet connection.
+</br>
+
+### Installing instantOS ISO
+I started the [ISO Download](https://instantos.io/download), as I am in [Lebanon](https://www.google.com/search?q=Beirut+lebanon&oq=Beirut+lebanon&aqs=chrome..69i57j69i59j69i60l6.5316j0j7&sourceid=chrome&ie=UTF-8#) currently, it's going to take quite a while to download it.. 
+<Image wide src="../static/img/Linux.Images/lebanon-download-speeds.png" />
+
+I decided to actually use `wget` instead as it may be a little bit faster and I believe it will maintain a more reliable connection.
+</br>
+I will take this time to backup the things I want to save, and to write a script to install all the tools I want all in one go, so I don't have to type it all out on the spot or as I go.
+
+### Installing Etcher
+The installation guide recommends using Etcher, we can get the download from [here](https://www.balena.io/etcher/), I went ahead and used `wget` again and unzipped, then ran Etcher with:
+```bash
+# Download
+$ wget https://github.com/balena-io/etcher/releases/download/v1.7.3/balena-etcher-electron-1.7.3-linux-x64.zip?d_id=6f468456-09ad-41e7-99a2-44199ba0194aR
+
+# Unzip
+$ unzip balena-etcher-electron-1.7.3-linux-x64.zip
+
+# Run
+$ ./balenaEtcher-1.7.3-x64.AppImage			
+```
+We just need to simply select the file, mine was temporarily placed in my `Desktop` directory, defaultly named `instantos_beta6.iso`. The USB that I am using is a SanDisk Cruzer 8GB, it previously had GalliumOS on it. Then we click `Flash!`

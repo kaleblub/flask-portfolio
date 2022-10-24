@@ -1,12 +1,97 @@
-/* padding-top: 0*/
-/* padding-bottom: 0*/
-/* padding-left: 0*/
-/* padding-right: 0 */
+/* ---------------------------- */
+/* Resets */
+/* ---------------------------- */
+/* https://piccalil.li/blog/a-modern-css-reset/ */
+/* Search for scss resets! */
+/* Box Sizing */
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Source+Code+Pro");
 @import url("https://fonts.googleapis.com/css2?family=Bungee+Hairline&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nova+Flat&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Aldrich&family=Audiowide&family=Caesar+Dressing&family=Electrolize&family=Iceberg&family=Iceland&family=Libre+Barcode+39+Extended+Text&family=Libre+Barcode+39+Text&family=Major+Mono+Display&family=Megrim&family=Monoton&family=Odibee+Sans&family=Share+Tech+Mono&family=Syncopate:wght@400;700&family=Text+Me+One&family=Unica+One&family=Zen+Kurenaido&family=Zen+Tokyo+Zoo&display=swap");
+*,
+*::before,
+*::after {
+  box-sizing: border-box; }
+
+/* Reset Margins */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+picture {
+  margin: 0; }
+
+/* Set up the body */
+body {
+  line-height: 1.5;
+  min-height: 100vh; }
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block; }
+
+/* Make Form Elements easier to work with */
+input,
+button,
+textarea,
+select {
+  font: inherit; }
+
+/* Remove animations for people who've turned them off */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important; } }
+
+@media screen and (max-width: 767px) {
+  .section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important; }
+  #about__skills {
+    /* Increase the height for the skills progress section */
+    height: 52rem; }
+  .timeline:before {
+    /* Move the backbone of the timeline to the left of the screen
+      and shorten it's height */
+    left: 2.5% !important;
+    height: 100% !important; } }
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: none;
+    margin: none; } }
+
+@media (min-width: 768px) {
+  .p-md-5 {
+    padding: 3rem !important; }
+  .m-md-3 {
+    margin: 4rem !important; } }
+
+*, ::after, ::before {
+  box-sizing: border-box; }
+
+.text-muted a:hover {
+  color: #E8175D !important;
+  text-shadow: 0 0 1rem #e8175d; }
+
+.bg-dark {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important; }
+
 @font-face {
   font-family: 'Modernhead';
   src: url("../fonts/modernhead.woff") format("woff"); }
@@ -69,6 +154,36 @@ main {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Modernhead';
   color: white; }
+
+h1 {
+  font-size: 40px; }
+
+h2 {
+  font-size: 28px;
+  border-bottom: 5px solid #E8175D;
+  margin-left: 5px; }
+
+h3 {
+  margin-left: 10px;
+  font-size: 20px; }
+
+h4 {
+  margin-left: 15px;
+  font-size: 16px; }
+
+h5 {
+  margin-left: 15px;
+  font-size: 12px; }
+
+h6 {
+  margin-left: 15px;
+  font-size: 8px; }
+
+p {
+  margin: 0 0 1.15em 20px; }
+
+p + h2 {
+  margin-top: 1.5em; }
 
 .br-40 {
   border-radius: 0.8em; }
@@ -255,7 +370,8 @@ a {
     .logo-link .logo__mark {
       margin-right: 5px; }
     .logo-link .logo__name {
-      font-size: 1.4rem; }
+      font-size: 1.4rem;
+      margin-right: inherit; }
     .logo-link .logo__text {
       color: #fff; }
     .logo-link .logo__cursor {
@@ -546,15 +662,43 @@ a {
   padding-bottom: 0.5rem;
   background: #485563;
   background: -webkit-linear-gradient(to bottom, #29323c, #48556320);
-  background: linear-gradient(to bottom, #29323c, #48556320); }
-  .navbar .container-xl .navbar-toggler #navbarOptions {
+  background: linear-gradient(to bottom, #29323c, #48556320);
+  /*=====HAMBURGER ICON=====*/
+  /* Style label tag */
+  /* Style span tag */ }
+  .navbar .hamb {
+    cursor: pointer;
+    float: right;
+    padding: 35px 40px;
+    position: relative;
+    z-index: 3; }
+  .navbar .hamb-line {
+    background: var(--white);
+    display: block;
+    height: 2px;
+    position: fixed;
+    width: 24px; }
+  .navbar .hamb-line::before,
+  .navbar .hamb-line::after {
+    background: var(--white);
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%; }
+  .navbar .hamb-line::before {
+    top: 5px; }
+  .navbar .hamb-line::after {
+    top: -5px; }
+  .navbar .navbar-toggler #navbarOptions {
     display: block !important;
     justify-content: flex-end; }
-  .navbar .container-xl .collapse {
+  .navbar .collapse {
     justify-content: flex-end; }
-    .navbar .container-xl .collapse .nav {
+    .navbar .collapse .nav {
       float: right; }
-      .navbar .container-xl .collapse .nav .nav-link {
+      .navbar .collapse .nav .nav-link {
         padding: 0.5rem 0.5rem;
         font-weight: 700;
         color: rgba(255, 255, 255, 0.5);
@@ -563,13 +707,13 @@ a {
         display: block;
         text-decoration: none;
         transition: color 0.6s ease-in-out,background-color 0.6s ease-in-out,border-color .6s ease-in-out; }
-        .navbar .container-xl .collapse .nav .nav-link:hover, .navbar .container-xl .collapse .nav .nav-link:focus {
+        .navbar .collapse .nav .nav-link:hover, .navbar .collapse .nav .nav-link:focus {
           color: rgba(255, 255, 255, 0.25) !important;
           border-bottom-color: rgba(255, 255, 255, 0.25);
           text-shadow: 0 0 3rem ghostwhite; }
-        .navbar .container-xl .collapse .nav .nav-link .nav-link + .nav-link {
+        .navbar .collapse .nav .nav-link .nav-link + .nav-link {
           margin-left: 1rem; }
-        .navbar .container-xl .collapse .nav .nav-link--active {
+        .navbar .collapse .nav .nav-link--active {
           color: #E8175D !important;
           border-bottom-color: #E8175D !important;
           text-shadow: 0 0 3rem #E8175D !important; }
@@ -637,6 +781,8 @@ a {
     margin-bottom: 1.5rem;
     border-bottom: none; }
   #home__header__description {
+    width: 50%;
+    margin: auto;
     margin-bottom: 1rem; }
 
 #home__cards {
@@ -822,21 +968,17 @@ on top of each other instead of next to each other */
 
 #blogPost {
   text-align: left; }
-  #blogPost h1, #blogPost h2, #blogPost h3, #blogPost h4, #blogPost h5, #blogPost h6 {
-    font-weight: 600; }
 
-h2 {
-  margin-top: 5rem;
-  margin-bottom: 2rem;
-  font-size: 2rem;
-  border-bottom: 5px solid #E8175D; }
+p img + blockquote {
+  margin: -2rem 1.5rem 1rem; }
 
 blockquote {
   background: #00000040;
   font-size: smaller;
-  margin: -2rem 1.5rem 1rem;
   padding-left: 3rem;
   border-left: 5px solid #E8175D; }
+  blockquote p {
+    margin-left: none; }
 
 pre {
   background: #00000040;
@@ -845,24 +987,6 @@ pre {
 img {
   margin-bottom: 2rem; }
 
-@media (min-width: 576px) {
-  .modal-dialog {
-    max-width: none;
-    margin: none; } }
-
-@media (min-width: 768px) {
-  .p-md-5 {
-    padding: 3rem !important; }
-  .m-md-3 {
-    margin: 4rem !important; } }
-
-*, ::after, ::before {
-  box-sizing: border-box; }
-
-.text-muted a:hover {
-  color: #E8175D !important;
-  text-shadow: 0 0 1rem #e8175d; }
-
-.bg-dark {
-  --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important; }
+code {
+  color: #E8175D;
+  font-size: 1em; }
